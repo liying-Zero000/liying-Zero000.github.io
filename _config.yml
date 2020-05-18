@@ -3,13 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: LiYing的博客
 subtitle: ''
-description: ''
-keywords:
+description: HITwh 14级,HITsz 18级。准备秋招ing
+keywords: "Java,SELinux"
 author: John Doe
-language: en
-timezone: ''
+email:liying253617@hotmail.com
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -101,3 +100,22 @@ deploy:
   type: git
   repository: git@github.com:liying-Zero000/liying-Zero000.github.io.git
   branch: master
+
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true
