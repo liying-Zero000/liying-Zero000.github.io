@@ -51,6 +51,13 @@
         </div>
       <% } %>
     </div>
+   <!-- 添加本文结束标记-->
+<% if ( !index ){ %>
+<div style="text-align:center;color: #00BFFF;font-size:14px;">
+     -------------本文结束<i class="fa fa-paw"></i>感谢阅读-------------
+</div>
+<% } %>
+<!-- 添加完成 -->
     <div class="article-info article-info-index">
       <%if(post.top){%>
         <div class="article-pop-out tagcloud">
