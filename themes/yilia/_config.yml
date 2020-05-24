@@ -2,7 +2,9 @@
 
 menu:
   主页: /
+  Java: /tags/Java/
   随笔: /tags/随笔/
+
 
 # SubNav
 subnav:
