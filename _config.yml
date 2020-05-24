@@ -95,6 +95,8 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: yilia
 
+post_asset_folder: true
+
 word_count: True
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
