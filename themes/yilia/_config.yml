@@ -68,7 +68,7 @@ google_analytics: ''
 favicon: 
 
 #你的头像url
-avatar:
+avatar: "liying-Zero000.github.io/assets/header.jpg"
 
 #是否开启分享
 share_jia: true
