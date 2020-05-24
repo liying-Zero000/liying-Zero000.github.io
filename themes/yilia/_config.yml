@@ -65,7 +65,7 @@ top: true
 # Miscellaneous
 baidu_analytics: ''
 google_analytics: ''
-favicon: /img/header.jpg
+favicon: 
 
 #你的头像url
 avatar: /img/header.jpg
