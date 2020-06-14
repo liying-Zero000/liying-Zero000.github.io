@@ -16,8 +16,6 @@
 <meta property="article:author" content="LiYing">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternative" href="/atom.xml" title="Territory" type="application/atom+xml">
-  
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
@@ -81,11 +79,11 @@
 				
 					<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
 		        
-					<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
+					<a class="weibo" target="_blank" href="https://www.weibo.com/u/5330070367" title="weibo"><i class="icon-weibo"></i></a>
 		        
-					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
+					<a class="douban" target="_blank" href="https://www.douban.com/people/189308470/" title="douban"><i class="icon-douban"></i></a>
 		        
-					<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
+					<a class="mafengwo" target="_blank" href="http://www.mafengwo.cn/u/67495508.html" title="mafengwo"><i class="icon-mafengwo"></i></a>
 		        
 			</div>
 		</nav>
@@ -126,11 +124,11 @@
 					
 						<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
 			        
-						<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
+						<a class="weibo" target="_blank" href="https://www.weibo.com/u/5330070367" title="weibo"><i class="icon-weibo"></i></a>
 			        
-						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
+						<a class="douban" target="_blank" href="https://www.douban.com/people/189308470/" title="douban"><i class="icon-douban"></i></a>
 			        
-						<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
+						<a class="mafengwo" target="_blank" href="http://www.mafengwo.cn/u/67495508.html" title="mafengwo"><i class="icon-mafengwo"></i></a>
 			        
 				</div>
 			</nav>
@@ -161,6 +159,108 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-jdk动态代理的关键点思考" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/13/jdk%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%9A%84%E5%85%B3%E9%94%AE%E7%82%B9%E6%80%9D%E8%80%83/">jdk动态代理的关键点思考</a>
+    </h1>
+  
+
+        
+        <a href="/2020/06/13/jdk%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%9A%84%E5%85%B3%E9%94%AE%E7%82%B9%E6%80%9D%E8%80%83/" class="archive-article-date">
+  	<time datetime="2020-06-13T15:33:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-13</time>
+</a>
+	<!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.2k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">5分</span>
+      </span>
+    </span>
+</div>
+
+	
+        <!-- 添加完成 -->
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h2><p>动态代理生成的类在哪里？<br><a href="https://blog.csdn.net/ywlmsm1224811/article/details/92583559?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase" target="_blank" rel="noopener">JDK动态代理文件$Proxy0.class的生成和查看</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.getProperties().put(<span class="string">"sun.misc.ProxyGenerator.saveGeneratedFiles"</span>,<span class="string">"true"</span>);</span><br></pre></td></tr></table></figure>
+        
+      
+
+      
+    </div>
+   <!-- 添加本文结束标记-->
+
+<!-- 添加完成 -->
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/06/13/jdk%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%9A%84%E5%85%B3%E9%94%AE%E7%82%B9%E6%80%9D%E8%80%83/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-2020-6-9" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
