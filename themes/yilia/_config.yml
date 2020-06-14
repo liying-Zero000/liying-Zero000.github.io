@@ -10,13 +10,13 @@ menu:
 # SubNav
 subnav:
   github: "#"
-  weibo: "#"
-  rss: "#"
-  zhihu: "#"
+  weibo: "https://www.weibo.com/u/5330070367"
+  #rss: "#"
+  #zhihu: "#"
   #qq: "#"
   #weixin: "#"
   #jianshu: "#"
-  #douban: "#"
+  douban: "https://www.douban.com/people/189308470/"
   #segmentfault: "#"
   #bilibili: "#"
   #acfun: "#"
@@ -25,8 +25,9 @@ subnav:
   #google: "#"
   #twitter: "#"
   #linkedin: "#"
+  mafengwo: "http://www.mafengwo.cn/u/67495508.html"
 
-rss: /atom.xml
+#rss: /atom.xml
 
 # 是否需要修改 root 路径
 # 如果您的网站存放在子目录中，例如 http://yoursite.com/blog，
