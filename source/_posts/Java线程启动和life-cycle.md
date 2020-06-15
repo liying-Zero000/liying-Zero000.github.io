@@ -40,8 +40,9 @@ public synchronized void start() {
 ....
 ```
 执行的主要部分是start0()这个方法
-![start0()](https://upload-images.jianshu.io/upload_images/19092361-9c4f80b56066edc7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![start0()](https://gitee.com/liying000/blogimg/raw/master/1256.jpg)
 start0()是`native`函数。。。是通过C/C++实现的。native方法是通过java中的JNI实现的。JNI是Java Native Interface的 缩写。从Java 1.1开始，Java Native Interface (JNI)标准成为java平台的一部分，它允许Java代码和其他语言写的代码进行交互。
+
 ```
 /* openjdk\jdk\src\share\native\java\lang\Thread.c */
 ...
@@ -155,31 +156,30 @@ void JavaThread::run() {
 }
 ```
 就到这吧，大体上就是这样一个过程
-![](https://uploadfiles.nowcoder.com/images/20190731/2505886_1564537155072_D5D109BB8EA439F60D4960AF194310AF)
+![](https://gitee.com/liying000/blogimg/raw/master/1257.jpg)
 ## Java线程状态切换
 那么JVM中线程的状态是如何转换的？下面有几张图QAQ
 
-![](https://pic2.zhimg.com/80/v2-326a2be9b86b1446d75b6f52f54c98fb_720w.jpg)
-![](https://img-blog.csdnimg.cn/20181120173640764.jpeg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3BhbmdlMTk5MQ==,size_16,color_FFFFFF,t_70)
+![](https://gitee.com/liying000/blogimg/raw/master/v2-326a2be9b86b1446d75b6f52f54c98fb_720w.jpg)
+![](https://gitee.com/liying000/blogimg/raw/master/1258.jpg)
 
 下图参考《并发编程的艺术》
-![](https://pic2.zhimg.com/80/v2-20edff079dc147b795e08261be1161f4_720w.jpg)
+![](https://gitee.com/liying000/blogimg/raw/master/v2-20edff079dc147b795e08261be1161f4_720w.jpg)
 下面这张图来自[Core Java](https://www.google.co.in/search?q=Core+Java+Vol+1%2C+9th+Edition%2C+Horstmann%2C+Cay+S.+%26+Cornell%2C+Gary_2013&oq=Core+Java+Vol+1%2C+9th+Edition%2C+Horstmann%2C+Cay+S.+%26+Cornell%2C+Gary_2013&aqs=chrome..69i57.383j0j7&sourceid=chrome&ie=UTF-8)
-![](https://media.geeksforgeeks.org/wp-content/uploads/threadLifeCycle.jpg)
+![](https://gitee.com/liying000/blogimg/raw/master/threadLifeCycle.jpg)
 Stack Overflow上的图
-![image.png](https://upload-images.jianshu.io/upload_images/19092361-f90ec5815f0edad7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://gitee.com/liying000/blogimg/raw/master/1259.jpg)
 bitstechnotes个人站
-![image.png](https://upload-images.jianshu.io/upload_images/19092361-205483092c8826d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![image.png](https://upload-images.jianshu.io/upload_images/19092361-3b572c2160b6ff70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://gitee.com/liying000/blogimg/raw/master/1260.jpg)
+![image.png](https://gitee.com/liying000/blogimg/raw/master/1262.jpg)
 
-![image.png](https://upload-images.jianshu.io/upload_images/19092361-1d48e44ffda9fc01.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://gitee.com/liying000/blogimg/raw/master/1261.jpg)
 
-![](https://img-blog.csdn.net/20180410221200700)
-![image.png](https://upload-images.jianshu.io/upload_images/19092361-d2bab3acc690339f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
+![](https://gitee.com/liying000/blogimg/raw/master/1263.jpg)
+![image.png](https://gitee.com/liying000/blogimg/raw/master/1264.jpg)
 
 廖大大的状态转移图更简单：
-![](https://upload-images.jianshu.io/upload_images/19092361-74f3b82f367e9ca1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://gitee.com/liying000/blogimg/raw/master/1265.jpg)
 当线程启动后，它可以在Runnable、Blocked、Waiting和Timed Waiting这几个状态之间切换，直到最后变成Terminated状态，线程终止。
 
 Thread.State枚举类定义了Java线程的六个状态：
@@ -200,14 +200,14 @@ public enum State {
 ### NEW
  NEW is waiting to be executed
 新创建了一个Thread对象，但是还没有start：
-```
+```java
 Thread thread = new Thread(new MyRunnable());
 System.out.println(thread.getState());
 ```
 结果：`NEW`
 >神奇
 ### Runnable
-```
+```java
 class MyThread extends Thread{
 
 	@Override
@@ -228,7 +228,7 @@ public class Main {
 }
 ```
 结果：
-```
+```java
 State of thread after creating it - NEW
 thread start
 State of thread in run() - RUNNABLE

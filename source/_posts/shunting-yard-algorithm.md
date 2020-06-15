@@ -68,7 +68,8 @@ public static int PostfixToValue(String string) {
 最后，把Operation栈中所有元素出栈，按出栈顺序入Postfix栈。
 
 一个利于理解的图：
-![](https://liam.page/uploads/images/ACS/Shunting_yard.png)
+![](F:\blog\Shunting_yard.png)
+
 ```
 public static String infixToSufix(String string) {
 		Stack<Character> operation = new Stack<>();
@@ -165,7 +166,7 @@ if (operation.empty()||string.charAt(i)=='(') {//操作符栈为空或者是左�
 >问题：为什么括号这么操作就是对的呢？
 
 我自己的理解：括号因为优先级最高，所以可以看做是把括号中的操作看做是另一个中缀表达式转后缀表达式。如下图所示：
-![](https://img.alicdn.com/tfs/TB12TZZbbvpK1RjSZFqXXcXUVXa-672-414.png_640x640.jpg)
+![](F:\blog\TB12TZZbbvpK1RjSZFqXXcXUVXa-672-414.png_640x640.jpg)
 图片来自：[boycgit.github.io](https://boycgit.github.io/algorithm-shunting-yard/)
 
 括号里的是一个子栈。

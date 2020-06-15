@@ -15,11 +15,11 @@ System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles","true");
 
 必须在main方法中测试，Junit不行(我没用Junit试，教程里这么写的)。
 生成的class文件在当前工作目录下的
-![](https://upload-images.jianshu.io/upload_images/19092361-d24a0dc77034eca6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://gitee.com/liying000/blogimg/raw/master/1266.jpg)
 
 
 Idea直接打开
-![](https://upload-images.jianshu.io/upload_images/19092361-63084d1e491b9ed4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://gitee.com/liying000/blogimg/raw/master/1267.jpg)
 动态类继承了Proxy，实现了Rent接口（我们自己定义的接口）
 我们在使用的时候：
 ```java
@@ -42,7 +42,7 @@ public final void rent() throws  {
     }
 ```
 主要操作：调用父类的h的invoke方法
-![](https://upload-images.jianshu.io/upload_images/19092361-103f5997dccb8eeb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://gitee.com/liying000/blogimg/raw/master/1268.jpg)
 h是InvocationHandler 对象
 
 先看一下Proxy的newProxInstance
@@ -173,17 +173,17 @@ Class<?> cl = getProxyClass0(loader, intfs);
 那么：
 
 ## 何时生成动态代理类？
-<img src="https://images2017.cnblogs.com/blog/401339/201710/401339-20171024224513066-180150579.png" style="zoom:80%;" />
+<img src="https://gitee.com/liying000/blogimg/raw/master/1269.jpg" style="zoom:80%;" />
 
 对上面的这个图，我们简单来说说：客户端动态生成代理类，然后调用代理类的方法。
 代理类内部调用handler.invoke（）方法
 在invoke中呢，又指向目标类，调用目标类的方法
 invoke在整个项目＋lib中的应用，红框中是Spring的
 
-![](https://upload-images.jianshu.io/upload_images/19092361-c32760d3bab2562e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://gitee.com/liying000/blogimg/raw/master/1271.jpg)
 
 
-![](https://upload-images.jianshu.io/upload_images/19092361-3ee55a193418f195.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://gitee.com/liying000/blogimg/raw/master/1270.jpg)
 
 
 
