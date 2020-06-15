@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Linux安全模块(LSM) | Territory</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 什么是LSM一种轻量级的安全访问控制框架，主要利用Hook函数对权限进行访问控制，并在部分对象中内置了透明的安全属性。 2. 设计思想Linux 系统调用接口提供了用户空间与内核进行交互的抽象，可以通过截获系统调用来实施访问控制。LSM 的策略执行点刚好在对象被访问之前，如下图所示：  3. 实现原理Linux 安全模块通过提供一系列的安全钩子函数来控制对内核对象的访问，同时通过放置在内核数">
+  <meta name="description" content="1. 什么是LSM一种轻量级的安全访问控制框架，主要利用Hook函数对权限进行访问控制，并在部分对象中内置了透明的安全属性。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux安全模块(LSM)">
-<meta property="og:url" content="http://yoursite.com/2020/06/16/Linux%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9D%97-LSM/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/11/01/Linux%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9D%97-LSM/index.html">
 <meta property="og:site_name" content="Territory">
-<meta property="og:description" content="1. 什么是LSM一种轻量级的安全访问控制框架，主要利用Hook函数对权限进行访问控制，并在部分对象中内置了透明的安全属性。 2. 设计思想Linux 系统调用接口提供了用户空间与内核进行交互的抽象，可以通过截获系统调用来实施访问控制。LSM 的策略执行点刚好在对象被访问之前，如下图所示：  3. 实现原理Linux 安全模块通过提供一系列的安全钩子函数来控制对内核对象的访问，同时通过放置在内核数">
+<meta property="og:description" content="1. 什么是LSM一种轻量级的安全访问控制框架，主要利用Hook函数对权限进行访问控制，并在部分对象中内置了透明的安全属性。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191121144419367.png">
 <meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191121151442404.png">
@@ -25,8 +25,8 @@
 <meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/2019112210400277.png">
 <meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191121162845425.png">
 <meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191121163256610.png">
-<meta property="article:published_time" content="2020-06-15T16:47:07.000Z">
-<meta property="article:modified_time" content="2020-06-15T16:51:37.064Z">
+<meta property="article:published_time" content="2019-11-01T03:47:07.000Z">
+<meta property="article:modified_time" content="2020-06-15T16:58:16.233Z">
 <meta property="article:author" content="LiYing">
 <meta property="article:tag" content="SELinux">
 <meta name="twitter:card" content="summary">
@@ -192,8 +192,8 @@
   
 
         
-        <a href="/2020/06/16/Linux%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9D%97-LSM/" class="archive-article-date">
-  	<time datetime="2020-06-15T16:47:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-16</time>
+        <a href="/2019/11/01/Linux%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9D%97-LSM/" class="archive-article-date">
+  	<time datetime="2019-11-01T03:47:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
 </a>
 	<!-- 需要添加的位置 -->
         <!-- 开始添加字数统计-->
@@ -225,9 +225,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="1-什么是LSM"><a href="#1-什么是LSM" class="headerlink" title="1. 什么是LSM"></a>1. 什么是LSM</h1><p>一种轻量级的安全访问控制框架，主要利用Hook函数对权限进行访问控制，并在部分对象中内置了透明的安全属性。</p>
+<a id="more"></a>
+
 <h1 id="2-设计思想"><a href="#2-设计思想" class="headerlink" title="2. 设计思想"></a>2. 设计思想</h1><p>Linux 系统调用接口提供了用户空间与内核进行交互的抽象，可以通过<strong>截获系统调用</strong>来实施访问控制。<br>LSM 的策略执行点刚好在对象被访问之前，如下图所示：</p>
 <p><img src="https://gitee.com/liying000/blogimg/raw/master/20191121144419367.png" alt=""></p>
-<h1 id="3-实现原理"><a href="#3-实现原理" class="headerlink" title="3. 实现原理"></a>3. 实现原理</h1><p>Linux 安全模块通过提供一系列的安全钩子函数来控制对内核对象的访问，同时通过放置在内核数据结构中的不透明安全域来维护对象的安全属性。安全域都是 void*类型的指针，一般命名为security，并用于存储安全属性，通过安全域，安全模块可以把安全属性和内核内部对象联系起来，以实施各自的安全策略。LSM修改了的内核结构如下表所示<br>| 内核结构        | 对象                             |<br>| ————— | ——————————– |<br>| cred            | 认证或令牌                       |<br>| super_block     | 文件系统                         |<br>| inode           | 管道、文件、或套接字             |<br>| file            | 打开的文件                       |<br>| sk_buff         | 网络缓冲区(包)                   |<br>| net_device      | 网络设备                         |<br>| kernel_ipc_perm | 信号量、共享内存段、或者消息队列 |<br>| msg_msg         | 单个消息                         |<br>这些内核对象在各个安全模块中都有具体的实现</p>
+<h1 id="3-实现原理"><a href="#3-实现原理" class="headerlink" title="3. 实现原理"></a>3. 实现原理</h1><p>Linux 安全模块通过提供一系列的安全钩子函数来控制对内核对象的访问，同时通过放置在内核数据结构中的不透明安全域来维护对象的安全属性。安全域都是 void*类型的指针，一般命名为security，并用于存储安全属性，通过安全域，安全模块可以把安全属性和内核内部对象联系起来，以实施各自的安全策略。LSM修改了的内核结构如下表所示<br>| 内核结构        | 对象                             |<br>| :————– | ——————————– |<br>| cred            | 认证或令牌                       |<br>| super_block     | 文件系统                         |<br>| inode           | 管道、文件、或套接字             |<br>| file            | 打开的文件                       |<br>| sk_buff         | 网络缓冲区(包)                   |<br>| net_device      | 网络设备                         |<br>| kernel_ipc_perm | 信号量、共享内存段、或者消息队列 |<br>| msg_msg         | 单个消息                         |<br>这些内核对象在各个安全模块中都有具体的实现</p>
 <h2 id="3-1-安全模块的注册"><a href="#3-1-安全模块的注册" class="headerlink" title="3.1 安全模块的注册"></a>3.1 安全模块的注册</h2><p>LSM框架下访问决策模块包括selinux，smack，tomoyo，yama，apparmor.</p>
 <p><img src="https://gitee.com/liying000/blogimg/raw/master/20191121151442404.png" alt=""></p>
 <p>操作系统初始化 Linux 安全模块及各个安全模块的注册到 Linux 安全模块的过程如下图所示：<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191122120356810.png" alt="在这里插入图片描述"><br>其中，内核init进程的初始化在/init/main.c::start_kernel()中<br>安全模块的初始化函数为security_init()：</p>
@@ -313,7 +315,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/06/16/Linux%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9D%97-LSM/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/01/Linux%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9D%97-LSM/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -327,9 +329,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2019/12/01/Policydb%E5%8A%A0%E8%BD%BDSELinux%E7%AD%96%E7%95%A5%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Policydb加载SELinux策略二进制文件分析
+        
+      </div>
+    </a>
   
-    <a href="/2020/06/14/yilia-%E5%8D%9A%E5%AE%A2%E6%A0%B7%E5%BC%8F%E4%BF%AE%E6%94%B9%E7%82%B9/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">yilia 博客样式修改点</div>
+  
+    <a href="/2019/08/25/SELinux%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SELinux命令行操作</div>
       <i class="icon-circle-right"></i>
     </a>
   
