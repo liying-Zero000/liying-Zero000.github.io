@@ -15,14 +15,14 @@
 <meta property="og:site_name" content="Territory">
 <meta property="og:description" content="为什么要看这个？答：写一个24点的小demo，需要得到中缀表达式的计算结果。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://liam.page/uploads/images/ACS/Shunting_yard.png">
-<meta property="og:image" content="https://img.alicdn.com/tfs/TB12TZZbbvpK1RjSZFqXXcXUVXa-672-414.png_640x640.jpg">
+<meta property="og:image" content="f:%5Cblog%5CShunting_yard.png">
+<meta property="og:image" content="f:%5Cblog%5CTB12TZZbbvpK1RjSZFqXXcXUVXa-672-414.png_640x640.jpg">
 <meta property="article:published_time" content="2020-06-02T17:34:00.000Z">
-<meta property="article:modified_time" content="2020-06-14T11:19:02.925Z">
+<meta property="article:modified_time" content="2020-06-15T14:15:53.829Z">
 <meta property="article:author" content="LiYing">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://liam.page/uploads/images/ACS/Shunting_yard.png">
+<meta name="twitter:image" content="f:%5Cblog%5CShunting_yard.png">
   
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
@@ -236,7 +236,7 @@
 <li>扫描到操作符入操作符栈Operation<br>（1）如果Operation栈空，直接入栈<br>（2）栈不空，比较当前操作符与栈顶操作符的优先级<br>  ——–当前操作符优先级高：入栈<br>  ——–否则：Operation栈顶元素出栈，入Postfix栈，重复（2）</li>
 </ul>
 <p>最后，把Operation栈中所有元素出栈，按出栈顺序入Postfix栈。</p>
-<p>一个利于理解的图：<br><img src="https://liam.page/uploads/images/ACS/Shunting_yard.png" alt=""></p>
+<p>一个利于理解的图：<br><img src="F:%5Cblog%5CShunting_yard.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">public static String infixToSufix(String string) &#123;</span><br><span class="line">		Stack&lt;Character&gt; operation &#x3D; new Stack&lt;&gt;();</span><br><span class="line">		Stack&lt;Character&gt; postfix &#x3D; new Stack&lt;&gt;();</span><br><span class="line">		for(int i &#x3D; 0;i&lt;string.length();i++) &#123;</span><br><span class="line">			if (string.charAt(i)&gt;&#39;0&#39;&amp;&amp;string.charAt(i)&lt;&#x3D;&#39;9&#39;) &#123;</span><br><span class="line">				postfix.add(string.charAt(i));&#x2F;&#x2F;如果是数字直接入栈</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">				if (operation.empty()) &#123;&#x2F;&#x2F;操作符栈为空</span><br><span class="line">					operation.push(string.charAt(i));</span><br><span class="line">				&#125;else &#123;&#x2F;&#x2F;操作符栈不空</span><br><span class="line">					if (Compare(string.charAt(i), operation.peek())) &#123;&#x2F;&#x2F;当前的操作符比栈顶的操作符优先级高</span><br><span class="line">						operation.add(string.charAt(i));</span><br><span class="line">					&#125;else &#123;</span><br><span class="line">						while(!operation.empty()&amp;&amp;!Compare(string.charAt(i), operation.peek())) &#123;&#x2F;&#x2F;跟栈顶操作符出栈，一直比较，直到当前的操作符优先级高</span><br><span class="line">								postfix.add(operation.pop());</span><br><span class="line">						&#125;</span><br><span class="line">						operation.add(string.charAt(i));</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		while(!operation.empty()) &#123;</span><br><span class="line">			postfix.add(operation.pop());</span><br><span class="line">		&#125;</span><br><span class="line">		return postfix.toString();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">public static boolean Compare(char first, char second) &#123;</span><br><span class="line">		&#x2F;&#x2F;大于0说明前边的char优先级更高</span><br><span class="line">		return definepriority(first)-definepriority(second)&gt;0;</span><br><span class="line">	&#125;</span><br><span class="line">public static int definepriority(char c) &#123;</span><br><span class="line">        int priority &#x3D; 0;</span><br><span class="line">		switch (c) &#123;</span><br><span class="line">		case &#39;+&#39;:</span><br><span class="line">			priority &#x3D; 1;</span><br><span class="line">			break;</span><br><span class="line">		case &#39;-&#39;:</span><br><span class="line">			priority &#x3D; 1;</span><br><span class="line">			break;</span><br><span class="line">		case &#39;*&#39;:</span><br><span class="line">			priority &#x3D; 2;</span><br><span class="line">			break;</span><br><span class="line">		case &#39;&#x2F;&#39;:</span><br><span class="line">			priority &#x3D; 2;</span><br><span class="line">			break;</span><br><span class="line">		default:</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		return priority;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 <p>那么问题来了：<br>加括号的怎么处理？</p>
 <p>算法版本升级——加括号的表达式：<br>思路：</p>
@@ -251,7 +251,7 @@
 <blockquote>
 <p>问题：为什么括号这么操作就是对的呢？</p>
 </blockquote>
-<p>我自己的理解：括号因为优先级最高，所以可以看做是把括号中的操作看做是另一个中缀表达式转后缀表达式。如下图所示：<br><img src="https://img.alicdn.com/tfs/TB12TZZbbvpK1RjSZFqXXcXUVXa-672-414.png_640x640.jpg" alt=""><br>图片来自：<a href="https://boycgit.github.io/algorithm-shunting-yard/" target="_blank" rel="noopener">boycgit.github.io</a></p>
+<p>我自己的理解：括号因为优先级最高，所以可以看做是把括号中的操作看做是另一个中缀表达式转后缀表达式。如下图所示：<br><img src="F:%5Cblog%5CTB12TZZbbvpK1RjSZFqXXcXUVXa-672-414.png_640x640.jpg" alt=""><br>图片来自：<a href="https://boycgit.github.io/algorithm-shunting-yard/" target="_blank" rel="noopener">boycgit.github.io</a></p>
 <p>括号里的是一个子栈。</p>
 <p>遗留问题：</p>
 <ul>
@@ -558,7 +558,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
         <ul class="search-ul">
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
+              <a href="https://molunerfinn.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>PicGo作者blog</a>
             </li>
           
             <li class="search-li">
