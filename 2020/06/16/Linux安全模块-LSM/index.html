@@ -6,15 +6,31 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020/6 | Territory</title>
+  <title>Linux安全模块(LSM) | Territory</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Territory">
-<meta property="og:url" content="http://yoursite.com/archives/2020/06/index.html">
+  <meta name="description" content="1. 什么是LSM一种轻量级的安全访问控制框架，主要利用Hook函数对权限进行访问控制，并在部分对象中内置了透明的安全属性。 2. 设计思想Linux 系统调用接口提供了用户空间与内核进行交互的抽象，可以通过截获系统调用来实施访问控制。LSM 的策略执行点刚好在对象被访问之前，如下图所示：  3. 实现原理Linux 安全模块通过提供一系列的安全钩子函数来控制对内核对象的访问，同时通过放置在内核数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux安全模块(LSM)">
+<meta property="og:url" content="http://yoursite.com/2020/06/16/Linux%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9D%97-LSM/index.html">
 <meta property="og:site_name" content="Territory">
+<meta property="og:description" content="1. 什么是LSM一种轻量级的安全访问控制框架，主要利用Hook函数对权限进行访问控制，并在部分对象中内置了透明的安全属性。 2. 设计思想Linux 系统调用接口提供了用户空间与内核进行交互的抽象，可以通过截获系统调用来实施访问控制。LSM 的策略执行点刚好在对象被访问之前，如下图所示：  3. 实现原理Linux 安全模块通过提供一系列的安全钩子函数来控制对内核对象的访问，同时通过放置在内核数">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191121144419367.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191121151442404.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191122120356810.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191121165939882.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191122092324537.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191122104630622.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191122103700724.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/2019112210400277.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191121162845425.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191121163256610.png">
+<meta property="article:published_time" content="2020-06-15T16:47:07.000Z">
+<meta property="article:modified_time" content="2020-06-15T16:51:37.064Z">
 <meta property="article:author" content="LiYing">
+<meta property="article:tag" content="SELinux">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/liying000/blogimg/raw/master/20191121144419367.png">
   
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
@@ -164,36 +180,78 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Linux安全模块-LSM" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/16/Linux%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9D%97-LSM/" class="archive-article-date">
-  	<time datetime="2020-06-15T16:47:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-16</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/16/Linux%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9D%97-LSM/">Linux安全模块(LSM)</a>
+    <h1 class="article-title" itemprop="name">
+      Linux安全模块(LSM)
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/06/16/Linux%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9D%97-LSM/" class="archive-article-date">
+  	<time datetime="2020-06-15T16:47:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-16</time>
+</a>
+	<!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.1k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">4分</span>
+      </span>
+    </span>
+</div>
+
+	
+        <!-- 添加完成 -->
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-什么是LSM"><a href="#1-什么是LSM" class="headerlink" title="1. 什么是LSM"></a>1. 什么是LSM</h1><p>一种轻量级的安全访问控制框架，主要利用Hook函数对权限进行访问控制，并在部分对象中内置了透明的安全属性。</p>
+<h1 id="2-设计思想"><a href="#2-设计思想" class="headerlink" title="2. 设计思想"></a>2. 设计思想</h1><p>Linux 系统调用接口提供了用户空间与内核进行交互的抽象，可以通过<strong>截获系统调用</strong>来实施访问控制。<br>LSM 的策略执行点刚好在对象被访问之前，如下图所示：</p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/20191121144419367.png" alt=""></p>
+<h1 id="3-实现原理"><a href="#3-实现原理" class="headerlink" title="3. 实现原理"></a>3. 实现原理</h1><p>Linux 安全模块通过提供一系列的安全钩子函数来控制对内核对象的访问，同时通过放置在内核数据结构中的不透明安全域来维护对象的安全属性。安全域都是 void*类型的指针，一般命名为security，并用于存储安全属性，通过安全域，安全模块可以把安全属性和内核内部对象联系起来，以实施各自的安全策略。LSM修改了的内核结构如下表所示<br>| 内核结构        | 对象                             |<br>| ————— | ——————————– |<br>| cred            | 认证或令牌                       |<br>| super_block     | 文件系统                         |<br>| inode           | 管道、文件、或套接字             |<br>| file            | 打开的文件                       |<br>| sk_buff         | 网络缓冲区(包)                   |<br>| net_device      | 网络设备                         |<br>| kernel_ipc_perm | 信号量、共享内存段、或者消息队列 |<br>| msg_msg         | 单个消息                         |<br>这些内核对象在各个安全模块中都有具体的实现</p>
+<h2 id="3-1-安全模块的注册"><a href="#3-1-安全模块的注册" class="headerlink" title="3.1 安全模块的注册"></a>3.1 安全模块的注册</h2><p>LSM框架下访问决策模块包括selinux，smack，tomoyo，yama，apparmor.</p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/20191121151442404.png" alt=""></p>
+<p>操作系统初始化 Linux 安全模块及各个安全模块的注册到 Linux 安全模块的过程如下图所示：<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191122120356810.png" alt="在这里插入图片描述"><br>其中，内核init进程的初始化在/init/main.c::start_kernel()中<br>安全模块的初始化函数为security_init()：</p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/20191121165939882.png" alt="在这里插入图片描述"><br>security_init()函数如下，在/security/security.c中</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * security_init - initializes the security framework</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * This should be called early in the kernel initialization sequence.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> __init <span class="title">security_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">hlist_head</span> *<span class="title">list</span> = (<span class="title">struct</span> <span class="title">hlist_head</span> *) &amp;<span class="title">security_hook_heads</span>;</span></span><br><span class="line"></span><br><span class="line">	pr_info(<span class="string">"Security Framework initializing\n"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="keyword">sizeof</span>(security_hook_heads) / <span class="keyword">sizeof</span>(struct hlist_head);</span><br><span class="line">	     i++)</span><br><span class="line">		INIT_HLIST_HEAD(&amp;<span class="built_in">list</span>[i]);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Load minor LSMs, with the capability module always first.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	capability_add_hooks();</span><br><span class="line">	yama_add_hooks();<span class="comment">//yama是用于控制进程追踪的安全模块</span></span><br><span class="line">	loadpin_add_hooks();</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Load all the remaining security modules.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	major_lsm_init();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>备注：在4.x的稳定版本中的security函数之间有一些差异，此处分析的是4.20版本，这个函数与5.0版本的security_init()函数相同。<br>首先是一些轻量的安全模块的初始化<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191122092324537.png" alt="在这里插入图片描述"><br>将该安全模块的所有hooks函数添加到在security_hook_list的数据结构里<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191122104630622.png" alt="在这里插入图片描述"><br>接下来是主要的安全模块的注册 major_lsm_init<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191122103700724.png" alt="在这里插入图片描述"><br>lsm_info是一个包含 安全模块的名称与相应的init函数的结构体<br><img src="https://gitee.com/liying000/blogimg/raw/master/2019112210400277.png" alt="在这里插入图片描述"><br>从前面minor LSMs的加载以及后面major LSMs的加载可以看出，目前linux已经支持多个安全模块共同起作用。</p>
+<h2 id="3-2-Hooks函数的应用点"><a href="#3-2-Hooks函数的应用点" class="headerlink" title="3.2 Hooks函数的应用点"></a>3.2 Hooks函数的应用点</h2><p>在 linux/include/security.h 中定义的 security_xxx 函数为 Linux 安全模块的上层框架，它们被放在内核数据结构的内核控制路径上，当某个内核对象被访问时，它们将被调用，将访问请求转发到特定安全模块的 Hooks 函数中。<br>以目录的创建为例分析其具体的实现过程：<br>在用户空间中，创建目录的命令为mkdir(),它在内核中的调用入口为sys_mkdir()<br>具体的目录创建函数为 vfs_mkdir()，其实现如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//dir 是父目录的inode结构，dentry是要建文件的dentry结构</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">vfs_mkdir</span><span class="params">(struct inode *dir, struct dentry *dentry, <span class="keyword">umode_t</span> mode)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> error = may_create(dir, dentry);<span class="comment">//检查是否对父目录有读写权限</span></span><br><span class="line">	<span class="keyword">unsigned</span> max_links = dir-&gt;i_sb-&gt;s_max_links;</span><br><span class="line">	......</span><br><span class="line">	error = security_inode_mkdir(dir, dentry, mode);</span><br><span class="line">	<span class="comment">//检查是否具有创建目录的权限</span></span><br><span class="line">	......</span><br><span class="line">	error = dir-&gt;i_op-&gt;<span class="built_in">mkdir</span>(dir, dentry, mode);</span><br><span class="line">	<span class="comment">//调用具体文件系统实现函数</span></span><br><span class="line">	......</span><br><span class="line">	<span class="keyword">return</span> error;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数主要做了三件事：<br>（1）调用may_create()检查主体对父目录的读写权限（这部分进行DAC与capability的检查）<br>（2）调用 security_inode_mkdir 函数检查进程是否有创建目录的权限<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191121162845425.png" alt="在这里插入图片描述"><br>这个插入了安全模块的钩子，这个hook会将请求转给相应的安全模块进行判断。<br>（3）调用底层文件系统的目录创建函数<br>（安全模块为selinux的情况下）<br>整个创建目录过程中，最终调用hooks的检查函数的过程大致如下：<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191121163256610.png" alt="在这里插入图片描述"></p>
+
+      
+
+      
+    </div>
+   <!-- 添加本文结束标记-->
+
+<div style="text-align:center;color: #00BFFF;font-size:14px;">
+     -------------本文结束,<i class="fa fa-paw"></i>感谢阅读-------------
+</div>
+
+<!-- 添加完成 -->
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -205,247 +263,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/06/16/Linux%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9D%97-LSM/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/14/yilia-%E5%8D%9A%E5%AE%A2%E6%A0%B7%E5%BC%8F%E4%BF%AE%E6%94%B9%E7%82%B9/" class="archive-article-date">
-  	<time datetime="2020-06-14T14:31:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-14</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/06/14/yilia-%E5%8D%9A%E5%AE%A2%E6%A0%B7%E5%BC%8F%E4%BF%AE%E6%94%B9%E7%82%B9/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">yilia 博客样式修改点</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/14/yilia-%E5%8D%9A%E5%AE%A2%E6%A0%B7%E5%BC%8F%E4%BF%AE%E6%94%B9%E7%82%B9/">yilia 博客样式修改点</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/14/2020-6-14/" class="archive-article-date">
-  	<time datetime="2020-06-14T07:13:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/14/2020-6-14/">2020年广东第一个台风天</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/13/jdk%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%9A%84%E5%85%B3%E9%94%AE%E7%82%B9%E6%80%9D%E8%80%83/" class="archive-article-date">
-  	<time datetime="2020-06-13T15:33:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/13/jdk%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%9A%84%E5%85%B3%E9%94%AE%E7%82%B9%E6%80%9D%E8%80%83/">jdk动态代理的关键点思考</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/09/2020-6-9/" class="archive-article-date">
-  	<time datetime="2020-06-09T15:11:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/09/2020-6-9/">2020-6-9</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/08/%E9%9B%86%E5%90%88-1/" class="archive-article-date">
-  	<time datetime="2020-06-07T17:46:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/08/%E9%9B%86%E5%90%88-1/">集合</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/03/shunting-yard-algorithm/" class="archive-article-date">
-  	<time datetime="2020-06-02T17:34:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/03/shunting-yard-algorithm/">shunting yard algorithm</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -468,8 +385,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
