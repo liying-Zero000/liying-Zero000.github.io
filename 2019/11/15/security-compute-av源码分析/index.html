@@ -32,9 +32,9 @@
 <meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191115111626123.png">
 <meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191115095422394.png">
 <meta property="article:published_time" content="2019-11-15T03:16:53.000Z">
-<meta property="article:modified_time" content="2020-06-16T15:25:04.750Z">
+<meta property="article:modified_time" content="2020-06-16T15:43:01.606Z">
 <meta property="article:author" content="LiYing">
-<meta property="article:tag" content="-SELinux">
+<meta property="article:tag" content="SELinux">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gitee.com/liying000/blogimg/raw/master/20191108162518611.png">
   
@@ -209,7 +209,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">697字</span>
+        <span class="post-count">699字</span>
       </span>
     </span>
 
@@ -239,11 +239,11 @@
 </ol>
 <p><img src="https://gitee.com/liying000/blogimg/raw/master/20191114114108434.png" alt="在这里插入图片描述"><br>找到相关的解释如下：<br>A domain running with a permissive type will be allowed to perform any action similarly to when the system is globally set permissive.<br>如果域是 permissive 类型，那么 这个域将被允许任何访问，（相当于系统对这个域开的是permissive模式）。<br>实现方式是：<br>在policydb中存储了 bitmap类型的permissive_map，通过ebitmap_get_bit函数判断，主体的type是否在bitmap中（也就是type这个32位的数值是否为permissive_map中的一个key）</p>
 <ol start="2">
-<li><p>获取tsid 的安全上下文结构<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191114114739587.png" alt="在这里插入图片描述"></p>
+<li><p>获取tsid 的安全上下文结构<br> <img src="https://gitee.com/liying000/blogimg/raw/master/20191114114739587.png" alt="在这里插入图片描述"></p>
 </li>
-<li><p>获取客体类别 tclass的策略值<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191114141316278.png" alt="在这里插入图片描述"></p>
+<li><p>获取客体类别 tclass的策略值<br> <img src="https://gitee.com/liying000/blogimg/raw/master/20191114141316278.png" alt="在这里插入图片描述"></p>
 </li>
-<li><p>基于前面获取的主体和客体安全上下文及客体类别的策略值调用安全服务器的<br>context_struct_compute_av()计算访问向量决策avd<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191114144952764.png" alt="在这里插入图片描述"><br>下面来看context_struct_compute_av()函数：<br>4.1 该函数首先初始化访问控制向量。<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191114145711911.png" alt="在这里插入图片描述"><br>4.2 第二步是检查tclass 是否定义，如果没有定义<br>就直接返回错误信息。<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191114153509699.png" alt="在这里插入图片描述"><br>如果能正常识别，则通过tclass 在 policydb 的 class_val_to_struct数组中查找相应的 tclass_datum 数据<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191114153620346.png" alt="在这里插入图片描述"><br>在policydb中可以看到class_val_to_struct的定义，并且user、role、type的datum都是由 他们的 value-1作为索引<br><img src="https://gitee.com/liying000/blogimg/raw/master/2019111415422510.png" alt="在这里插入图片描述"><br>class_datum 的结构图如下所示：</p>
+<li><p>基于前面获取的主体和客体安全上下文及客体类别的策略值调用安全服务器的<br> context_struct_compute_av()计算访问向量决策avd<br> <img src="https://gitee.com/liying000/blogimg/raw/master/20191114144952764.png" alt="在这里插入图片描述"><br> 下面来看context_struct_compute_av()函数：<br> 4.1 该函数首先初始化访问控制向量。<br> <img src="https://gitee.com/liying000/blogimg/raw/master/20191114145711911.png" alt="在这里插入图片描述"><br> 4.2 第二步是检查tclass 是否定义，如果没有定义<br> 就直接返回错误信息。<br> <img src="https://gitee.com/liying000/blogimg/raw/master/20191114153509699.png" alt="在这里插入图片描述"><br> 如果能正常识别，则通过tclass 在 policydb 的 class_val_to_struct数组中查找相应的 tclass_datum 数据<br> <img src="https://gitee.com/liying000/blogimg/raw/master/20191114153620346.png" alt="在这里插入图片描述"><br> 在policydb中可以看到class_val_to_struct的定义，并且user、role、type的datum都是由 他们的 value-1作为索引<br> <img src="https://gitee.com/liying000/blogimg/raw/master/2019111415422510.png" alt="在这里插入图片描述"><br> class_datum 的结构图如下所示：</p>
 </li>
 </ol>
 <p>  <img src="https://gitee.com/liying000/blogimg/raw/master/image-20200616231435922.png" alt=""></p>
@@ -277,7 +277,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">-SELinux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">SELinux</a>
         		</li>
       		
 		</ul>
@@ -505,10 +505,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">others</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">-SELinux</a>
               </li>
             
             <div class="clearfix"></div>
