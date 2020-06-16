@@ -6,26 +6,41 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>std 没有成员 thread （thread not member of std） | Territory</title>
+  <title>selinuxfs:SELinux文件系统 | Territory</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="问题描述： 系统： win10 32位 编辑器： VScode">
+  <meta name="description" content="SELinux 文件系统是用户空间与 SELinux 交互的接口，在 libselinux 库中封装了许多 SELinux 文件系统的操作，需要使用SELinux 提供的安全机制的用户空间程序可以通过 libselinux 方便的完成 SELinux 相关操作。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="std 没有成员 thread （thread not member of std）">
-<meta property="og:url" content="http://yoursite.com/2020/04/07/std-%E6%B2%A1%E6%9C%89%E6%88%90%E5%91%98-thread-%EF%BC%88thread-not-member-of-std%EF%BC%89/index.html">
+<meta property="og:title" content="selinuxfs:SELinux文件系统">
+<meta property="og:url" content="http://yoursite.com/2019/12/03/selinuxfs-SELinux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="Territory">
-<meta property="og:description" content="问题描述： 系统： win10 32位 编辑器： VScode">
+<meta property="og:description" content="SELinux 文件系统是用户空间与 SELinux 交互的接口，在 libselinux 库中封装了许多 SELinux 文件系统的操作，需要使用SELinux 提供的安全机制的用户空间程序可以通过 libselinux 方便的完成 SELinux 相关操作。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20200407142124670.png">
-<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpeWluZzk2,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
-<meta property="article:published_time" content="2020-04-07T04:59:57.000Z">
-<meta property="article:modified_time" content="2020-06-14T16:22:52.529Z">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191203105531344.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191203105645911.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191203152314608.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191203142125974.PNG">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191203142341730.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191203145936959.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191203151437789.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191203151939412.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191203151742801.PNG">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191203154119850.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191203154534527.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191203160621496.PNG">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191203160109737.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191203160124929.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191203161344170.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191203171353364.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191203172450445.PNG">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191203175048249.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191203175312633.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191203175411654.png">
+<meta property="article:published_time" content="2019-12-02T17:16:21.000Z">
+<meta property="article:modified_time" content="2020-06-16T17:19:25.370Z">
 <meta property="article:author" content="LiYing">
-<meta property="article:tag" content="others">
+<meta property="article:tag" content="SELinux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
+<meta name="twitter:image" content="https://gitee.com/liying000/blogimg/raw/master/20191203105531344.png">
   
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
@@ -175,20 +190,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-std-没有成员-thread-（thread-not-member-of-std）" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-selinuxfs-SELinux文件系统" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      std 没有成员 thread （thread not member of std）
+      selinuxfs:SELinux文件系统
     </h1>
   
 
         
-        <a href="/2020/04/07/std-%E6%B2%A1%E6%9C%89%E6%88%90%E5%91%98-thread-%EF%BC%88thread-not-member-of-std%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2020-04-07T04:59:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-07</time>
+        <a href="/2019/12/03/selinuxfs-SELinux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="archive-article-date">
+  	<time datetime="2019-12-02T17:16:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-03</time>
 </a>
 	<!-- 需要添加的位置 -->
         <!-- 开始添加字数统计-->
@@ -198,7 +213,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">287字</span>
+        <span class="post-count">1.4k字</span>
       </span>
     </span>
 
@@ -207,7 +222,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
+        <span class="post-count">5分</span>
       </span>
     </span>
 </div>
@@ -219,25 +234,37 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>问题描述：</p>
-<p>系统： win10 32位</p>
-<p>编辑器： VScode</p>
+        <p>SELinux 文件系统是用户空间与 SELinux 交互的接口，在 libselinux 库中封装了许多 SELinux 文件系统的操作，需要使用SELinux 提供的安全机制的用户空间程序可以通过 libselinux 方便的完成 SELinux 相关操作。</p>
 <a id="more"></a>
 
-<p>问题：在配置好includePath以及安装好mingw之后，仍然显示 std 没有成员 thread （thread not member of std），在编辑界面写thread时，不会有自动提示（这应该是有问题？），示例代码如下</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;       // std::cout</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;future&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">// do stuff...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bar</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">// do stuff...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="function"><span class="built_in">std</span>::thread <span class="title">first</span> <span class="params">(foo)</span></span>;     <span class="comment">// spawn new thread that calls foo()</span></span><br><span class="line">  <span class="function"><span class="built_in">std</span>::thread <span class="title">second</span> <span class="params">(bar,<span class="number">0</span>)</span></span>;  <span class="comment">// spawn new thread that calls bar(0)</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="文件系统的挂载"><a href="#文件系统的挂载" class="headerlink" title="文件系统的挂载"></a>文件系统的挂载</h1><p>selinuxfs挂载位置：<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191203105531344.png" alt="在这里插入图片描述"><br>/sys/fs/selinux目录树如下：<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191203105645911.png" alt="在这里插入图片描述"></p>
+<h2 id="init-call函数在内核启动中的调用过程"><a href="#init-call函数在内核启动中的调用过程" class="headerlink" title="init_call函数在内核启动中的调用过程"></a>init_call函数在内核启动中的调用过程</h2><p>如果在内核启动命令行中指定“selinux=1”,则在（_initcall(init_sel_fs)）中会注册并挂载SELinux文件系统<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191203152314608.png" alt="在这里插入图片描述"><br>在 /include/linux/init.h中，涉及到的函数如下：<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191203142125974.PNG" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191203142341730.png" alt="在这里插入图片描述"></p>
+<p>最终我们看到的是的：<code>__define_initcall(fn,id,__sec)</code>。<br>这个宏的含义是：</p>
+<p>1) 声明一个名称为<code>__initcall_##fn</code>的函数指针；</p>
+<p>2) 将这个函数指针初始化为fn；</p>
+<p>3) 编译的时候需要把这个函数指针变量放置到名称为 “.initcall” id”.init”的section中。<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191203145936959.png" alt="在这里插入图片描述"></p>
+<p>可以看出INIT_CALL一共有8个等级，而我们的 _initcall(init_sel_fs) 通过 device_initcall注册在 level =6 中，比较靠后，</p>
+<p>下面我们来看看，内核是什么时候调用存储在 .initcall”id”.init 的section内的函数的。<br>内核是通过do_initcalls函数 调用执行 .initcall”id”.init ，整个函数调用链如下：<br>kernel 启动过程中会执行 init/main.c 的 start_kernel()，最终会调用 do_initcalls() 执行这些初始化函数：</p>
+<p>start_kernel()-&gt;rest_init()-&gt;kernel_thread(kernel_init)-&gt;kernel_init_freeable()-&gt;do_basic_setup()-&gt;do_initcalls()-&gt;do_initcall_level()</p>
+<p>而执行的顺序就跟各个宏的定义有关，比如 pure_initcall 实际上是 __define_initcall(fn, 0) 所以它会被首先执行，而 late_initcall 是 __define_initcall(fn, 7) 所以会最后执行。具体的执行如下：<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191203151437789.png" alt="在这里插入图片描述"><br>do_initcall_level() 会执行每个 section 内部的所有初始化函数 ：<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191203151939412.png" alt="在这里插入图片描述"><br>do_initcall_level() 按顺序遍历每个 section 执行所有函数。</p>
+<p>两个相关的数组，initcall_levels 指向了每个 section 的起始地址，也就是第一个函数地址，initcall_level_names 则将 section 的顺序号（就是 0,1,2,3 这些）和初始化函数的含义关联起来（比如 0 对应 early ，1 对应 core）</p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/20191203151742801.PNG" alt="在这里插入图片描述"></p>
+<h2 id="init-sel-fs——selinuxfs挂载过程"><a href="#init-sel-fs——selinuxfs挂载过程" class="headerlink" title="init_sel_fs——selinuxfs挂载过程"></a>init_sel_fs——selinuxfs挂载过程</h2><p>整个 init_sel_fs函数的过程如下所示：<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191203154119850.png" alt="在这里插入图片描述"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> __init <span class="title">init_sel_fs</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	...</span><br><span class="line">	err = sysfs_create_mount_point(fs_kobj, <span class="string">"selinux"</span>);</span><br><span class="line">	<span class="keyword">if</span> (err)</span><br><span class="line">		<span class="keyword">return</span> err;</span><br><span class="line">	...</span><br><span class="line">	err = register_filesystem(&amp;sel_fs_type);</span><br><span class="line">	<span class="keyword">if</span> (err) &#123;</span><br><span class="line">		sysfs_remove_mount_point(fs_kobj, <span class="string">"selinux"</span>);</span><br><span class="line">		<span class="keyword">return</span> err;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	selinux_null.mnt = selinuxfs_mount = kern_mount(&amp;sel_fs_type);</span><br><span class="line">	...</span><br><span class="line">	<span class="keyword">return</span> err;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>错误提示：</p>
-<p><img src="https://gitee.com/liying000/blogimg/raw/master/20200407142124670.png" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>可能的原因：</p>
-<p>不支持C++11，因为thread类是C++11的特性，将vscode修改为默认用C++11 ，没有解决；尝试C++11 的其他新特性，成功。</p>
-<p>说明是thread这个类的问题，在Stack Overflow上查找到相似问题，链接如下：</p>
-<p><a href="https://stackoverflow.com/questions/2519607/stdthread-error-thread-not-member-of-std" target="_blank" rel="noopener">https://stackoverflow.com/questions/2519607/stdthread-error-thread-not-member-of-std</a></p>
-<p>提到的解决方法：</p>
-<p>mingw的问题，下载mingw为thread提供的头文件，include当前项目中，解决。</p>
-<p><img src="https://gitee.com/liying000/blogimg/raw/master/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpeWluZzk2,size_16,color_FFFFFF,t_70" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>内心OS：为什么配环境要出这么多问题！！我已经装过了vscode运行c++ 在windows xp上，mac上，win10上！开学用自己电脑还要再装一遍。</p>
+<p>主要有两步：</p>
+<ul>
+<li><p>register_filesystem(&amp;sel_fs_type)，将sel_fs_type注册到Linux文件系统中<br>sel_fs_type定义如下：<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191203154534527.png" alt="在这里插入图片描述"><br>其中sel_mount 是挂载函数，会在挂载文件系统时被调用</p>
+</li>
+<li><p>挂载文件系统，使用的是 kern_mount 函数，函数返回 vfsmount 对象selinuxfs_mount<br>sel_fs_type 中的 sel_mount 函数在这个挂载过程中被调用。sel_mount函数中直接调用了 mount_single 函数，  mount_single 属于 Linux 文件系统的一个功能函数，其要做的工作是，创建超级节点 super_block，并回调 fill_super()指针函数，在 SELinux 文件系统的实现中就是 sel_fill_super()函数<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191203160621496.PNG" alt="在这里插入图片描述"><br>sel_fill_super()函数初始化文件系统超级块，创建根目录和导出文件系统。从selinux_files 数组可以看到，SELinux 文件系统创建的文件有 load，enforce，context，status，mls，disable，policyvers，policy 等，并提供了相应的文件操作集合<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191203160109737.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191203160124929.png?" alt="在这里插入图片描述"><br>例如我们看到，对 policy 文件提供了打开、读、注销等操作.<br>整个 sel_fill_super所创建的文件与我们最开始 用 tree命令看到的 selinux 目录结构树相吻合。</p>
+</li>
+</ul>
+<p>除了上面的文件外，还会创建一些目录，有booleans，avc，class，initial_contexts,policy_capabilities,后续会在这里文件中创建对应的文件，此过程发生在加载策略配置文件 policy.X 时，如在 class 目录中会为策略中的每个客体类别都创建一个以其名称命名的类目录，并在类目录下创建对应客体类别的所有权限的文件</p>
+<h1 id="关键的功能接口"><a href="#关键的功能接口" class="headerlink" title="关键的功能接口"></a>关键的功能接口</h1><p>SELinux 文件系统通过创建一系列相关的文件为用户空间提供了丰富的策略管理接口，虽说数量众多，但它们的实现原理都是相似的，因此只研究与策略加载有关的load 文件操作。load 文件操作集合为<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191203161344170.png" alt="在这里插入图片描述"><br>load 文件就提供了一个写操作，用于完成用户配置的二进制安全策略库的加载功能。<br>其过程如下所示：<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191203171353364.png" alt="在这里插入图片描述"></p>
+<p>该函数的第一步是检查当前进程是否具有加载策略的权限：有则继续，否则退出。<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191203172450445.PNG" alt="在这里插入图片描述"><br>接着把配置的二进制策略数据拷贝到内核空间 data。<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191203175048249.png" alt="在这里插入图片描述"><br>调用 security_load_policy()函数加载配置的安全策略。<br>后续通过相关的 sel_make_policy_nodes函数在文件系统挂载时创建的 booleans、class、policycap 目录中创建相关的目录与文件<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191203175312633.png" alt="在这里插入图片描述"><br>其中，sel_make_policy_nodes如下所示：<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191203175411654.png" alt="在这里插入图片描述"><br>load 文件提供的 sel_write_load 接口在系统中扮演着重要的角色，Linux 系统启动时，init 进程将初始化 SELinux，此时，策略文件并没有被加载，因此只能通过预定义的客体“初始安全标识”来描述相应内核设施的初始安全属性（在前面sid）。</p>
+<p>比如 init 进程在装再policy.X（X 为版本号）策略文件之前，使用的便是初始的安全标识“kernel”，此时它处于 kernel_t 类型上（初始化函数 selinux_init 中调用 cred_init_security 函数设置）。</p>
+<p>之后 init 进程通过 load 文件提供的策略加载功能接口加载策略文件 policy.X，在部署SELinux 环境时，通过 restorecon 命令给整个文件系统上所有正规文件和目录打标签。</p>
+<p>这样，SELinux 的安全策略才能真正起作用，init 进程在加载了策略库后会重启自己，并且依策略库中的定义的策略规则转换为 init_t 类型。</p>
 
       
 
@@ -258,7 +285,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">others</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">SELinux</a>
         		</li>
       		
 		</ul>
@@ -314,7 +341,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/07/std-%E6%B2%A1%E6%9C%89%E6%88%90%E5%91%98-thread-%EF%BC%88thread-not-member-of-std%EF%BC%89/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/03/selinuxfs-SELinux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -328,18 +355,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/05/18/my2019/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/04/07/std-%E6%B2%A1%E6%9C%89%E6%88%90%E5%91%98-thread-%EF%BC%88thread-not-member-of-std%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          我的23岁，自我认识的一年。
+          std 没有成员 thread （thread not member of std）
         
       </div>
     </a>
   
   
-    <a href="/2019/12/03/selinuxfs-SELinux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">selinuxfs:SELinux文件系统</div>
+    <a href="/2019/12/01/Policydb%E5%8A%A0%E8%BD%BDSELinux%E7%AD%96%E7%95%A5%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Policydb加载SELinux策略二进制文件分析</div>
       <i class="icon-circle-right"></i>
     </a>
   
