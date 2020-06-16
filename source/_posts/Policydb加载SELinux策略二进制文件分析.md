@@ -5,8 +5,10 @@ tags:
 	- SELinux
 ---
 
-@[toc](Policydb加载策略二进制文件分析)
 Linux 操作系统启动时，init 进程首先初始化 LSM 模块并将SELinux 作为它的一个可选安全模块加载到系统中，最后 init 通过文件系统的策略加载接口读取 policy.x 文件。策略的加载过程便是将二进制策略配置文件中的数据加载到内存中表示为策略数据库结构的过程，由于策略数据结构比较复杂，解析的过程将是一个很复杂 和细致的工作。
+
+<!--more-->
+
 # security_load_policy函数
 解析二进制策略配置文件的功能是通过int security_load_policy(void  *data,size_t  len)函数实现的，该函数位于 security/selinux/ss/services.c中，在运行时被selinux伪文件系统加载：
 ![在这里插入图片描述](https://gitee.com/liying000/blogimg/raw/master/20191201160744277.png)
