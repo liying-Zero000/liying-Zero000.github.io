@@ -2,7 +2,7 @@
 title: security_compute_av源码分析
 date: 2019-11-15 11:16:53
 tags:
-	-SELinux
+	- SELinux
 ---
 
 security_compute_av是负责计算ssid对tsid的访问权限决策的函数，函数位置在：
@@ -25,25 +25,25 @@ A domain running with a permissive type will be allowed to perform any action si
 在policydb中存储了 bitmap类型的permissive_map，通过ebitmap_get_bit函数判断，主体的type是否在bitmap中（也就是type这个32位的数值是否为permissive_map中的一个key）
 
 2. 获取tsid 的安全上下文结构
-  ![在这里插入图片描述](https://gitee.com/liying000/blogimg/raw/master/20191114114739587.png)
+    ![在这里插入图片描述](https://gitee.com/liying000/blogimg/raw/master/20191114114739587.png)
 
 3. 获取客体类别 tclass的策略值
-  ![在这里插入图片描述](https://gitee.com/liying000/blogimg/raw/master/20191114141316278.png)
+    ![在这里插入图片描述](https://gitee.com/liying000/blogimg/raw/master/20191114141316278.png)
 
 4. 基于前面获取的主体和客体安全上下文及客体类别的策略值调用安全服务器的
-  context_struct_compute_av()计算访问向量决策avd
-  ![在这里插入图片描述](https://gitee.com/liying000/blogimg/raw/master/20191114144952764.png)
-  下面来看context_struct_compute_av()函数：
-  4.1 该函数首先初始化访问控制向量。
-  ![在这里插入图片描述](https://gitee.com/liying000/blogimg/raw/master/20191114145711911.png)
-  4.2 第二步是检查tclass 是否定义，如果没有定义
-  就直接返回错误信息。
-  ![在这里插入图片描述](https://gitee.com/liying000/blogimg/raw/master/20191114153509699.png)
-  如果能正常识别，则通过tclass 在 policydb 的 class_val_to_struct数组中查找相应的 tclass_datum 数据
-  ![在这里插入图片描述](https://gitee.com/liying000/blogimg/raw/master/20191114153620346.png)
-  在policydb中可以看到class_val_to_struct的定义，并且user、role、type的datum都是由 他们的 value-1作为索引
-  ![在这里插入图片描述](https://gitee.com/liying000/blogimg/raw/master/2019111415422510.png)
-  class_datum 的结构图如下所示：
+    context_struct_compute_av()计算访问向量决策avd
+    ![在这里插入图片描述](https://gitee.com/liying000/blogimg/raw/master/20191114144952764.png)
+    下面来看context_struct_compute_av()函数：
+    4.1 该函数首先初始化访问控制向量。
+    ![在这里插入图片描述](https://gitee.com/liying000/blogimg/raw/master/20191114145711911.png)
+    4.2 第二步是检查tclass 是否定义，如果没有定义
+    就直接返回错误信息。
+    ![在这里插入图片描述](https://gitee.com/liying000/blogimg/raw/master/20191114153509699.png)
+    如果能正常识别，则通过tclass 在 policydb 的 class_val_to_struct数组中查找相应的 tclass_datum 数据
+    ![在这里插入图片描述](https://gitee.com/liying000/blogimg/raw/master/20191114153620346.png)
+    在policydb中可以看到class_val_to_struct的定义，并且user、role、type的datum都是由 他们的 value-1作为索引
+    ![在这里插入图片描述](https://gitee.com/liying000/blogimg/raw/master/2019111415422510.png)
+    class_datum 的结构图如下所示：
 
   
 
