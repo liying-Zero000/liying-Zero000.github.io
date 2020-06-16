@@ -6,57 +6,35 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>SELinux命令行操作 | Territory</title>
+  <title>SELinux安全上下文与sid的映射 | Territory</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="下面的命令中的policy（如果有的话）参数都是policy路径，否则就是默认分析内核中的，policy可以是以下两种文件中的一种。">
+  <meta name="description" content="存储用户态所使用的安全上下文都以“user:role:type[:mls_range]”字符串表示在 SELinux 内核空间用context 数据结构来描述 SC，其中各个域都以 u32 来表示">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SELinux命令行操作">
-<meta property="og:url" content="http://yoursite.com/2019/08/25/SELinux%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:title" content="SELinux安全上下文与sid的映射">
+<meta property="og:url" content="http://yoursite.com/2019/10/24/SELinux%E5%AE%89%E5%85%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8Esid%E7%9A%84%E6%98%A0%E5%B0%84/index.html">
 <meta property="og:site_name" content="Territory">
-<meta property="og:description" content="下面的命令中的policy（如果有的话）参数都是policy路径，否则就是默认分析内核中的，policy可以是以下两种文件中的一种。">
+<meta property="og:description" content="存储用户态所使用的安全上下文都以“user:role:type[:mls_range]”字符串表示在 SELinux 内核空间用context 数据结构来描述 SC，其中各个域都以 u32 来表示">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190823140910418.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190823141053377.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190823141300735.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190823142111574.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/2019082314171195.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190823142424200.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190823144212309.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190823154419270.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190823150054735.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190823151935977.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190823145542826.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190823153516242.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/2019082315364738.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190825231137447.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191223153854719.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190823173740952.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190823173952587.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190823151321280.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190825190317341.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/2019082316291573.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190828152726519.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190823164116721.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190823165241282.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/2019082518291582.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191223151957800.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191223152649895.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191223152529309.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190825184917545.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191223152934557.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190823164239876.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190823164437455.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190825223804190.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190825225923604.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190825230434455.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190825230726458.png">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20190825230650809.png">
-<meta property="article:published_time" content="2019-08-25T15:27:16.000Z">
-<meta property="article:modified_time" content="2020-06-15T14:15:19.489Z">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191024160745283.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191024162633740.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191024163128426.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/2019102510031012.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191025091749196.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191025101130912.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191025104247596.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191025114103837.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191025114052522.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191025093554178.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191025162437850.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191025164010766.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191025165712887.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191025165741773.png">
+<meta property="article:published_time" content="2019-10-23T17:22:48.000Z">
+<meta property="article:modified_time" content="2020-06-16T17:28:16.220Z">
 <meta property="article:author" content="LiYing">
 <meta property="article:tag" content="SELinux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/liying000/blogimg/raw/master/20190823140910418.png">
+<meta name="twitter:image" content="https://gitee.com/liying000/blogimg/raw/master/20191024160745283.png">
   
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
@@ -206,20 +184,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-SELinux命令行操作" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-SELinux安全上下文与sid的映射" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      SELinux命令行操作
+      SELinux安全上下文与sid的映射
     </h1>
   
 
         
-        <a href="/2019/08/25/SELinux%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/" class="archive-article-date">
-  	<time datetime="2019-08-25T15:27:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
+        <a href="/2019/10/24/SELinux%E5%AE%89%E5%85%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8Esid%E7%9A%84%E6%98%A0%E5%B0%84/" class="archive-article-date">
+  	<time datetime="2019-10-23T17:22:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-24</time>
 </a>
 	<!-- 需要添加的位置 -->
         <!-- 开始添加字数统计-->
@@ -229,7 +207,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2k字</span>
+        <span class="post-count">1.6k字</span>
       </span>
     </span>
 
@@ -238,7 +216,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">7分</span>
+        <span class="post-count">6分</span>
       </span>
     </span>
 </div>
@@ -250,63 +228,49 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>下面的命令中的policy（如果有的话）参数都是policy路径，否则就是默认分析内核中的，policy可以是以下两种文件中的一种。</p>
+        <h1 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h1><p>用户态所使用的安全上下文都以“user:role:type[:mls_range]”字符串表示<br>在 SELinux 内核空间用context 数据结构来描述 SC，其中各个域都以 u32 来表示</p>
 <a id="more"></a>
-<p>(下面是manpage的说法，版本不一定是正确的，《selinux学习笔记》中提到过版本最好不要超过内核中的版本，<br>疑问：<strong><em>如果是自己编写的策略文件，版本号是直接指定的嘛</em></strong>？)</p>
+
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/20191024160745283.png" alt="在这里插入图片描述"><br>SELinux 内核空间给每个有效的 context 分配一个 u32 sid，所有内核数据结构的安全扩展中都通过 sid<br>来描述当前对象的安全上下文。sidtab_node 用于建立 context 数据结构和其 sid 之间的关联，组织为<br>sidtab 哈希表。</p>
+<h2 id="sidtab"><a href="#sidtab" class="headerlink" title="sidtab"></a>sidtab</h2><p>SID表用一个hash表存储了SID和安全上下文的节点，提供了SID和安全上下文的对应关系。通过查找表sidtab，可方便地由SID找到安全上下文，hash表的hash值就是SID。<br>结构sidtab列出如下（在security/selinux/ss/sidtab.h中）：<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191024162633740.png" alt="在这里插入图片描述"><br>SID表节点由结构sidtab_node 的实例组成，它描述了SID和安全上下文的对应关系，这样，知道了SID或者安全上下文，就可以找到安全上下文或者SID。结构sidtab_node 列出如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sidtab_node</span> &#123;</span></span><br><span class="line">	u32 sid;		<span class="comment">/* SID,security identifier */</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">context</span> <span class="title">context</span>;</span>	<span class="comment">/* 安全上下文结构security context structure */</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">sidtab_node</span> *<span class="title">next</span>;</span> <span class="comment">//下一个节点</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>结构context是安全上下文的描述结构，安全上下文包括用户、角色、类型和安全级别，结构context列出如下（在selinux/ss/context.h中）：<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191024163128426.png" alt="在这里插入图片描述"><br>SID表sidtab的组织结构图如下图所示：<br><img src="https://gitee.com/liying000/blogimg/raw/master/2019102510031012.png" alt="在这里插入图片描述"><br>在selinux/ss/sidtab.c中提供了SID表sidtab的管理函数，例如，函数sidtab_init初始化sidtab表，函数sidtab_insert在表中插入一个节点；函数sidtab_search从表中查找到SID对应的安全上下文；函数sidtab_search_context从表中找到安全上下文对应的SID；函数sidtab_context_to_sid将安全上下文转换到对应的SID，如果表中不存在这个节点，将其加入到表中。</p>
+<p>看一下<strong>sidtab的初始化：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sidtab_init</span><span class="params">(struct sidtab *s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">	s-&gt;htable = kmalloc(<span class="keyword">sizeof</span>(*(s-&gt;htable)) * SIDTAB_SIZE, GFP_ATOMIC);</span><br><span class="line">	<span class="keyword">if</span> (!s-&gt;htable)</span><br><span class="line">		<span class="keyword">return</span> -ENOMEM;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; SIDTAB_SIZE; i++)</span><br><span class="line">		s-&gt;htable[i] = <span class="literal">NULL</span>;</span><br><span class="line">	s-&gt;nel = <span class="number">0</span>;</span><br><span class="line">	s-&gt;next_sid = <span class="number">1</span>;  ## 初始化sidtab时，下一个可以分配的sid是<span class="number">1</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> next_sid;	</span><br><span class="line">	s-&gt;<span class="built_in">shutdown</span> = <span class="number">0</span>;</span><br><span class="line">	spin_lock_init(&amp;s-&gt;lock);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/20191025091749196.png" alt="在这里插入图片描述"><br>可以看出SIDTAB_HASH_BUCKETS 是128，也就是有128个哈希槽。</p>
+<h1 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h1><h2 id="sitab-node-的插入"><a href="#sitab-node-的插入" class="headerlink" title="sitab_node 的插入"></a>sitab_node 的插入</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sidtab_insert</span><span class="params">(struct sidtab *s, u32 sid, struct context *context)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> hvalue, rc = <span class="number">0</span>;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">sidtab_node</span> *<span class="title">prev</span>, *<span class="title">cur</span>, *<span class="title">newnode</span>;</span></span><br></pre></td></tr></table></figure>
+<p>看输入参数，插入的前提是<strong>已经得到了sid与相应的context</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hvalue = SIDTAB_HASH(sid);</span><br><span class="line">prev = <span class="literal">NULL</span>;</span><br><span class="line">cur = s-&gt;htable[hvalue];</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/20191025101130912.png" alt="在这里插入图片描述"><br>哈希值是直接取sid的后七位<br>第一个例子：SID是28</p>
+<p>hvalue = 28<br>prev = NULL<br>cur = s-&gt;htable[28] =NULL</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">while</span> (cur &amp;&amp; sid &gt; cur-&gt;sid) &#123;</span><br><span class="line">		prev = cur;</span><br><span class="line">		cur = cur-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (cur &amp;&amp; sid == cur-&gt;sid) &#123;</span><br><span class="line">		rc = -EEXIST;</span><br><span class="line">		<span class="keyword">goto</span> out;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	newnode = kmalloc(<span class="keyword">sizeof</span>(*newnode), GFP_ATOMIC);</span><br><span class="line">	<span class="keyword">if</span> (newnode == <span class="literal">NULL</span>) &#123;</span><br><span class="line">		rc = -ENOMEM;</span><br><span class="line">		<span class="keyword">goto</span> out;</span><br><span class="line">	&#125;</span><br><span class="line">	newnode-&gt;sid = sid;</span><br><span class="line">	<span class="keyword">if</span> (context_cpy(&amp;newnode-&gt;context, context)) &#123; <span class="comment">//context复制成功会返回0</span></span><br><span class="line">		kfree(newnode);</span><br><span class="line">		rc = -ENOMEM;</span><br><span class="line">		<span class="keyword">goto</span> out;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (prev) &#123;</span><br><span class="line">		newnode-&gt;next = prev-&gt;next;</span><br><span class="line">		wmb();</span><br><span class="line">		prev-&gt;next = newnode;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		newnode-&gt;next = s-&gt;htable[hvalue];</span><br><span class="line">		wmb();</span><br><span class="line">		s-&gt;htable[hvalue] = newnode;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	s-&gt;nel++;</span><br><span class="line">	<span class="keyword">if</span> (sid &gt;= s-&gt;next_sid)</span><br><span class="line">		s-&gt;next_sid = sid + <span class="number">1</span>;</span><br><span class="line">out:</span><br><span class="line">	<span class="keyword">return</span> rc;</span><br></pre></td></tr></table></figure>
+<p>while跟if都走不到，直接分配一个newnode<br>newnode的sid是已知的sid，将context拷贝到newnode中<br>prev是null<br>那么最终执行的是：<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191025104247596.png" alt="在这里插入图片描述"><br>sid为28的节点作为 s-&gt;htable[28]的链表的头结点</p>
+<p>如果是sid是156，<br>hvalue = 28<br>prev = NULL<br>cur = s-&gt;htable[28] =【sid=28 | * next = NULL】<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191025114103837.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191025114052522.png" alt="在这里插入图片描述"><br>在s-&gt;htable[28]这个链表用尾插法插入新节点。</p>
+<h2 id="创建-context-并注册到-sidtab-以获得-sid-的时机"><a href="#创建-context-并注册到-sidtab-以获得-sid-的时机" class="headerlink" title="创建 context 并注册到 sidtab 以获得 sid 的时机"></a>创建 context 并注册到 sidtab 以获得 sid 的时机</h2><p>任何内核数据结构的安全属性中都以 u32 sid 描述相应数据结构的安全上下文。sid 有效说明对应的context 数据结构已经存在并且在 sidtab 中注册过了。如果 Security Server 尚未初始化，则有效的 sid 只能是固化在 SELinux 内核驱动中的 Initial SID。如<br>果参数 sid 属于 Initial SID，则直接从 initial_sid_to_string 数组中拷贝相应的字符串</p>
+<p>Initial SID /security/selinux/include/flask.h<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191025093554178.png" alt="在这里插入图片描述"></p>
+<p>每当得到一个新的 context 时（比如进入到新的 domain 或者创建新的文件或内核对象时），都需要调用 sidtab_context_to_sid 函数向 sidtab 查询它所对应的 sid，如果不存在则注册之并返回相应的 sid。</p>
+<p>由 sidtab_context_to_sid 函数的调用者创建 context 数据结构，所有的可能调用如下：</p>
+<ol>
+<li>Initial SID string 向 sidtab 注册时<br>security_load_policy  </li>
+</ol>
+<p>—&gt; policydb_load_isid<br>—&gt; sidtab_insert<br>2. Domain Transition 时<br>当进程 exec 可执行文件时可能会发生 Domain Transition，根据当前进程 tsec-&gt;sid 以及可执行文件 isec-&gt;sid 查询 policy 得到新的 domain 和新的 context。<br>selinux_bprm_set_security<br>—&gt;security_transition_sid<br>—&gt; security_compute_sid         # 根据 subject/target context，计算 newcontext<br>—&gt; sidtab_context_to_sid<br>3. 创建新文件时<br>vfs_create<br>—&gt; may_create<br>—&gt; security_transition_sid<br>—&gt; security_compute_sid<br>—&gt; sidtab_context_to_sid<br>vfs_create<br>—&gt; …<br>—&gt; security_inode_init_security == selinux_inode_init_security<br>—&gt; security_compute_sid<br>—&gt; sidtab_context_to_sid<br>4. 当用户写入/proc/&lt;$pid&gt;/attr/*文件时<br>用户通过 attr/下的 current/exec 文件来显式指定当前进程的 SC 字符串，或者下一次执行 exec 时切换<br>到的 SC 字符串。<br>selinux_setprocattr<br>—&gt; security_context_to_sid # 将 SC 字符串转化为一个 context 数据结构<br>—&gt; sidtab_context_to_sid</p>
+<p>其中，通过context获得sid的函数是 sidtab_context_to_sid</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sidtab_context_to_sid</span><span class="params">(struct sidtab *s, struct context *context, u32 *out_sid)</span></span></span><br></pre></td></tr></table></figure>
+<p>输入是sidtab 与context ，输出out_sid</p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/20191025162437850.png" alt="在这里插入图片描述"><br>过程如下：</p>
 <ul>
-<li>源文件：<br> 包含单一策略源的单个文本文件。 该文件通常名为policy.conf。</li>
-<li>二进制文件：<br>包含二进制策略的单个文件。 此文件通常以Linux系统上的版本命名，例如policy.30。 此文件通常在Android系统上命名为sepolicy。</li>
+<li>先搜索sidtab的cache，如果cache中存在相应的context，那么返回相应的sid</li>
+<li>如果cache中不存在相应的context，那么查找整个sidtab</li>
+<li>如果整个sidtab中存在相应的context，返回相应的sid</li>
+<li>如果整个sidtab中不存在相应的context，分配一个新的sid</li>
 </ul>
-<h1 id="1-seinfo"><a href="#1-seinfo" class="headerlink" title="1.seinfo"></a>1.seinfo</h1><p>得到当前规则库中各种SELinux语法使用情况的摘要信息<br><img src="https://gitee.com/liying000/blogimg/raw/master/20190823140910418.png" alt="在这里插入图片描述"><br>分析某个编译好的policy文件，在seinfo后面加上policy文件的路径<br><img src="https://gitee.com/liying000/blogimg/raw/master/20190823141053377.png" alt="在这里插入图片描述"></p>
-<h2 id="（1）seinfo-u"><a href="#（1）seinfo-u" class="headerlink" title="（1）seinfo -u"></a>（1）seinfo -u</h2><p>查看策略中的user信息<br><img src="https://gitee.com/liying000/blogimg/raw/master/20190823141300735.png" alt="在这里插入图片描述"></p>
-<h3 id="seinfo-uXXX-x"><a href="#seinfo-uXXX-x" class="headerlink" title="seinfo -uXXX -x"></a>seinfo -uXXX -x</h3><p>查询某个linux用户关联了哪些selinux的user以及role<br><img src="https://gitee.com/liying000/blogimg/raw/master/20190823142111574.png" alt="在这里插入图片描述"></p>
-<h2 id="（2）seinfo-r"><a href="#（2）seinfo-r" class="headerlink" title="（2）seinfo -r"></a>（2）seinfo -r</h2><p>查询策略的role信息<br><img src="https://gitee.com/liying000/blogimg/raw/master/2019082314171195.png" alt="在这里插入图片描述"></p>
-<h3 id="seinfo-rXXX-t-x"><a href="#seinfo-rXXX-t-x" class="headerlink" title="seinfo -rXXX_t -x"></a>seinfo -rXXX_t -x</h3><p>查询某个角色关联的类型信息<br><img src="https://gitee.com/liying000/blogimg/raw/master/20190823142424200.png" alt="在这里插入图片描述"></p>
-<h2 id="（3）seinfo-tXXX-t-x"><a href="#（3）seinfo-tXXX-t-x" class="headerlink" title="（3）seinfo -tXXX_t -x"></a>（3）seinfo -tXXX_t -x</h2><p>查询一个type所属于的所有domain的信息<br><img src="https://gitee.com/liying000/blogimg/raw/master/20190823144212309.png" alt="在这里插入图片描述"></p>
-<h2 id="（4）seinfo-b"><a href="#（4）seinfo-b" class="headerlink" title="（4）seinfo -b"></a>（4）seinfo -b</h2><p>查询布尔值的名字，布尔值详细内容由semanage给出<br><img src="https://gitee.com/liying000/blogimg/raw/master/20190823154419270.png" alt="在这里插入图片描述"></p>
-<h1 id="2-sesearch"><a href="#2-sesearch" class="headerlink" title="2.sesearch"></a>2.sesearch</h1><p>精细地查找一条具体的SELinux规则<br>语法：<br><img src="https://gitee.com/liying000/blogimg/raw/master/20190823150054735.png" alt="在这里插入图片描述"><br>其中<br>-A 并不是表示all的意思，而是<br><img src="https://gitee.com/liying000/blogimg/raw/master/20190823151935977.png" alt="在这里插入图片描述"><br>两个permission属性的集合</p>
-<h2 id="sesearch-A-–allow-…-s-name-t-name"><a href="#sesearch-A-–allow-…-s-name-t-name" class="headerlink" title="sesearch [-A/–allow/…] -s [name] -t[name]"></a>sesearch [-A/–allow/…] -s [name] -t[name]</h2><p>s跟t可以同时指定。</p>
-<p>从下面的图可以看出，s(source)跟t(target)并不是alllow规则中的主体跟客体的对应，<strong>而是具有source指定的名称作为类型或者属性的意思（存疑）</strong>，如果要精确查找某些allow规则中的主体或者客体是某个名称的规则， 用正则表达式 |grep name（当然上面的有些命令也可以用正则表达式。）</p>
-<p><img src="https://gitee.com/liying000/blogimg/raw/master/20190823145542826.png" alt="在这里插入图片描述"><br><img src="https://gitee.com/liying000/blogimg/raw/master/20190823153516242.png" alt="在这里插入图片描述"><br><img src="https://gitee.com/liying000/blogimg/raw/master/2019082315364738.png" alt="在这里插入图片描述"><br>查看某一对主体&amp;客体产生的日志（如果被标记为dontaudit也是可以检索出来）<br><img src="https://img-blog.csdnimg.cn/20190825231137447.png" alt="在这里插入图片描述"></p>
-<h2 id="sesearch-T"><a href="#sesearch-T" class="headerlink" title="sesearch -T"></a>sesearch -T</h2><p>查询域转移的命令<br>sesearch -T命令会显示系统中所有的转移命令，包括域转移，角色转移等<br>举例如下：<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191223153854719.png" alt="在这里插入图片描述"><br>其中：<br> -s 参数表示要发生迁移的域<br> -t 参数表示的是在迁移点（注意不是迁移后的域）</p>
-<h1 id="3-semanage"><a href="#3-semanage" class="headerlink" title="3.semanage"></a>3.semanage</h1><p>查询与修改SELinux默认目录的安全上下文<br>semanage可管理的内容很多，具体有：</p>
-<h2 id="import"><a href="#import" class="headerlink" title="import"></a>import</h2><p><img src="https://gitee.com/liying000/blogimg/raw/master/20190823173740952.png" alt="在这里插入图片描述"><br>不是很重要，略</p>
-<h2 id="export"><a href="#export" class="headerlink" title="export"></a>export</h2><p>略</p>
-<h2 id="login"><a href="#login" class="headerlink" title="login"></a>login</h2><p>该属性用于定义等Unix用户登录系统后，所得到的的对应SElinux User，以及context标记。</p>
-<h3 id="semanage-login-l"><a href="#semanage-login-l" class="headerlink" title="semanage login -l"></a>semanage login -l</h3><p>-l, –list            List records of the login object type<br><img src="https://gitee.com/liying000/blogimg/raw/master/20190823173952587.png" alt="在这里插入图片描述"><br>这个命令对于那些权利分离的系统很有用（例如红旗安全操作系统，三权分离，直接管理登录的selinux用户）</p>
-<h2 id="user"><a href="#user" class="headerlink" title="user"></a>user</h2><p>控制SELinux用户角色和MLS / MCS级别之间的映射。<br><img src="https://gitee.com/liying000/blogimg/raw/master/20190823151321280.png" alt="在这里插入图片描述"></p>
-<h2 id="semanage-user-a"><a href="#semanage-user-a" class="headerlink" title="semanage user -a"></a>semanage user -a</h2><p>Modify groups for staff_u user<br>下面这条命令的意思是给staff_u这个selinux的user增加三个角色。<br> #semanage user -m -R “system_r unconfined_r staff_r” staff_u<br> Add level for TopSecret Users<br> #semanage user -a -R “staff_r” -rs0-TopSecret topsecret_u<br> 使用<strong>semanage user</strong>创建<strong>Selinux User</strong>的命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">semanage user -a -R user_r -P user -r s0-s5:c1.c20 -L s0 chuzhang_u</span><br></pre></td></tr></table></figure>
-<p>其中，-R是selinux Roles，-P是selinux Prefix（selinux 前缀，链接到selinux 用户id，并反映用户角色），-L 是selinux缺省的level，-r是MLS/LCS 的范围<br>注意：-r和-L两个值的设定，对<strong>semanage login</strong>的 -r参数是有影响的，其值不能超过<strong>semanage user</strong> 中定义的某个<strong>Selinux User</strong> 的MCS范围<br>注意：给semanage user设定-L参数，可能会引发许多意向不到的问题，建议设置时保留其默认值。</p>
-<p>semanage user与semanage login设定的selinux user冲突，解决方法是：<br>删除掉semanage user 设置的selinux user，重新设置。</p>
-<h2 id="port"><a href="#port" class="headerlink" title="port"></a>port</h2><p>定义了一些针对某个服务的类型（Type）所使用的端口。除已定义的属性端口外，该服务就不能使用额外的端口<br><img src="https://gitee.com/liying000/blogimg/raw/master/20190825190317341.png" alt="在这里插入图片描述"></p>
-<h2 id="interface"><a href="#interface" class="headerlink" title="interface"></a>interface</h2><p>对应接口对象对应的context</p>
-<h2 id="fcontext（重要）"><a href="#fcontext（重要）" class="headerlink" title="fcontext（重要）"></a>fcontext（重要）</h2><h3 id="semanage-fcontext-l"><a href="#semanage-fcontext-l" class="headerlink" title="semanage fcontext -l"></a>semanage fcontext -l</h3><p>查询所有的默认安全上下文<br>一旦对文件的安全上下文进行了修改，就可以使用 restorecon 命令进行恢复，因为默认安全上下文已经明确定义了<br><strong>问题：对于一些新建文件或者复制文件，安全上下文是如何默认的？</strong><br><img src="https://gitee.com/liying000/blogimg/raw/master/2019082316291573.png" alt="在这里插入图片描述"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">思考：对于后期维护selinux的人员来说，可能需要查看某个主体或者客体对应的资源是哪些，</span><br><span class="line">这时候用semanage fcontext -l 就很方便，</span><br><span class="line">另外，如果想要开发管理工具，可以调用semanage fcontext显示出相应的type对应的文件是哪些。例子见下：</span><br></pre></td></tr></table></figure>
-<h3 id="semanage-fcontext-l-grep-XXX"><a href="#semanage-fcontext-l-grep-XXX" class="headerlink" title="semanage fcontext -l |grep XXX"></a>semanage fcontext -l |grep XXX</h3><p><img src="https://gitee.com/liying000/blogimg/raw/master/20190828152726519.png" alt="在这里插入图片描述"><br>restorecon举例：<br><img src="https://gitee.com/liying000/blogimg/raw/master/20190823164116721.png" alt="在这里插入图片描述"></p>
-<h3 id="semanage-fcontext-a-d"><a href="#semanage-fcontext-a-d" class="headerlink" title="semanage fcontext -a/-d"></a>semanage fcontext -a/-d</h3><p>-a表示增加安全上下文<br><img src="https://gitee.com/liying000/blogimg/raw/master/20190823165241282.png" alt="在这里插入图片描述"><br>这个语句的意思是给/test目录下所有以 . 开头的文件增加“httpd_sys_content_t”的type<br>但是manpage中说的是<strong>增加或者删除一条record</strong>，需要实际操作一下。<br>-d表示删除安全上下文<br>同理。</p>
-<h2 id="boolean"><a href="#boolean" class="headerlink" title="boolean"></a>boolean</h2><p>semanage boolean -l<br>长格式查看所有布尔变量<br><img src="https://gitee.com/liying000/blogimg/raw/master/2019082518291582.png" alt="在这里插入图片描述"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;***</span><br><span class="line">布尔值可以理解为是把一组规则（rules）合并起来，定义一个名称，以便在运行时可修改，实时生效，</span><br><span class="line">以满足某些许可的要求。</span><br><span class="line">***&#x2F;</span><br></pre></td></tr></table></figure>
-<p>修改bool值<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191223151957800.png" alt="在这里插入图片描述"></p>
-<h2 id="permissive"><a href="#permissive" class="headerlink" title="permissive"></a>permissive</h2><p>selinux中可以单独将某些类型设置为permissive，也就是说，整个系统运行在enforce模式时，此类型是permissive的<br>semanage permissive -l是列出当前策略中所有permissive类型<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191223152649895.png" alt="在这里插入图片描述"><br>semanage permissive -a XXX_t<br>将XXX_t设置为permissive模式<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191223152529309.png" alt="在这里插入图片描述"><br>实质上进行的操作应该是编译了一个pp文件，该文件的内容是将XXX_t设置为permissive<br><img src="https://gitee.com/liying000/blogimg/raw/master/20190825184917545.png" alt="在这里插入图片描述"><br>semanage permissive -d XXX_t<br>从系统策略中删除某一个permissive的type可以用semanage permissive -d XXX_t这个命令<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191223152934557.png" alt="在这里插入图片描述"><br>从返回结果看，这是讲我们看到的permissive-XXX_t删除，二者是一样的效果<br>（semodule -r permissive_sandbox_min_t）<br>现在系统中不存在permissive的type</p>
-<h2 id="dontaudit"><a href="#dontaudit" class="headerlink" title="dontaudit"></a>dontaudit</h2><p>设定某个规则访问或者拒绝访问之后是否记录。</p>
-<h2 id="ibendport"><a href="#ibendport" class="headerlink" title="ibendport"></a>ibendport</h2><h1 id="4-setsebool"><a href="#4-setsebool" class="headerlink" title="4.setsebool"></a>4.setsebool</h1><h2 id="setsebool-XXX-on-off"><a href="#setsebool-XXX-on-off" class="headerlink" title="setsebool XXX on/off"></a>setsebool XXX on/off</h2><p>设定某个布尔值打开或者关闭</p>
-<h1 id="5-getsebool"><a href="#5-getsebool" class="headerlink" title="5.getsebool"></a>5.getsebool</h1><p>获取某个布尔值的状态</p>
-<h2 id="getsebool-XXX"><a href="#getsebool-XXX" class="headerlink" title="getsebool XXX"></a>getsebool XXX</h2><h1 id="6-chcon"><a href="#6-chcon" class="headerlink" title="6.chcon"></a>6.chcon</h1><p>chcon [选项]… [-u 用户] [-r 角色] [-l 范围] [-t 类型] 文件<br>比较有用的部分是这个命令，修改某个文件的安全上下文<br><img src="https://gitee.com/liying000/blogimg/raw/master/20190823164239876.png" alt="在这里插入图片描述"><br>用法：<br><img src="https://gitee.com/liying000/blogimg/raw/master/20190823164437455.png" alt="在这里插入图片描述"></p>
-<h1 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h1><p>系统会对主体访问客体的动作是否允许进行判断，当拒绝发生时，除规则动作定义为dontaudit之外，会生成AVC消息记录在审计日志 /var/log/audit/audit.log文件，当允许发生时，只有匹配规则动作为auditallow的消息才写入日志。</p>
-<h2 id="日志字段"><a href="#日志字段" class="headerlink" title="日志字段"></a>日志字段</h2><p><img src="https://gitee.com/liying000/blogimg/raw/master/20190825223804190.png" alt="在这里插入图片描述"></p>
-<ul>
-<li>type<br>前缀是AVC，标识出这条消息是一条AVC消息，其它类型包括USER_AUTH，LOGIN，SYSCALL，和PATH</li>
-<li>msg<br>时间戳：从基准时间依赖的以纳秒为单位的时长<br>序列号：1770，用来标识由相同事件产生的多个相关的审核消息，例如，一个事件可以产生两个系统调用和AVC审核消息，这些消息的序列号是相同的</li>
-<li>avc<br>标识出审计消息时来自允许还是拒绝访问，以及允许或拒绝的许可，关键词denied标识这个消息来自访问被拒绝，允许访问的字段是granted</li>
-<li>scontext<br>主体的上下文</li>
-<li>tcontext<br>客体的上下文</li>
-<li>tclass<h2 id="辅助信息"><a href="#辅助信息" class="headerlink" title="辅助信息"></a>辅助信息</h2>对于特定的客体类别，例如，与文件有关的客体类别的审计消息通常包括客体的inode号，与网络有关的客体类别的审计消息通常包括IP地址和端口号</li>
-</ul>
-<p><img src="https://gitee.com/liying000/blogimg/raw/master/20190825225923604.png" alt="在这里插入图片描述"><br>查看日志服务的信息<br><img src="https://gitee.com/liying000/blogimg/raw/master/20190825230434455.png" alt="在这里插入图片描述"></p>
-<h2 id="日志命令"><a href="#日志命令" class="headerlink" title="日志命令"></a>日志命令</h2><h3 id="ausearch"><a href="#ausearch" class="headerlink" title="ausearch"></a>ausearch</h3><p><img src="https://gitee.com/liying000/blogimg/raw/master/20190825230726458.png" alt="在这里插入图片描述"><br>还可以加入时间等命令<br><img src="https://gitee.com/liying000/blogimg/raw/master/20190825230650809.png" alt="在这里插入图片描述"></p>
-<h3 id="audit2why"><a href="#audit2why" class="headerlink" title="audit2why"></a>audit2why</h3><p>从审计日志得到一些解决建议。</p>
-<h3 id="audit2allow"><a href="#audit2allow" class="headerlink" title="audit2allow"></a>audit2allow</h3><p>只能对日志中出现的一些拒绝访问给出建议，对于MLS/MCS模式下造成的拒绝访问不能给出建议。</p>
+<p>分配的过程先检查有没有超过无符号整数的最大界限，如果没超过，将 sidtab结构中保存的 next_sid赋值给sid，同时next_sid+1<br>然后把context与对应的sid作为一个新的sidtab_node插入到sidtab中</p>
+<p>从表中查找到SID对应的安全上下文是一个简单的查找哈希表的过程；</p>
+<h2 id="initial-SID注册到sidtab中"><a href="#initial-SID注册到sidtab中" class="headerlink" title="initial SID注册到sidtab中"></a>initial SID注册到sidtab中</h2><p>函数sidtab_search_context从表中找到安全上下文对应的SID</p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/20191025164010766.png" alt="在这里插入图片描述"><br>是一个数组链表遍历的过程，不再分析。</p>
+<p>在策略数据库初始化的过程中，装载SID的第一步就是在sidtab中注册初始SID：</p>
+<p>/security/selinux/ss/policydb.c::policydb_load_isids(struct policydb *p, struct sidtab *s)<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191025165712887.png" alt="在这里插入图片描述"><br>接着调用了sidtab_insert函数<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191025165741773.png" alt="在这里插入图片描述"><br>初始化之后，sidtab中的next_sid是28<br>非系统定义的context生成时，可以使用的第一个sid就是28了。</p>
 
       
 
@@ -383,7 +347,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/25/SELinux%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/24/SELinux%E5%AE%89%E5%85%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8Esid%E7%9A%84%E6%98%A0%E5%B0%84/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -397,15 +361,20 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/10/24/SELinux%E5%AE%89%E5%85%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8Esid%E7%9A%84%E6%98%A0%E5%B0%84/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/11/01/Linux%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9D%97-LSM/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          SELinux安全上下文与sid的映射
+          Linux安全模块(LSM)
         
       </div>
     </a>
   
+  
+    <a href="/2019/08/25/SELinux%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SELinux命令行操作</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
