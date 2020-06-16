@@ -6,6 +6,9 @@ tags:
 ---
 
 /security/selinux/avc.c
+
+<!--more-->
+
 # avc的存储
 AVC的缓存由类似文件系统的node和entry结构组成，结构avc_cache、avc_node、avc_entry、av_decision的关系图如下所示：
 实箭头表示指针(所有指针没有完全画出，只画出了重要的逻辑)，白色箭头表示结构体的内容。

@@ -7,6 +7,9 @@ tags:
 
 security_compute_av是负责计算ssid对tsid的访问权限决策的函数，函数位置在：
 /security/selinux/ss/service.c ::security_compute_av
+
+<!--more-->
+
 security_compute_av整体过程：
 ![在这里插入图片描述](https://gitee.com/liying000/blogimg/raw/master/20191108162518611.png)
 
