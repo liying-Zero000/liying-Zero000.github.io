@@ -21,8 +21,11 @@
 <meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/1269.jpg">
 <meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/1271.jpg">
 <meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/1270.jpg">
+<meta property="og:image" content="f:%5Cblog%5Cv2-eddc430b991c58039dfc79dd6f3139cc_720w.jpg">
+<meta property="og:image" content="f:%5Cblog%5Cv2-c9bf695b1b9d2a0ae01cf92501492159_720w.jpg">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/12400.jpg">
 <meta property="article:published_time" content="2020-06-13T15:33:21.000Z">
-<meta property="article:modified_time" content="2020-06-15T13:45:44.145Z">
+<meta property="article:modified_time" content="2020-06-18T15:19:39.227Z">
 <meta property="article:author" content="LiYing">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -199,7 +202,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.2k字</span>
+        <span class="post-count">1.8k字</span>
       </span>
     </span>
 
@@ -208,7 +211,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">5分</span>
+        <span class="post-count">7分</span>
       </span>
     </span>
 </div>
@@ -272,10 +275,25 @@
 <p><a href="https://zhuanlan.zhihu.com/p/42516717" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/42516717</a> 中举了下面的例子：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> hello;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">work</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> hello;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> <span class="keyword">implements</span> <span class="title">People</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"老师教书育人"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"教书"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> hello;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WorkHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Object obj;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WorkHandler</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WorkHandler</span><span class="params">(Object obj)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.obj = obj;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"before invoke"</span>);</span><br><span class="line">        Object invoke = method.invoke(obj,args);</span><br><span class="line">        System.out.println(<span class="string">"after invoke"</span>);</span><br><span class="line">        <span class="keyword">return</span> invoke;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> hello;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Clinet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        People people = <span class="keyword">new</span> Teacher();</span><br><span class="line">        InvocationHandler ih = <span class="keyword">new</span> WorkHandler(people);</span><br><span class="line">        People proxy = (People) Proxy.newProxyInstance(ih.getClass().getClassLoader(),people.getClass().getInterfaces(),ih);</span><br><span class="line">        proxy.work();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
-
-
+<h2 id="再探索"><a href="#再探索" class="headerlink" title="再探索"></a>再探索</h2><p>Java 动态代理作用是什么？ - bravo1988的回答 - 知乎<br><a href="https://www.zhihu.com/question/20794107/answer/658139129" target="_blank" rel="noopener">https://www.zhihu.com/question/20794107/answer/658139129</a><br>如果静态代理的缺点是要为每个真实角色写一个代理类,而真实的java对象是由Class对象创建的,那么是否不可不生成类,直接生成Class对象?<br>真实的创建对象的过程:<br><img src="F:%5Cblog%5Cv2-eddc430b991c58039dfc79dd6f3139cc_720w.jpg" alt=""><br>所谓的Class对象,是Class类的实例,Class类是描述所有类的:<br><img src="F:%5Cblog%5Cv2-c9bf695b1b9d2a0ae01cf92501492159_720w.jpg" alt=""></p>
+<p>能否不写代理类，而直接得到代理Class对象，然后根据它创建代理实例（反射）?</p>
+<p>Class对象包含了一个类的所有信息，比如构造器、方法、字段等。</p>
+<p>那么如何获得代理类的Class信息?<br>答:真实对象与代理对象实现 了相同的接口,那么就可以用接口的信息来获得真实对象拥有的方法.<br><img src="https://gitee.com/liying000/blogimg/raw/master/12400.jpg" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Class&lt;?&gt; getProxyClass(ClassLoader loader,</span><br><span class="line">                                         Class&lt;?&gt;... interfaces)</span><br><span class="line">        <span class="keyword">throws</span> IllegalArgumentException</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">final</span> Class&lt;?&gt;[] intfs = interfaces.clone();</span><br><span class="line">        <span class="keyword">final</span> SecurityManager sm = System.getSecurityManager();</span><br><span class="line">        <span class="keyword">if</span> (sm != <span class="keyword">null</span>) &#123;</span><br><span class="line">            checkProxyAccess(Reflection.getCallerClass(), loader, intfs);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> getProxyClass0(loader, intfs);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>跟newInstance中生成Class对象的逻辑是相同的,重要的是getProxyClass0.</p>
+<p>代理类的Class已经生成,下面做的就是反射.</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><blockquote>
+<p>我的问题:多个类要实现代理怎么写?每个类都写一个InvocationHandler吗?</p>
+</blockquote>
+<p>nope:所有的类都有一个父类:Object,接口的父类也是Object,把生成代理对象的类改一下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Object object;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ProxyInvocationHandler</span><span class="params">(Object object)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.object = object;</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">getProxy</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(Rent<span class="class">.<span class="keyword">class</span>.<span class="title">getClassLoader</span>(),<span class="title">object</span>.<span class="title">getClass</span>().<span class="title">getInterfaces</span>(),<span class="title">this</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        Object result = method.invoke(object,args);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>完工!!这样就可以传进来任意一个真实角色,然后获得代理角色对象了.<br>啊!又是一个多态的应用吧.</p>
+<p><a href="https://www.devio.org/2015/12/02/Java%E4%BB%A3%E7%90%86%E5%92%8C%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%9C%BA%E5%88%B6%E5%88%86%E6%9E%90%E5%92%8C%E5%BA%94%E7%94%A8/" target="_blank" rel="noopener">贾鹏辉的技术博客</a><br>代理的使用场景很多，struts2中的 action 调用， hibernate的懒加载， spring的 AOP无一不用到代理。总结起来可分为以下几类：</p>
+<ul>
+<li>在原方法执行之前和之后做一些操作，可以用代理来实现（比如记录Log，做事务控制等）。</li>
+<li>封装真实的主题类，将真实的业务逻辑隐藏，只暴露给调用者公共的主题接口。</li>
+<li>在延迟加载上的应用。</li>
+</ul>
 
       
 
@@ -524,6 +542,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">others</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
             
             <div class="clearfix"></div>
