@@ -246,7 +246,66 @@ public class Clinet {
 
 ```
 
+## 再探索
+Java 动态代理作用是什么？ - bravo1988的回答 - 知乎
+https://www.zhihu.com/question/20794107/answer/658139129
+如果静态代理的缺点是要为每个真实角色写一个代理类,而真实的java对象是由Class对象创建的,那么是否不可不生成类,直接生成Class对象?
+真实的创建对象的过程:
+![](F:\blog\v2-eddc430b991c58039dfc79dd6f3139cc_720w.jpg)
+所谓的Class对象,是Class类的实例,Class类是描述所有类的:
+![](F:\blog\v2-c9bf695b1b9d2a0ae01cf92501492159_720w.jpg)
 
+能否不写代理类，而直接得到代理Class对象，然后根据它创建代理实例（反射）?
 
+Class对象包含了一个类的所有信息，比如构造器、方法、字段等。
 
+那么如何获得代理类的Class信息?
+答:真实对象与代理对象实现 了相同的接口,那么就可以用接口的信息来获得真实对象拥有的方法.
+![](https://gitee.com/liying000/blogimg/raw/master/12400.jpg)
 
+```java
+public static Class<?> getProxyClass(ClassLoader loader,
+                                         Class<?>... interfaces)
+        throws IllegalArgumentException
+    {
+        final Class<?>[] intfs = interfaces.clone();
+        final SecurityManager sm = System.getSecurityManager();
+        if (sm != null) {
+            checkProxyAccess(Reflection.getCallerClass(), loader, intfs);
+        }
+
+        return getProxyClass0(loader, intfs);
+    }
+```
+跟newInstance中生成Class对象的逻辑是相同的,重要的是getProxyClass0.
+
+代理类的Class已经生成,下面做的就是反射.
+
+## 应用
+>我的问题:多个类要实现代理怎么写?每个类都写一个InvocationHandler吗?
+
+nope:所有的类都有一个父类:Object,接口的父类也是Object,把生成代理对象的类改一下:
+```java
+private Object object;
+    public ProxyInvocationHandler(Object object){
+        this.object = object;
+    }
+...
+public Object getProxy(){
+        return Proxy.newProxyInstance(Rent.class.getClassLoader(),object.getClass().getInterfaces(),this);
+    }
+...
+public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        Object result = method.invoke(object,args);
+        return result;
+    }
+```
+完工!!这样就可以传进来任意一个真实角色,然后获得代理角色对象了.
+啊!又是一个多态的应用吧.
+
+[贾鹏辉的技术博客](https://www.devio.org/2015/12/02/Java%E4%BB%A3%E7%90%86%E5%92%8C%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%9C%BA%E5%88%B6%E5%88%86%E6%9E%90%E5%92%8C%E5%BA%94%E7%94%A8/)
+代理的使用场景很多，struts2中的 action 调用， hibernate的懒加载， spring的 AOP无一不用到代理。总结起来可分为以下几类：
+
+- 在原方法执行之前和之后做一些操作，可以用代理来实现（比如记录Log，做事务控制等）。
+- 封装真实的主题类，将真实的业务逻辑隐藏，只暴露给调用者公共的主题接口。
+- 在延迟加载上的应用。
