@@ -12,7 +12,7 @@ tags:
 问题:入栈之后节点之间还是相连的,再出栈会有很多next的问题
 最笨的解决方法:入栈的时候直接拷贝节点值,然后新建节点 ━┳━　━┳━
 新建链表要考虑头插法还是尾插法.头插法是逆序的
-```
+```java
 public ListNode reverseList(ListNode head) {
         Stack<ListNode> temp = new Stack<>();
         while (head!=null){
