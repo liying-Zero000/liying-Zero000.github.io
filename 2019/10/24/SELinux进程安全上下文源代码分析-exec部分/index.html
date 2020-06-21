@@ -6,15 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Territory</title>
+  <title>SELinux进程安全上下文源代码分析-exec部分 | Territory</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Territory">
-<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+  <meta name="description" content="exec过程中对进程安全内容的处理系统调用exec作为入口，最终在内核中执行do_execveat_common(),代码如下fs&#x2F;exe.c所示：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SELinux进程安全上下文源代码分析-exec部分">
+<meta property="og:url" content="http://yoursite.com/2019/10/24/SELinux%E8%BF%9B%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E6%BA%90%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-exec%E9%83%A8%E5%88%86/index.html">
 <meta property="og:site_name" content="Territory">
+<meta property="og:description" content="exec过程中对进程安全内容的处理系统调用exec作为入口，最终在内核中执行do_execveat_common(),代码如下fs&#x2F;exe.c所示：">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/image-20200621173404283.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191023144251414.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191023144204565.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191023151424366.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/image-20200621173629798.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/20191023144006751.png">
+<meta property="article:published_time" content="2019-10-24T04:33:18.000Z">
+<meta property="article:modified_time" content="2020-06-21T09:40:18.554Z">
 <meta property="article:author" content="LiYing">
+<meta property="article:tag" content="SELinux">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/liying000/blogimg/raw/master/image-20200621173404283.png">
   
   
   <link rel="stylesheet" type="text/css" href="/./main.4de6c3.css">
@@ -164,218 +176,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-SELinux中的avc源码分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-SELinux进程安全上下文源代码分析-exec部分" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/08/SELinux%E4%B8%AD%E7%9A%84avc%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">SELinux中的avc源码分析</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/08/SELinux%E4%B8%AD%E7%9A%84avc%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="archive-article-date">
-  	<time datetime="2019-11-08T03:08:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-08</time>
-</a>
-	<!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">795字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">3分</span>
-      </span>
-    </span>
-</div>
-
-	
-        <!-- 添加完成 -->
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>/security/selinux/avc.c</p>
-        
-      
-
-      
-    </div>
-   <!-- 添加本文结束标记-->
-
-<!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">SELinux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/08/SELinux%E4%B8%AD%E7%9A%84avc%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Linux安全模块-LSM" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/01/Linux%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9D%97-LSM/">Linux安全模块(LSM)</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/01/Linux%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9D%97-LSM/" class="archive-article-date">
-  	<time datetime="2019-11-01T03:47:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-	<!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.1k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">4分</span>
-      </span>
-    </span>
-</div>
-
-	
-        <!-- 添加完成 -->
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-什么是LSM"><a href="#1-什么是LSM" class="headerlink" title="1. 什么是LSM"></a>1. 什么是LSM</h1><p>一种轻量级的安全访问控制框架，主要利用Hook函数对权限进行访问控制，并在部分对象中内置了透明的安全属性。</p>
-        
-      
-
-      
-    </div>
-   <!-- 添加本文结束标记-->
-
-<!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">SELinux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/01/Linux%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9D%97-LSM/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-SELinux进程安全上下文源代码分析-exec部分" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/24/SELinux%E8%BF%9B%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E6%BA%90%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-exec%E9%83%A8%E5%88%86/">SELinux进程安全上下文源代码分析-exec部分</a>
+    <h1 class="article-title" itemprop="name">
+      SELinux进程安全上下文源代码分析-exec部分
     </h1>
   
 
@@ -413,12 +221,58 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="exec过程中对进程安全内容的处理"><a href="#exec过程中对进程安全内容的处理" class="headerlink" title="exec过程中对进程安全内容的处理"></a>exec过程中对进程安全内容的处理</h2><p>系统调用exec作为入口，最终在内核中执行<code>do_execveat_common()</code>,代码如下fs/exe.c所示：</p>
-        
+<a id="more"></a>
+
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="C"><figure class="iseeu highlight /c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * sys_execve() executes a new program.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">do_execveat_common</span><span class="params">(<span class="keyword">int</span> fd, struct filename *filename,</span></span></span><br><span class="line"><span class="function"><span class="params">			      struct user_arg_ptr argv,</span></span></span><br><span class="line"><span class="function"><span class="params">			      struct user_arg_ptr envp,</span></span></span><br><span class="line"><span class="function"><span class="params">			      <span class="keyword">int</span> flags)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> *pathbuf = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">linux_binprm</span> *<span class="title">bprm</span>;</span> <span class="comment">//描述可执行程序的结构</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">file</span> *<span class="title">file</span>;</span> </span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">files_struct</span> *<span class="title">displaced</span>;</span></span><br><span class="line">	<span class="keyword">int</span> retval;</span><br><span class="line">	</span><br><span class="line">	retval = prepare_bprm_creds(bprm);</span><br><span class="line">    bprm-&gt;file = file;</span><br><span class="line">...</span><br><span class="line">    retval = bprm_mm_init(bprm);</span><br><span class="line">...</span><br><span class="line">    retval = prepare_binprm(bprm);</span><br><span class="line">...</span><br><span class="line">	retval = exec_binprm(bprm);</span><br></pre></td></tr></table></figure></div>
+
+<p>我们关注的关于selinux的部分在这几个函数中。</p>
+<p>prepare_bprm_creds:</p>
+<p>创建struct cred对象，并创建struct task_security_struct对象赋予struct cred的security成员变量，并将struct cred对象与struct linux_binprm对象关联；</p>
+<p>具体过程如下：</p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/image-20200621173404283.png" alt="image-20200621173404283"></p>
+<p>也就是说这一步主要是创建相关的结构，并给二进制可执行程序的对象关联上 cred 结构</p>
+<p>第二步：初始化struct linux_binprm中的file成员变量，将其对应真正的文件，用于从从file映射到inode，然后从node获取object的security context，然后从security context变成security id；</p>
+<p>第三步：</p>
+<p>prepare_binprm，真正初始化struct cred，将其所有成员变量都对应到正确的值；</p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/20191023144251414.png" alt="在这里插入图片描述"></p>
+<p>其中 <code>security.c::security_bprm_set_creds</code>会调用钩子函数，</p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/20191023144204565.png" alt="在这里插入图片描述"><br>在selinux的security/selinux/hooks.c 中，定义为：<br><img src="https://gitee.com/liying000/blogimg/raw/master/20191023151424366.png" alt="在这里插入图片描述"><br>实际上对cred进行赋值的就是selinux_bprm_set_creds:</p>
+<p>终极目标是确定 bsec-&gt;sid = newsid<br>要么newsid等于current-&gt;cred-&gt;security-&gt;sid<br>要么等于一个默认域转换的相关新的domain相关的sid</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="C"><figure class="iseeu highlight /c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">selinux_bprm_set_creds</span><span class="params">(struct linux_binprm *bprm)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">task_security_struct</span> *<span class="title">old_tsec</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">task_security_struct</span> *<span class="title">new_tsec</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">inode_security_struct</span> *<span class="title">isec</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">common_audit_data</span> <span class="title">ad</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">inode</span> *<span class="title">inode</span> = <span class="title">file_inode</span>(<span class="title">bprm</span>-&gt;<span class="title">file</span>);</span></span><br><span class="line">	<span class="keyword">int</span> rc;</span><br><span class="line"></span><br><span class="line">	old_tsec = current_security();  <span class="comment">// = current-&gt;security </span></span><br><span class="line">	new_tsec = bprm-&gt;cred-&gt;security;</span><br><span class="line">	isec = inode_security(inode); </span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Default to the current task SID. */</span> </span><br><span class="line">	<span class="comment">//先把当前进程安全部分的secutiry部分的sid赋值到 bprm-&gt;cred&gt;security 部分的sid跟osid中</span></span><br><span class="line">	new_tsec-&gt;sid = old_tsec-&gt;sid;</span><br><span class="line">	new_tsec-&gt;osid = old_tsec-&gt;sid;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Reset fs, key, and sock SIDs on execve. */</span> </span><br><span class="line">	<span class="comment">// 把bprm-&gt;cred&gt;security 的 create_sid、keycrete_sid、sockcreate都设为0，</span></span><br><span class="line">	<span class="comment">//还剩下exec_sid</span></span><br><span class="line">	new_tsec-&gt;create_sid = <span class="number">0</span>;</span><br><span class="line">	new_tsec-&gt;keycreate_sid = <span class="number">0</span>;</span><br><span class="line">	new_tsec-&gt;sockcreate_sid = <span class="number">0</span>;</span><br></pre></td></tr></table></figure></div>
+
+<p>如果当前进程存在 exec_id说明已经定义好了当前进程执行exec操作时要切换成的域，继续进行的操作如下：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="C"><figure class="iseeu highlight /c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (old_tsec-&gt;exec_sid) &#123; <span class="comment">//如果当前进程存在 exec_sid</span></span><br><span class="line">		<span class="comment">//bprm-&gt;cred-&gt;security的sid等于当前进程的exec_sid</span></span><br><span class="line">		new_tsec-&gt;sid = old_tsec-&gt;exec_sid; </span><br><span class="line">		<span class="comment">/* Reset exec SID on execve. */</span></span><br><span class="line">		new_tsec-&gt;exec_sid = <span class="number">0</span>;  <span class="comment">//bprm-&gt;cred-&gt;security的exec_sid=0</span></span><br><span class="line">		...</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="comment">/* Check for a default transition on this program. */</span></span><br><span class="line">		rc = security_transition_sid(old_tsec-&gt;sid, isec-&gt;sid,</span><br><span class="line">					     SECCLASS_PROCESS, <span class="literal">NULL</span>,</span><br><span class="line">					     &amp;new_tsec-&gt;sid);    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>这一部分比较复杂，主要是通过当前进程的sid与二进制文件的sid确定 bprm的sid</p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/image-20200621173629798.png" alt="image-20200621173629798"></p>
+<p>分析一下security_compute_sid(old_tsec-&gt;sid,  isec-&gt;sid ,SECCLASS_PROCESS, AVTAB_TRANSITION,NULL, &amp;new_tsec-&gt;sid, true);</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="C"><figure class="iseeu highlight /c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">security_compute_sid</span><span class="params">(u32 ssid,  <span class="comment">//old_tsec-&gt;sid</span></span></span></span><br><span class="line"><span class="function"><span class="params">				u32 tsid,                  <span class="comment">//isec-&gt;sid</span></span></span></span><br><span class="line"><span class="function"><span class="params">				u16 orig_tclass,           <span class="comment">//SECLASS_PROCESS</span></span></span></span><br><span class="line"><span class="function"><span class="params">				u32 specified,             <span class="comment">//AVTAB_TRANSITION</span></span></span></span><br><span class="line"><span class="function"><span class="params">				<span class="keyword">const</span> <span class="keyword">char</span> *objname,       <span class="comment">//NULL</span></span></span></span><br><span class="line"><span class="function"><span class="params">				u32 *out_sid,              <span class="comment">//&amp;new_tsec-&gt;sid         </span></span></span></span><br><span class="line"><span class="function"><span class="params">				<span class="keyword">bool</span> kern)</span>                 <span class="comment">//true</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">class_datum</span> *<span class="title">cladatum</span> = <span class="title">NULL</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">context</span> *<span class="title">scontext</span> = <span class="title">NULL</span>, *<span class="title">tcontext</span> = <span class="title">NULL</span>, <span class="title">newcontext</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">role_trans</span> *<span class="title">roletr</span> = <span class="title">NULL</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">avtab_key</span> <span class="title">avkey</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">avtab_datum</span> *<span class="title">avdatum</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">avtab_node</span> *<span class="title">node</span>;</span></span><br><span class="line">	u16 tclass;</span><br><span class="line">	<span class="keyword">int</span> rc = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">bool</span> sock;</span><br><span class="line">	...</span><br><span class="line">	<span class="keyword">if</span> (kern) &#123;</span><br><span class="line">		tclass = unmap_class(orig_tclass);</span><br><span class="line">		sock = security_is_socket_class(orig_tclass);</span><br><span class="line">	&#125;</span><br><span class="line">	...</span><br><span class="line">	<span class="comment">//sidtab_search()函数获取old_tsec-&gt;sid和isec-&gt;sid对应的安全上下文</span></span><br><span class="line">	scontext = sidtab_search(&amp;sidtab, ssid);</span><br><span class="line">	<span class="keyword">if</span> (!scontext) &#123;</span><br><span class="line">		printk(KERN_ERR <span class="string">"SELinux: %s:  unrecognized SID %d\n"</span>,</span><br><span class="line">		       __func__, ssid);</span><br><span class="line">		rc = -EINVAL;</span><br><span class="line">		<span class="keyword">goto</span> out_unlock;</span><br><span class="line">	&#125;</span><br><span class="line">	tcontext = sidtab_search(&amp;sidtab, tsid);</span><br><span class="line">	<span class="keyword">if</span> (!tcontext) &#123;</span><br><span class="line">		printk(KERN_ERR <span class="string">"SELinux: %s:  unrecognized SID %d\n"</span>,</span><br><span class="line">		       __func__, tsid);</span><br><span class="line">		rc = -EINVAL;</span><br><span class="line">		<span class="keyword">goto</span> out_unlock;</span><br><span class="line">	&#125;</span><br><span class="line">	...</span><br><span class="line">	<span class="keyword">switch</span> (specified) &#123;</span><br><span class="line">	<span class="keyword">case</span> AVTAB_TRANSITION:</span><br><span class="line">	<span class="keyword">case</span> AVTAB_CHANGE:                                                </span><br><span class="line">		<span class="keyword">if</span> (cladatum &amp;&amp; cladatum-&gt;default_user == DEFAULT_TARGET) &#123;  </span><br><span class="line">			newcontext.user = tcontext-&gt;user;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">/* notice this gets both DEFAULT_SOURCE and unset */</span></span><br><span class="line">			<span class="comment">/* Use the process user identity. */</span></span><br><span class="line">			newcontext.user = scontext-&gt;user;                </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	</span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Set the role to default values. */</span></span><br><span class="line">	<span class="keyword">if</span> (cladatum &amp;&amp; cladatum-&gt;default_role == DEFAULT_SOURCE) &#123;</span><br><span class="line">		newcontext.role = scontext-&gt;role;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (cladatum &amp;&amp; cladatum-&gt;default_role == DEFAULT_TARGET) &#123;</span><br><span class="line">		newcontext.role = tcontext-&gt;role;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> ((tclass == policydb.process_class) || (sock == <span class="literal">true</span>))</span><br><span class="line">			newcontext.role = scontext-&gt;role;  </span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			newcontext.role = OBJECT_R_VAL;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	...</span><br><span class="line">	<span class="comment">/* Set the type to default values. */</span></span><br><span class="line">	<span class="keyword">if</span> (cladatum &amp;&amp; cladatum-&gt;default_type == DEFAULT_SOURCE) &#123;</span><br><span class="line">		newcontext.type = scontext-&gt;type;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (cladatum &amp;&amp; cladatum-&gt;default_type == DEFAULT_TARGET) &#123;</span><br><span class="line">		newcontext.type = tcontext-&gt;type;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> ((tclass == policydb.process_class) || (sock == <span class="literal">true</span>)) &#123;</span><br><span class="line">			<span class="comment">/* Use the type of process. */</span></span><br><span class="line">			newcontext.type = scontext-&gt;type;  </span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">/* Use the type of the related object. */</span></span><br><span class="line">			newcontext.type = tcontext-&gt;type;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></div>
+<p>过程大致如下：</p>
+<ul>
+<li>通过current-&gt;cred-&gt;security-&gt;sid与bprm-&gt;inode-&gt;isec-&gt;sid获取当前进程的安全上下文以及二进制可执行文件的安全上下文</li>
+<li>确定newcontext的user、role、type（根据一些条件判断user、role、type分别等于当前进程的，还是二进制文件的相关user、role、type）<br>  <img src="https://gitee.com/liying000/blogimg/raw/master/20191023144006751.png" alt="在这里插入图片描述"></li>
+<li>确定了 bprm的newcontext，调用sidtab_context_to_sid(&amp;sidtab, &amp;newcontext, out_sid)函数获取newcontext对应的SID。</li>
+</ul>
+<p>&amp;new_tsec-&gt;sid即为最后一步中输出的out_sid</p>
+<p>至此，new_tsec的sid已经确定，</p>
+<p>下面的部分是回到selinux_bprm_set_creds()</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="C"><figure class="iseeu highlight /c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//如果不需要发生 domain transition，</span></span><br><span class="line"><span class="comment">//则检查new_tsec-&gt;sid对相应的二进制文件的sid是否具有execute_no_trans 权限</span></span><br><span class="line">	<span class="keyword">if</span> (new_tsec-&gt;sid == old_tsec-&gt;sid) &#123;</span><br><span class="line">		rc = avc_has_perm(old_tsec-&gt;sid, isec-&gt;sid,</span><br><span class="line">				  SECCLASS_FILE, FILE__EXECUTE_NO_TRANS, &amp;ad);</span><br><span class="line">		<span class="keyword">if</span> (rc)</span><br><span class="line">			<span class="keyword">return</span> rc;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123; <span class="comment">//如果需要发生域转移，也就是通过计算得到了新的sid，则检查相应的权限，</span></span><br><span class="line">		<span class="comment">/* Check permissions for the transition. */</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//检查是否许可 domain transition</span></span><br><span class="line">		rc = avc_has_perm(old_tsec-&gt;sid, new_tsec-&gt;sid,</span><br><span class="line">				  SECCLASS_PROCESS, PROCESS__TRANSITION, &amp;ad);</span><br><span class="line">		<span class="keyword">if</span> (rc)</span><br><span class="line">			<span class="keyword">return</span> rc;</span><br><span class="line">		<span class="comment">//检查新 domain 是否以当前可执行程序为其 entrypoint</span></span><br><span class="line">		rc = avc_has_perm(new_tsec-&gt;sid, isec-&gt;sid,</span><br><span class="line">				  SECCLASS_FILE, FILE__ENTRYPOINT, &amp;ad);</span><br><span class="line">		<span class="keyword">if</span> (rc)</span><br><span class="line">			<span class="keyword">return</span> rc;</span><br></pre></td></tr></table></figure></div>
+
+<p>至此，新建的cred结构的security部分已经得到真正的值<br>第四步：exec_binprm，将新创建的struct cred对象与进程对应的task对象关联；</p>
+<p>exec_binprm==&gt; search_binary_handler==&gt;load_elf_binary==&gt;install_exec_creds（bprm）==&gt;commit_creds</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="C"><figure class="iseeu highlight /c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * install the new credentials for this executable</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">install_exec_creds</span><span class="params">(struct linux_binprm *bprm)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	security_bprm_committing_creds(bprm);</span><br><span class="line"></span><br><span class="line">	commit_creds(bprm-&gt;cred);</span><br><span class="line">	bprm-&gt;cred = <span class="literal">NULL</span>;         </span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Disable monitoring for regular users</span></span><br><span class="line"><span class="comment">	 * when executing setuid binaries. Must</span></span><br><span class="line"><span class="comment">	 * wait until new credentials are committed</span></span><br><span class="line"><span class="comment">	 * by commit_creds() above</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">if</span> (get_dumpable(current-&gt;mm) != SUID_DUMP_USER)</span><br><span class="line">		perf_event_exit_task(current);</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * cred_guard_mutex must be held at least to this point to prevent</span></span><br><span class="line"><span class="comment">	 * ptrace_attach() from altering our determination of the task's</span></span><br><span class="line"><span class="comment">	 * credentials; any time after this it may be unlocked.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	security_bprm_committed_creds(bprm);</span><br><span class="line">	mutex_unlock(&amp;current-&gt;signal-&gt;cred_guard_mutex);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>其中，将bprm的cred部分与当前进程的cred相关联的函数是commit_creds（bprm-&gt;cred）</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="C"><figure class="iseeu highlight /c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * commit_creds - Install new credentials upon the current task</span></span><br><span class="line"><span class="comment"> * @new: The credentials to be assigned</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Install a new set of credentials to the current task, using RCU to replace</span></span><br><span class="line"><span class="comment"> * the old set.  Both the objective and the subjective credentials pointers are</span></span><br><span class="line"><span class="comment"> * updated.  This function may not be called if the subjective credentials are</span></span><br><span class="line"><span class="comment"> * in an overridden state.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * This function eats the caller's reference to the new credentials.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Always returns 0 thus allowing this function to be tail-called at the end</span></span><br><span class="line"><span class="comment"> * of, say, sys_setgid().</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">commit_creds</span><span class="params">(struct cred *<span class="keyword">new</span>)</span></span>&#123;</span><br><span class="line">	...</span><br><span class="line">	rcu_assign_pointer(task-&gt;real_cred, <span class="keyword">new</span>);</span><br><span class="line">	rcu_assign_pointer(task-&gt;cred, <span class="keyword">new</span>);</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>当前task 的real_cred与cred都变为了bprm的cred部分。</p>
+
       
 
       
     </div>
    <!-- 添加本文结束标记-->
+
+<div style="text-align:center;color: #00BFFF;font-size:14px;">
+     -------------本文结束,<i class="fa fa-paw"></i>感谢阅读-------------
+</div>
 
 <!-- 添加完成 -->
     <div class="article-info article-info-index">
@@ -438,226 +292,84 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/24/SELinux%E8%BF%9B%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E6%BA%90%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-exec%E9%83%A8%E5%88%86/">展开全文 >></a>
-        </p>
-      
 
       
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
         
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-SELinux安全上下文与sid的映射" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/24/SELinux%E5%AE%89%E5%85%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8Esid%E7%9A%84%E6%98%A0%E5%B0%84/">SELinux安全上下文与sid的映射</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/24/SELinux%E5%AE%89%E5%85%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8Esid%E7%9A%84%E6%98%A0%E5%B0%84/" class="archive-article-date">
-  	<time datetime="2019-10-23T17:22:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-24</time>
-</a>
-	<!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.6k字</span>
-      </span>
+      </div>
     </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">6分</span>
-      </span>
-    </span>
+  </div>
 </div>
 
-	
-        <!-- 添加完成 -->
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h1><p>用户态所使用的安全上下文都以“user:role:type[:mls_range]”字符串表示<br>在 SELinux 内核空间用context 数据结构来描述 SC，其中各个域都以 u32 来表示</p>
-        
-      
-
-      
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/24/SELinux%E8%BF%9B%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E6%BA%90%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90-exec%E9%83%A8%E5%88%86/" alt="微信分享二维码">
     </div>
-   <!-- 添加本文结束标记-->
-
-<!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">SELinux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/24/SELinux%E5%AE%89%E5%85%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8Esid%E7%9A%84%E6%98%A0%E5%B0%84/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-在进程中启动另一个进程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/20/%E5%9C%A8%E8%BF%9B%E7%A8%8B%E4%B8%AD%E5%90%AF%E5%8A%A8%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%BF%9B%E7%A8%8B/">在进程中启动另一个进程</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/20/%E5%9C%A8%E8%BF%9B%E7%A8%8B%E4%B8%AD%E5%90%AF%E5%8A%A8%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%BF%9B%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2019-10-20T10:37:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-20</time>
-</a>
-	<!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">3.8k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">16分</span>
-      </span>
-    </span>
 </div>
 
-	
-        <!-- 添加完成 -->
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在Linux系统中创建进程有两种方式：一是由操作系统创建，二是由父进程创建进程（通常为子进程）fork是创建子进程唯一的方法。</p>
-        
-      
-
-      
-    </div>
-   <!-- 添加本文结束标记-->
-
-<!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">others</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">进程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/20/%E5%9C%A8%E8%BF%9B%E7%A8%8B%E4%B8%AD%E5%90%AF%E5%8A%A8%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%BF%9B%E7%A8%8B/">展开全文 >></a>
-        </p>
-      
-
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/11/01/Linux%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9D%97-LSM/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Linux安全模块(LSM)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/10/24/SELinux%E5%AE%89%E5%85%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8Esid%E7%9A%84%E6%98%A0%E5%B0%84/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SELinux安全上下文与sid的映射</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -677,113 +389,14 @@
 
 
 
-
-  
-    <article id="post-SELinux命令行操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/25/SELinux%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/">SELinux命令行操作</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/25/SELinux%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/" class="archive-article-date">
-  	<time datetime="2019-08-25T15:27:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
-</a>
-	<!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">7分</span>
-      </span>
-    </span>
-</div>
-
-	
-        <!-- 添加完成 -->
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>下面的命令中的policy（如果有的话）参数都是policy路径，否则就是默认分析内核中的，policy可以是以下两种文件中的一种。</p>
-        
-      
-
-      
-    </div>
-   <!-- 添加本文结束标记-->
-
-<!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">SELinux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/25/SELinux%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -806,8 +419,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
