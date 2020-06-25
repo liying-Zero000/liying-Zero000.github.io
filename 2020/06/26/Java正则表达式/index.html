@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>科学上网 | Territory</title>
+  <title>Java正则表达式 | Territory</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我在手机上用的Shadowrocket，在ssrbee上买的节点。但是这在windows电脑上不好用啊！！！！">
+  <meta name="description" content="部分字符总结：    元字符 匹配对象 匹配单个字符的元字符            . 点号 匹配单个任意字符    [···] 字符组 匹配单个列出的字符   [^···] 排除型字符组 匹配单个未列出的字符   \char 转义字符 若 char 是元字符，或转义序列无特殊含义时，匹配 char 对应的普通字符">
 <meta property="og:type" content="article">
-<meta property="og:title" content="科学上网">
-<meta property="og:url" content="http://yoursite.com/2020/06/21/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/index.html">
+<meta property="og:title" content="Java正则表达式">
+<meta property="og:url" content="http://yoursite.com/2020/06/26/Java%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Territory">
-<meta property="og:description" content="我在手机上用的Shadowrocket，在ssrbee上买的节点。但是这在windows电脑上不好用啊！！！！">
+<meta property="og:description" content="部分字符总结：    元字符 匹配对象 匹配单个字符的元字符            . 点号 匹配单个任意字符    [···] 字符组 匹配单个列出的字符   [^···] 排除型字符组 匹配单个未列出的字符   \char 转义字符 若 char 是元字符，或转义序列无特殊含义时，匹配 char 对应的普通字符">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/image-20200621023829653.png">
-<meta property="article:published_time" content="2020-06-20T18:36:04.000Z">
-<meta property="article:modified_time" content="2020-06-20T18:48:40.096Z">
+<meta property="article:published_time" content="2020-06-25T16:05:41.031Z">
+<meta property="article:modified_time" content="2020-06-25T16:13:27.299Z">
 <meta property="article:author" content="LiYing">
-<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/liying000/blogimg/raw/master/image-20200621023829653.png">
   
   
   <link rel="stylesheet" type="text/css" href="/./main.4de6c3.css">
@@ -171,20 +169,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-科学上网" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Java正则表达式" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      科学上网
+      Java正则表达式
     </h1>
   
 
         
-        <a href="/2020/06/21/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" class="archive-article-date">
-  	<time datetime="2020-06-20T18:36:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-21</time>
+        <a href="/2020/06/26/Java%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="archive-article-date">
+  	<time datetime="2020-06-25T16:05:41.031Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-26</time>
 </a>
 	<!-- 需要添加的位置 -->
         <!-- 开始添加字数统计-->
@@ -194,7 +192,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">201字</span>
+        <span class="post-count">1.7k字</span>
       </span>
     </span>
 
@@ -203,7 +201,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
+        <span class="post-count">6分</span>
       </span>
     </span>
 </div>
@@ -215,25 +213,244 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>我在手机上用的Shadowrocket，在ssrbee上买的节点。但是这在windows电脑上不好用啊！！！！</p>
+        <p>部分字符总结：</p>
+<table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>匹配对象</th>
+<th>匹配单个字符的元字符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">.</th>
+<th align="left">点号</th>
+<th align="left">匹配单个任意字符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">[···]</td>
+<td align="left">字符组</td>
+<td align="left">匹配单个列出的字符</td>
+</tr>
+<tr>
+<td align="left">[^···]</td>
+<td align="left">排除型字符组</td>
+<td align="left">匹配单个未列出的字符</td>
+</tr>
+<tr>
+<td align="left">\char</td>
+<td align="left">转义字符</td>
+<td align="left">若 char 是元字符，或转义序列无特殊含义时，匹配 char 对应的普通字符</td>
+</tr>
+</tbody></table>
 <a id="more"></a>
 
-<p><img src="https://gitee.com/liying000/blogimg/raw/master/image-20200621023829653.png" alt="image-20200621023829653"></p>
-<p>进行了这些尝试之后，都不行！！！</p>
-<p>是ssr节点不行了吗？可是我手机上还能用呢。</p>
-<p>总之就是添加订阅失败</p>
-<p>想起来上周看到一个关于科学上网的推荐 ：<a href="https://kejibear.ml/" target="_blank" rel="noopener">科技熊</a></p>
-<p>测评：</p>
-<p>1.注册登录界面良好</p>
-<p>对比：ssrbee.top连账号注册都不做</p>
-<p>2.使用简单</p>
-<p>教程非常详细，安装什么软件，大多数是一键配置</p>
-<p>3.价格不贵</p>
-<p>大约是ssrbee的三分之一！</p>
-<p>气死我了！！大半夜不睡觉搞这个。</p>
-<p>试用了一下，网速很快，打开网页几乎不用等。</p>
-<p>下个月就用这个了</p>
-<p>满篇写满了我对晚睡的怨念。</p>
+<p>提供计数功能的字符</p>
+<table>
+<thead>
+<tr>
+<th align="left">？</th>
+<th align="left">问号</th>
+<th align="left">容许匹配一次，但非必须</th>
+<th align="left">&lt;=1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">*</td>
+<td align="left">星号</td>
+<td align="left">可以匹配任意多次</td>
+<td align="left">&gt;=0</td>
+</tr>
+<tr>
+<td align="left">+</td>
+<td align="left">加号</td>
+<td align="left">至少需要匹配一次，至多可能任意多次</td>
+<td align="left">1&lt;= 次数&lt;= ∞</td>
+</tr>
+<tr>
+<td align="left">{min,max}</td>
+<td align="left">区间量词</td>
+<td align="left">至少需要 min 次，至多容许 max 次</td>
+<td align="left">min&lt;= 次数&lt;= max</td>
+</tr>
+</tbody></table>
+<p>匹配位置的元字符</p>
+<table>
+<thead>
+<tr>
+<th align="left">^</th>
+<th align="left">脱字符</th>
+<th align="left">匹配一行的开头位置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$</td>
+<td align="left">美元符</td>
+<td align="left">匹配一行的结束位置</td>
+</tr>
+<tr>
+<td align="left">&lt;</td>
+<td align="left">单词分界符</td>
+<td align="left">匹配单词的开始位置</td>
+</tr>
+<tr>
+<td align="left">&gt;</td>
+<td align="left">单词分界符</td>
+<td align="left">匹配单词的结束位置</td>
+</tr>
+</tbody></table>
+<p>其他元字符</p>
+<table>
+<thead>
+<tr>
+<th align="left">|</th>
+<th align="left">alternation</th>
+<th align="left">匹配任意分隔的表达式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">(···)</td>
+<td align="left">括号</td>
+<td align="left">限定多选结构的范围，标注量词作用的元素，为反向引用“捕获”文本</td>
+</tr>
+<tr>
+<td align="left">\1,\2,…</td>
+<td align="left">反向引用</td>
+<td align="left">匹配之前的第一、第二括号内的字表达式匹配的文本</td>
+</tr>
+</tbody></table>
+<p>用 Java 语言为例：</p>
+<p>例 1 匹配数字：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"+9.726"</span>.matches(<span class="string">"^(\\+|\\-)?\\d\\.\\d*$"</span>)</span><br><span class="line"><span class="comment">//true</span></span><br></pre></td></tr></table></figure></div>
+
+<p>+9.726 是目标字符串<br>后面的正则表达式可以分解为以下几部分：</p>
+<ul>
+<li>^ 表示行首，$表示行尾</li>
+<li>（\+|\-)?  这一部分是为了匹配正负号，\是转义，为了匹配 +-，中间一个 | 表示或者，而？表示正负号可以出现一次，也可以不出现。</li>
+<li>\.匹配小数点：输入的数字必须包含小数点</li>
+<li>\d* ：小数点后的数字匹配，可以匹配任意长度的小数。</li>
+</ul>
+<p>例 2：</p>
+<p>匹配空格</p>
+<p>2-1：匹配空格</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"\\s"</span></span><br></pre></td></tr></table></figure></div>
+
+<p>在\s 后面加入表示匹配次数的元符号就可以表示匹配空格的数量<br>比如，\s+ 表示至少匹配一个空格</p>
+<pre><code>\\s* 可以不匹配空格  到匹配任意多个空格
+
+？和{min，max}同理</code></pre><p>2-1：匹配限定数量的空格</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">"  "</span>.matches(<span class="string">"^\\s&#123;1,4&#125;$"</span>));</span><br><span class="line"><span class="comment">//true</span></span><br><span class="line">System.out.println(<span class="string">" "</span>.matches(<span class="string">"^\\s&#123;2&#125;$"</span>));</span><br><span class="line"><span class="string">" "</span>中包含了一个空格，\\s&#123;<span class="number">2</span>&#125;表示匹配两个空格 </span><br><span class="line"><span class="comment">//false</span></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>一些常用的匹配：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">\b</th>
+<th align="left">匹配一个字边界，即字与空格间的位置。例如，”er\b”匹配”never “中的”er”，但不匹配”verb”中的”er”。</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">\B</td>
+<td align="left">非字边界匹配。”er\B”匹配”verb”中的”er”，但不匹配”never “中的”er”。</td>
+</tr>
+<tr>
+<td align="left">\d</td>
+<td align="left">数字字符匹配。等效于 [0-9]。</td>
+</tr>
+<tr>
+<td align="left">\D</td>
+<td align="left">非数字字符匹配。等效于 [^0-9]。</td>
+</tr>
+<tr>
+<td align="left">\s</td>
+<td align="left">匹配任何空白字符，包括空格、制表符、换页符等。与 [ \f\n\r\t\v] 等效。</td>
+</tr>
+<tr>
+<td align="left">\S</td>
+<td align="left">匹配任何非空白字符。与 [^ \f\n\r\t\v] 等效。</td>
+</tr>
+<tr>
+<td align="left">\w</td>
+<td align="left">匹配任何字类字符，包括下划线。与”[A-Za-z0-9_]”等效。</td>
+</tr>
+<tr>
+<td align="left">\W</td>
+<td align="left">与任何非单词字符匹配。与”[^A-Za-z0-9_]”等效。</td>
+</tr>
+</tbody></table>
+<p>例 3：获取匹配的内容</p>
+<p>Java 中 有两种子模式 Capturing 和 Non-Capturing。</p>
+<p>Capturing 指获取匹配,是指系统会在幕后将所有子模式匹配结果保存起来，供查找和替换</p>
+<p>Non-Capturing 指非获取匹配，这时系统不会保存子模式的匹配结果。</p>
+<p>3-1：初识 group</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">      Pattern pattern = Pattern.compile(<span class="string">"\\d&#123;3,5&#125;[a-z]&#123;2&#125;"</span>);</span><br><span class="line">      <span class="comment">//此正则表达式代表 3-5 个数字后面有两个字母</span></span><br><span class="line">String s = <span class="string">"123aa-5423zx-642oi-00"</span>;</span><br><span class="line">Matcher matcher = pattern.matcher(s);</span><br><span class="line"><span class="keyword">while</span>(matcher.find()) &#123;</span><br><span class="line">	System.out.println(matcher.group());</span><br><span class="line">&#125;</span><br><span class="line">      <span class="comment">//结果：</span></span><br><span class="line">      <span class="number">123</span>aa</span><br><span class="line">      <span class="number">5423</span>zx</span><br><span class="line">      <span class="number">642</span>oi</span><br><span class="line">      <span class="comment">//输出 group——size</span></span><br></pre></td></tr></table></figure></div>
+
+<p>上面的 “\d{3,5}[a-z]{2}” 是一组，因此 matcher.group()就是遍历找到的组<br>而正则表达式也支持 表达式分组</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Pattern pattern = Pattern.compile(<span class="string">"(\\d&#123;3,5&#125;)([a-z]&#123;2&#125;)"</span>);</span><br><span class="line">String s = <span class="string">"123aa-5423zx-642oi-00"</span>;</span><br><span class="line">Matcher matcher = pattern.matcher(s);</span><br><span class="line"><span class="keyword">while</span>(matcher.find()) &#123;</span><br><span class="line">	System.out.println(matcher.group(<span class="number">1</span>));</span><br><span class="line">	System.out.println(matcher.group(<span class="number">2</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//结果：</span></span><br><span class="line"><span class="number">123</span></span><br><span class="line">aa</span><br><span class="line"><span class="number">5423</span></span><br><span class="line">zx</span><br><span class="line"><span class="number">642</span></span><br><span class="line">oi</span><br><span class="line"><span class="comment">//可以把 group 理解为一个嵌套，matcher 的 group（）是匹配的整个表达式的结果</span></span><br><span class="line"><span class="comment">//而 group 中的 0,1,2 表示的是 自身，第一个分组，第二个分组 的匹配内容。</span></span><br><span class="line"><span class="comment">//python 中好像也是这样的形式。</span></span><br></pre></td></tr></table></figure></div>
+
+<p>如果并不想获取 group 里的某些内容，做法如下：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Pattern pattern = Pattern.compile(<span class="string">"(？：\\d&#123;3,5&#125;)([a-z]&#123;2&#125;)"</span>);</span><br><span class="line">String s = <span class="string">"123aa-5423zx-642oi-00"</span>;</span><br><span class="line">Matcher matcher = pattern.matcher(s);</span><br><span class="line">System.out.println(<span class="string">"GroupCount:"</span>);</span><br><span class="line">System.out.println(matcher.groupCount());</span><br><span class="line"><span class="keyword">while</span>(matcher.find()) &#123;</span><br><span class="line">	System.out.println(matcher.group(<span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//结果如下：</span></span><br><span class="line">GroupCount:</span><br><span class="line"><span class="number">1</span></span><br><span class="line">aa</span><br><span class="line">zx</span><br><span class="line">oi</span><br></pre></td></tr></table></figure></div>
+
+<p>3-2 获取匹配</p>
+<ul>
+<li>反向引用</li>
+</ul>
+<p>捕获会返回一个捕获组，这个分组保存在内存中，不仅可以在正则表达式外部通过程序进行引用，也可以在正则表达式内部进行引用，这种引用方式就是反向引用</p>
+<p>例 4：查找一串字母“aabbbbgbddesddfiid”里成对的字母</p>
+<p>如果按照写代码的思路：</p>
+<p>（1）匹配到第一个字母</p>
+<p>（2）向右扫描下一个字母，检查是否与上一个字母相同</p>
+<p>（3）如果一样，匹配成功，否则失败。</p>
+<p>问题在于：正则表达式如何记住上一个匹配到的字母？</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">String test = <span class="string">"aabbbbgbddesddfiid"</span>;</span><br><span class="line">Pattern pattern = Pattern.compile(<span class="string">"(\\w)\\1"</span>);</span><br><span class="line">Matcher mc= pattern.matcher(test);</span><br><span class="line"><span class="keyword">while</span>(mc.find())&#123;</span><br><span class="line">    System.out.println(mc.group());</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//结果如下：</span></span><br><span class="line">aa</span><br><span class="line">bb</span><br><span class="line">bb</span><br><span class="line">dd</span><br><span class="line">dd</span><br><span class="line">ii</span><br></pre></td></tr></table></figure></div>
+
+<p>在正则表达式”(\w)\1”中，“\1”就代表第一个捕获组获取到的内容<br>例 5：替换指定字符串</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"abc def aaa bbb"</span>.replaceAll(<span class="string">"(\\w+)\\s+(\\w+)"</span>, <span class="string">"$2 $1"</span>); <span class="comment">//结果是 def abc bbb aaa</span></span><br></pre></td></tr></table></figure></div>
+
+<p>分析：</p>
+<p>首先这个正则表达式会匹配到两个 大group，分别是</p>
+<p>abc def</p>
+<p>aaa bbb</p>
+<p>然后，replaceAll操作把每个组的 第一个小组 的结果与 第二个小组的 内容交换。</p>
+<p>3-3 非获取匹配</p>
+<p>非捕获匹配时，系统不会保存子模式的匹配结果，更多的只作为一种限制条件使用。</p>
+<ul>
+<li>正向预查</li>
+</ul>
+<p>正向预测(?=pattern),即查找一个字符串，该字符串的后边接有符合pattern条件的子字符串，但此pattern为非匹配捕获，即不需要获取以供以后使用。</p>
+<p>例6 查找元字符中符合“win ”格式的子字符串，而且该字符串后面一定跟着一个“7”字符串。</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Pattern pattern = Pattern.compile(<span class="string">"win\\s(?=7)"</span>,Pattern.UNICODE_CASE);</span><br><span class="line">Matcher matcher = pattern.matcher(<span class="string">"win 8"</span>);</span><br><span class="line"><span class="keyword">while</span>(matcher.find()) &#123;</span><br><span class="line">	System.out.println(matcher.group());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>反向预查</li>
+</ul>
+<p>查找元字符中符合“win ”格式的子字符串，而且该字符串后面没有跟一个“7”字符串。</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Pattern pattern = Pattern.compile(<span class="string">"win\\s(?!7)"</span>,Pattern.UNICODE_CASE);</span><br><span class="line">Matcher matcher = pattern.matcher(<span class="string">"win 8"</span>);</span><br><span class="line"><span class="keyword">while</span>(matcher.find()) &#123;</span><br><span class="line">	System.out.println(matcher.group());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>此正则表达式要匹配的是 win后边带一个空格，而且后面没有跟着7<br>如果 string是 “win 7”则匹配不到。</p>
+<ul>
+<li>负正向预查</li>
+</ul>
+<p>也就是前边一定要有个 xxx字符</p>
+<p>盲猜一下，格式是 <strong>（?=）rex !!!!!!!!!!!!!!!!!!!!!!! wrong answer</strong></p>
+<p>正确格式：(?&lt;=7) rex</p>
+<ul>
+<li>负反向预查</li>
+</ul>
+<p>要匹配的字符前边一定没有什么字符</p>
+<p>(?&lt;！7) rex</p>
+<ul>
+<li><input disabled="" type="checkbox"> 贪婪与非贪婪</li>
+</ul>
 
       
 
@@ -254,7 +471,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
         		</li>
       		
 		</ul>
@@ -310,7 +527,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/06/21/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/06/26/Java%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -324,18 +541,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/06/26/Java%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Java正则表达式
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/06/18/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%AD%90%E5%BC%B9%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">[读书笔记]子弹笔记</div>
+    <a href="/2020/06/21/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">科学上网</div>
       <i class="icon-circle-right"></i>
     </a>
   
