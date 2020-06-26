@@ -151,3 +151,16 @@ tags:
 
   疯球了，这样子我孙子来看我博客的时候那些依赖包都不服务了咋办。。几十年呢！！！
 
+
+
+- 错误修改
+
+  ![image-20200626005027694](C:\Users\liyin\AppData\Roaming\Typora\typora-user-images\image-20200626005027694.png)
+
+  next 页面有问题，查了一下source
+
+  这个应该是右箭头的意思吧，，找一下在哪里生成
+
+  ![image-20200626010302703](C:\Users\liyin\AppData\Roaming\Typora\typora-user-images\image-20200626010302703.png)
+
+  如果是最后一页的话，Prev前面的左箭头标识就不对了。
