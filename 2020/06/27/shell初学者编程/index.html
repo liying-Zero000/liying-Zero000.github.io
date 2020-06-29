@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Territory</title>
+  <title>shell初学者编程 | Territory</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Territory">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+  <meta name="description" content="shell 编程初学 shell中用的最多的竟然是字符串，为难我┑(￣Д ￣)┍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell初学者编程">
+<meta property="og:url" content="http://yoursite.com/2020/06/27/shell%E5%88%9D%E5%AD%A6%E8%80%85%E7%BC%96%E7%A8%8B/index.html">
 <meta property="og:site_name" content="Territory">
+<meta property="og:description" content="shell 编程初学 shell中用的最多的竟然是字符串，为难我┑(￣Д ￣)┍">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/19092361-08ade47bcdcd8110.png">
+<meta property="article:published_time" content="2020-06-26T16:40:25.000Z">
+<meta property="article:modified_time" content="2020-06-29T14:20:44.576Z">
 <meta property="article:author" content="LiYing">
+<meta property="article:tag" content="others">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/19092361-08ade47bcdcd8110.png">
   
   
   <link rel="stylesheet" type="text/css" href="/./main.4de6c3.css">
@@ -164,348 +171,121 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-shell初学者编程" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      shell初学者编程
+    </h1>
+  
+
+        
+        <a href="/2020/06/27/shell%E5%88%9D%E5%AD%A6%E8%80%85%E7%BC%96%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2020-06-26T16:40:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-27</time>
+</a>
+	<!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.6k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">7分</span>
+      </span>
+    </span>
+</div>
+
+	
+        <!-- 添加完成 -->
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>shell 编程初学</p>
+<p>shell中用的最多的竟然是字符串，为难我┑(￣Д ￣)┍</p>
+<a id="more"></a>
+
+<h2 id="1-关于-1作为函数后缀的困惑"><a href="#1-关于-1作为函数后缀的困惑" class="headerlink" title="1.关于$1作为函数后缀的困惑"></a>1.关于$1作为函数后缀的困惑</h2><p>在sh中写一个函数:</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SH"><figure class="iseeu highlight /sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">func_readfile()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"echo"</span>    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func_<span class="variable">$1</span></span><br></pre></td></tr></table></figure></div>
+<p>之前一直没看懂func_$1是什么意思<br>以为是这个shell中以func_为前缀的所有函数<br>原来$1指的是执行shell时的第一个参数</p>
+<p>这个代码这样执行:<br><img src="https://upload-images.jianshu.io/upload_images/19092361-08ade47bcdcd8110.png" alt=""></p>
+<h2 id="2-把文件路径作为命令行参数"><a href="#2-把文件路径作为命令行参数" class="headerlink" title="2.把文件路径作为命令行参数"></a>2.把文件路径作为命令行参数</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SH"><figure class="iseeu highlight /sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">LOG_FILE=<span class="variable">$1</span></span><br><span class="line">func_readfile()</span><br><span class="line">&#123;</span><br><span class="line">    cat <span class="variable">$&#123;LOG_FILE&#125;</span> | <span class="keyword">while</span> <span class="built_in">read</span> line</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">	    <span class="built_in">echo</span> <span class="variable">$line</span></span><br><span class="line">    <span class="keyword">done</span>    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func_<span class="variable">$2</span></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>千万千万不要忘记变量前边加 $(🙃查了半个小时,结果是这么个愚蠢错误)</strong></p>
+<h2 id="3-嵌套循环"><a href="#3-嵌套循环" class="headerlink" title="3. 嵌套循环"></a>3. 嵌套循环</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SH"><figure class="iseeu highlight /sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">LOG_FILE=<span class="variable">$1</span></span><br><span class="line">CONFIG_FILE=<span class="variable">$2</span></span><br><span class="line"></span><br><span class="line">func_capbility()</span><br><span class="line">&#123;</span><br><span class="line">    cat <span class="variable">$&#123;LOG_FILE&#125;</span> | <span class="keyword">while</span> <span class="built_in">read</span> line</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">	    cat <span class="variable">$&#123;CONFIG_FILE&#125;</span> | <span class="keyword">while</span> <span class="built_in">read</span> configline</span><br><span class="line">	        <span class="keyword">do</span> </span><br><span class="line">		        <span class="built_in">echo</span> <span class="variable">$line</span></span><br><span class="line">		        <span class="built_in">echo</span> <span class="variable">$configline</span></span><br><span class="line">	         <span class="keyword">done</span></span><br><span class="line">    <span class="keyword">done</span>    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func_<span class="variable">$3</span></span><br></pre></td></tr></table></figure></div>
+<p>死循环了嘤（；´д｀）ゞ</p>
+<h2 id="4-切割字符串"><a href="#4-切割字符串" class="headerlink" title="4. 切割字符串"></a>4. 切割字符串</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SH"><figure class="iseeu highlight /sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">str=<span class="string">"1                     root               root              init               []"</span></span><br><span class="line">arr=(<span class="variable">$str</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;arr[2]&#125;</span></span><br></pre></td></tr></table></figure></div>
+<p>还有很多方法</p>
+<h2 id="5-读取某个目录下所有文件的名字并返回到数组中-不递归遍历子目录"><a href="#5-读取某个目录下所有文件的名字并返回到数组中-不递归遍历子目录" class="headerlink" title="5.读取某个目录下所有文件的名字并返回到数组中(不递归遍历子目录)"></a>5.读取某个目录下所有文件的名字并返回到数组中(不递归遍历子目录)</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SH"><figure class="iseeu highlight /sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">LOG_FILE=<span class="variable">$1</span></span><br><span class="line"><span class="comment">#CONFIG_FILE=$2</span></span><br><span class="line">CONFIG_DIR=<span class="variable">$2</span></span><br><span class="line"></span><br><span class="line">func_getconfig_dirpath()</span><br><span class="line">&#123;</span><br><span class="line">    files=$(ls <span class="variable">$CONFIG_DIR</span> </span><br><span class="line">)</span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$&#123;files[@]&#125;</span></span><br><span class="line">&#125;</span><br><span class="line">//调用</span><br><span class="line">func_capbility()</span><br><span class="line">&#123;</span><br><span class="line">    config_files=$(func_getconfig_dirpath)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p><code>files=$(ls $CONFIG_DIR)</code>这一句应该是重定向吧</p>
+<h2 id="6-shell读取json文件"><a href="#6-shell读取json文件" class="headerlink" title="6.shell读取json文件"></a>6.shell读取json文件</h2><p>本着尽量减少不下载包的原则,就用系统已有的命令做</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SH"><figure class="iseeu highlight /sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">CONFIG_FILE=<span class="variable">$1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">func_parsejson</span></span>()&#123;</span><br><span class="line">    <span class="built_in">local</span> value=$(cat <span class="variable">$CONFIG_FILE</span> | tr <span class="string">'\n'</span> <span class="string">' '</span> )<span class="comment">#ls竟然是有换行符的，命令行坑我</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$value</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>这样整个json文件就变成了一行</p>
+<p>然后使用awk跟sed获取到想要的字段信息</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SH"><figure class="iseeu highlight /sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">解析json</span><br><span class="line"><span class="function"><span class="title">func_parsejson</span></span>()&#123;</span><br><span class="line">    <span class="built_in">local</span> value=$(cat <span class="variable">$1</span>)</span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$value</span></span><br><span class="line">    capbility=`<span class="built_in">echo</span> <span class="variable">$value</span> | awk -F<span class="string">'],'</span> <span class="string">'&#123;print $1&#125;'</span>|awk -F<span class="string">'[:[]+'</span> <span class="string">'&#123;print$2&#125;'</span>|sed <span class="string">'s/\"//g'</span>`</span><br><span class="line">    cap_arr=(<span class="variable">$&#123;capbility//,/&#125;</span>)</span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$cap_arr</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JSON"><figure class="iseeu highlight /json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">monitor.json</span><br><span class="line">&#123; </span><br><span class="line">    <span class="attr">"capbility"</span>:[</span><br><span class="line">        <span class="string">"cap_setgid"</span>,</span><br><span class="line">        <span class="string">"cap_setuid"</span>,</span><br><span class="line">        <span class="string">"cap_sys_boot+ep"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"DAC"</span>:[</span><br><span class="line">        &#123;<span class="attr">"path1"</span>:<span class="number">777</span>&#125;,</span><br><span class="line">        &#123;<span class="attr">"path2"</span>:<span class="number">750</span>&#125;,</span><br><span class="line">        &#123;<span class="attr">"path3"</span>:<span class="number">640</span>&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="7-debug脚本"><a href="#7-debug脚本" class="headerlink" title="7 debug脚本"></a>7 debug脚本</h2><p>sh -x example.sh arg1 arg2….<br>一直报我有语法错误<br>经查<br>改为<br>bash -x  example.sh arg1 arg2….</p>
+<blockquote>
+<p>┑(￣Д ￣)┍ 脚本的debug真的友好，java的命令行debug是不是也很友好</p>
+</blockquote>
+<h2 id="8-判断shell中的两个数组是否相等（数组中都没有重复元素，无序）"><a href="#8-判断shell中的两个数组是否相等（数组中都没有重复元素，无序）" class="headerlink" title="8 判断shell中的两个数组是否相等（数组中都没有重复元素，无序）"></a>8 判断shell中的两个数组是否相等（数组中都没有重复元素，无序）</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SH"><figure class="iseeu highlight /sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">isEqual</span></span>()&#123;</span><br><span class="line">    arr1=(<span class="variable">$1</span>)</span><br><span class="line">    arr2=(<span class="variable">$2</span>)</span><br><span class="line">    <span class="built_in">local</span> flag=0</span><br><span class="line">    intersection=($(comm -12 &lt;(<span class="built_in">printf</span> <span class="string">"%s\n"</span> <span class="variable">$&#123;arr1[@]&#125;</span> | LC_ALL=C sort) &lt;(<span class="built_in">printf</span> <span class="string">"%s\n"</span> <span class="variable">$&#123;arr2[@]&#125;</span> | LC_ALL=C sort)))</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#echo $&#123;intersection[@]&#125;</span></span><br><span class="line">    <span class="keyword">if</span> [ <span class="string">"<span class="variable">$&#123;#intersection[@]&#125;</span>"</span> == <span class="string">"<span class="variable">$&#123;#arr2[@]&#125;</span>"</span> ] &amp;&amp; [ <span class="string">"<span class="variable">$&#123;#intersection[@]&#125;</span>"</span> == <span class="string">"<span class="variable">$&#123;#arr1[@]&#125;</span>"</span> ];<span class="keyword">then</span></span><br><span class="line">    	flag=1</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">	    flag=0</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$flag</span></span><br><span class="line">    <span class="built_in">return</span> $?</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>通过comm命令来比较两个数组，printf是把两个数组打印到文件中(应该是个临时文件)，sort是先把数组排序<br>comm -12 提取出二者的交集<br>交集的大小跟两个数组大小都相同，那么这两个数组相同。</p>
+<p>用法：comm [选项]… 文件1 文件2<br>逐行比较已排序的文件文件1 和文件2。</p>
+<p>When FILE1 or FILE2 (not both) is -, read standard input.</p>
+<p>如果不附带选项，程序会生成三列输出。第一列包含文件1 特有的行，第二列包含 文件2 特有的行，而第三列包含两个文件共有的行。</p>
+<p>  -1        不输出文件1 特有的行<br>  -2        不输出文件2 特有的行<br>  -3        不输出两个文件共有的行</p>
+<p>  –check-order            检查输入是否被正确排序，即使所有输入行均成对<br>  –nocheck-order        不检查输入是否被正确排序<br>  –output-delimiter=STR    依照STR 分列<br>  -z, –zero-terminated    line delimiter is NUL, not newline<br>      –help        显示此帮助信息并退出<br>      –version        显示版本信息并退出</p>
+<p>Note, comparisons honor the rules specified by ‘LC_COLLATE’.</p>
+<p>示例：<br>  comm -12 文件1 文件2  只打印在文件1 和文件2 中都有的行<br>  comm -3  文件1 文件2  打印在文件1 中有，而文件2 中没有的行。反之亦然。</p>
+<h2 id="总代码"><a href="#总代码" class="headerlink" title="总代码"></a>总代码</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SH"><figure class="iseeu highlight /sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">LOG_FILE=<span class="variable">$2</span></span><br><span class="line">CONFIG_DIR=<span class="variable">$3</span></span><br><span class="line"></span><br><span class="line">getconfig()</span><br><span class="line">&#123;</span><br><span class="line">    files=$(ls <span class="variable">$CONFIG_DIR</span> | tr <span class="string">'\n'</span> <span class="string">' '</span>)</span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$&#123;files[@]&#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">parsejson</span></span>()&#123;</span><br><span class="line">    value=$(cat <span class="variable">$1</span>)</span><br><span class="line">    capbility=`<span class="built_in">echo</span> <span class="variable">$value</span> | awk -F<span class="string">'],'</span> <span class="string">'&#123;print $1&#125;'</span>|awk -F<span class="string">'[:[]+'</span> <span class="string">'&#123;print$2&#125;'</span>|sed <span class="string">'s/\"//g'</span>`</span><br><span class="line">    cap_arr=<span class="variable">$&#123;capbility//,/&#125;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$&#123;cap_arr[@]&#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">isEqual</span></span>()&#123;</span><br><span class="line">    arr1=(<span class="variable">$1</span>)</span><br><span class="line">    arr2=(<span class="variable">$2</span>)</span><br><span class="line">    <span class="built_in">local</span> flag=0</span><br><span class="line">    intersection=($(comm -12 &lt;(<span class="built_in">printf</span> <span class="string">"%s\n"</span> <span class="variable">$&#123;arr1[@]&#125;</span> | LC_ALL=C sort) &lt;(<span class="built_in">printf</span> <span class="string">"%s\n"</span> <span class="variable">$&#123;arr2[@]&#125;</span> | LC_ALL=C sort)))</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#echo $&#123;intersection[@]&#125;</span></span><br><span class="line">    <span class="keyword">if</span> [ <span class="string">"<span class="variable">$&#123;#intersection[@]&#125;</span>"</span> == <span class="string">"<span class="variable">$&#123;#arr2[@]&#125;</span>"</span> ] &amp;&amp; [ <span class="string">"<span class="variable">$&#123;#intersection[@]&#125;</span>"</span> == <span class="string">"<span class="variable">$&#123;#arr1[@]&#125;</span>"</span> ];<span class="keyword">then</span></span><br><span class="line">    	flag=1</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">	    flag=0</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$flag</span></span><br><span class="line">    <span class="built_in">return</span> $?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">func_capbility</span></span>()&#123;</span><br><span class="line">    <span class="built_in">printf</span> <span class="string">"%-20s% -100s %-100s\n"</span> <span class="string">"process"</span> <span class="string">"log"</span> <span class="string">"config"</span> &gt; logconfigcompare.log</span><br><span class="line">    config_files=( $(getconfig) )</span><br><span class="line">    cat <span class="variable">$LOG_FILE</span> | <span class="keyword">while</span> <span class="built_in">read</span> logline</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">    	<span class="keyword">for</span> filename <span class="keyword">in</span> <span class="variable">$&#123;config_files[@]&#125;</span></span><br><span class="line">    	<span class="keyword">do</span> &#123;</span><br><span class="line">	    log_arr=($(<span class="built_in">echo</span> <span class="variable">$logline</span> | sed <span class="string">'s/\s\+/ /g'</span>))</span><br><span class="line">    	    realname=$(<span class="built_in">echo</span> <span class="variable">$filename</span> | cut -d . -f1)</span><br><span class="line">	    cmdline=$(<span class="built_in">echo</span> <span class="variable">$&#123;log_arr[3]&#125;</span>)</span><br><span class="line">	    <span class="keyword">if</span> [[ <span class="variable">$cmdline</span> == *<span class="variable">$realname</span>* ]];<span class="keyword">then</span></span><br><span class="line">		cap_config=$(parsejson <span class="variable">$&#123;CONFIG_DIR&#125;</span><span class="variable">$&#123;filename&#125;</span>)</span><br><span class="line">		cap_log_temp=`<span class="built_in">echo</span> <span class="variable">$&#123;log_arr[4]&#125;</span>|sed <span class="string">'s/\[//;s/\]$//'</span>`</span><br><span class="line">		cap_log=(<span class="variable">$&#123;cap_log_temp//,/ &#125;</span>)</span><br><span class="line">		</span><br><span class="line">		diff=($(isEqual <span class="string">"<span class="variable">$&#123;cap_config[*]&#125;</span>"</span> <span class="string">"<span class="variable">$&#123;cap_log[*]&#125;</span>"</span>))</span><br><span class="line">                <span class="keyword">if</span> [ <span class="string">"<span class="variable">$diff</span>"</span> -eq 0 ];<span class="keyword">then</span></span><br><span class="line">		    <span class="built_in">printf</span> <span class="string">"%-20s %-100s %-100s\n"</span> <span class="variable">$realname</span> <span class="string">"<span class="variable">$cap_log_temp</span>"</span> <span class="string">"<span class="variable">$cap_config</span>"</span> &gt;&gt; logconfigcompare.log </span><br><span class="line">		<span class="keyword">fi</span></span><br><span class="line">	    <span class="keyword">fi</span></span><br><span class="line">	&#125;</span><br><span class="line">    	<span class="keyword">done</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func_<span class="variable">$1</span> $*</span><br></pre></td></tr></table></figure></div>
+
+<p><a href="https://wiki2.xbits.net:4430/start" target="_blank" rel="noopener">https://wiki2.xbits.net:4430/start</a></p>
+<p>两个数组是否相等<br>换个思路：<br>求两个数组的交集，看这个交集的长度是不是跟这两个数组的长度都相等！！<br>bingo！</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SH"><figure class="iseeu highlight /sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">arr1=(cap_a cap_b cap_c)</span><br><span class="line">arr2=(cap_b)</span><br><span class="line">intersection=($(comm -12 &lt;(<span class="built_in">printf</span> <span class="string">'%s\n'</span> <span class="string">"<span class="variable">$&#123;arr1[@]&#125;</span>"</span> | LC_ALL=C sort) &lt;(<span class="built_in">printf</span> <span class="string">'%s\n'</span> <span class="string">"<span class="variable">$&#123;arr2[@]&#125;</span>"</span> | LC_ALL=C sort)))</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;intersection[@]&#125;</span></span><br></pre></td></tr></table></figure></div>
+
+
+<h2 id="9-数组中-跟-的比较"><a href="#9-数组中-跟-的比较" class="headerlink" title="9 数组中*跟@的比较"></a>9 数组中*跟@的比较</h2><blockquote>
+<p>题外话，写脚本的时候确实感觉引号，括号，花括号小括号很难分清楚怎么用，要debug才能知道写的是不是自己想要的。还有 `` 跟（）的区别等等</p>
+</blockquote>
+<p>转载<br><a href="[https://blog.csdn.net/weixin_44901564/article/details/101017738?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase](https://blog.csdn.net/weixin_44901564/article/details/101017738?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase)">Shell脚本数组中@跟*的区别与如何将数组作为函数参数的方法</a></p>
+<p>一、shell脚本数组中@跟<em>的区别<br>`“${数组变量[</em>]}”<code>：加上双引号，bash会当成是一串字符串处理</code>${数组变量[*]}<code>：不加上双引号，bash会当成是数组处理</code>${数组变量[@]`：加不加双引号bash都是当成数组处理</p>
+<p>二、将数组作为函数参数的方法<br>假设一个数组：<br>a=(1 2 3)<br>下面用脚本来说一下：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SH"><figure class="iseeu highlight /sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="keyword">function</span> ceshi //这里定义一个函数</span><br><span class="line">&#123;</span><br><span class="line">z=(<span class="variable">$1</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;z[@]&#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a=(1 2 3) //定义数组a</span><br><span class="line">ceshi “<span class="variable">$&#123;a[*]&#125;</span>” //运行函数，并且传入数组参数</span><br></pre></td></tr></table></figure></div>
+<p>解释：</p>
+<h2 id="10-全部改成字符串操作"><a href="#10-全部改成字符串操作" class="headerlink" title="10 全部改成字符串操作"></a>10 全部改成字符串操作</h2><blockquote>
+<p>设备上不支持数组也是醉了</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SH"><figure class="iseeu highlight /sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">string_tofile</span></span>()&#123;</span><br><span class="line">    string=<span class="string">"<span class="variable">$1</span>"</span></span><br><span class="line">    file=<span class="string">"<span class="variable">$2</span>.txt"</span></span><br><span class="line">    &gt;<span class="variable">$file</span></span><br><span class="line">    i=1</span><br><span class="line">    <span class="keyword">while</span> ((1==1))</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">        splitchar=$(<span class="built_in">echo</span> <span class="variable">$string</span>|cut -d <span class="string">","</span> -f<span class="variable">$i</span>)</span><br><span class="line">	<span class="keyword">if</span> [ <span class="string">"<span class="variable">$splitchar</span>"</span> != <span class="string">""</span> ]</span><br><span class="line">	<span class="keyword">then</span></span><br><span class="line">		((i++))</span><br><span class="line">		<span class="built_in">echo</span> <span class="variable">$splitchar</span>&gt;&gt;<span class="variable">$file</span></span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="built_in">break</span></span><br><span class="line">	<span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">isEqual</span></span>()&#123;</span><br><span class="line">    string1=$(sort config.txt)</span><br><span class="line">    string2=$(sort log.txt)</span><br><span class="line">    <span class="built_in">local</span> flag=0</span><br><span class="line">    <span class="keyword">if</span> [ <span class="string">"<span class="variable">$string1</span>"</span> == <span class="string">"<span class="variable">$string2</span>"</span> ]</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">	flag=1</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">	flag=0</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$flag</span></span><br><span class="line">    <span class="built_in">return</span> $?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">func_test</span></span>()&#123;</span><br><span class="line">    str1=<span class="string">"cap_high,cap_ability,cap_tap,cap_override"</span></span><br><span class="line">    str2=<span class="string">"cap_override,cap_high,cap_ability,cap_tap"</span></span><br><span class="line">    string_sort_tofile <span class="string">"<span class="variable">$str1</span>"</span> <span class="string">"config"</span></span><br><span class="line">    string_sort_tofile <span class="string">"<span class="variable">$str2</span>"</span> <span class="string">"log"</span></span><br><span class="line">    diff=$(isEqual)</span><br><span class="line">    <span class="keyword">if</span> [ <span class="string">"<span class="variable">$diff</span>"</span> -eq 1 ]</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">	    <span class="built_in">echo</span> <span class="string">"equal"</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">	    <span class="built_in">echo</span> <span class="string">"no"</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func_test</span><br></pre></td></tr></table></figure></div>
+
+
+      
+
+      
+    </div>
+   <!-- 添加本文结束标记-->
+
+<div style="text-align:center;color: #00BFFF;font-size:14px;">
+     -------------本文结束,<i class="fa fa-paw"></i>感谢阅读-------------
+</div>
+
+<!-- 添加完成 -->
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/09/2020-6-9/" class="archive-article-date">
-  	<time datetime="2020-06-09T15:11:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/09/2020-6-9/">2020-6-9</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/08/%E9%9B%86%E5%90%88-1/" class="archive-article-date">
-  	<time datetime="2020-06-07T17:46:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/08/%E9%9B%86%E5%90%88-1/">集合</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/03/shunting-yard-algorithm/" class="archive-article-date">
-  	<time datetime="2020-06-02T17:34:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/03/shunting-yard-algorithm/">shunting yard algorithm</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/05/27/Java%E7%BA%BF%E7%A8%8B%E5%90%AF%E5%8A%A8%E5%92%8Clife-cycle/" class="archive-article-date">
-  	<time datetime="2020-05-26T16:10:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/27/Java%E7%BA%BF%E7%A8%8B%E5%90%AF%E5%8A%A8%E5%92%8Clife-cycle/">Java线程启动和life cycle</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/05/24/%E9%9B%86%E5%90%88/" class="archive-article-date">
-  	<time datetime="2020-05-24T15:24:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/24/%E9%9B%86%E5%90%88/">Iterator和Collections</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">集合</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/05/18/my2019/" class="archive-article-date">
-  	<time datetime="2020-05-17T17:44:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/18/my2019/">我的23岁，自我认识的一年。</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/05/09/2020-5-9/" class="archive-article-date">
-  	<time datetime="2020-05-09T15:33:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/09/2020-5-9/">2020-5-9</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/20/Java%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2020-04-20T02:05:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/20/Java%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">Java正则表达式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/07/std-%E6%B2%A1%E6%9C%89%E6%88%90%E5%91%98-thread-%EF%BC%88thread-not-member-of-std%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2020-04-07T04:59:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/07/std-%E6%B2%A1%E6%9C%89%E6%88%90%E5%91%98-thread-%EF%BC%88thread-not-member-of-std%EF%BC%89/">std 没有成员 thread （thread not member of std）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -517,70 +297,105 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/06/27/shell%E5%88%9D%E5%AD%A6%E8%80%85%E7%BC%96%E7%A8%8B/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/06/26/%E8%8F%9C%E8%B0%B1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">菜谱</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/03/selinuxfs-SELinux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="archive-article-date">
-  	<time datetime="2019-12-02T17:16:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-03</time>
-</a>
-        </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/03/selinuxfs-SELinux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">selinuxfs:SELinux文件系统</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">SELinux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&amp;laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/3/">Next &amp;raquo;</a>
-    </nav>
+  
+
   
 
 
@@ -604,8 +419,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
