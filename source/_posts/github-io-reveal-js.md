@@ -17,6 +17,8 @@ http://jr0cket.co.uk/2014/01/share-your-revealjs-slides-on-github-pages.html
 
 如何用 Github 免费在线播放你的幻灯？ - 王树义的文章 - 知乎 https://zhuanlan.zhihu.com/p/77840879
 
+<!--more-->
+
 （上边这位老师我本科毕设的时候开始关注的……,会分享很多实用的自然语言处理教程）
 
 
