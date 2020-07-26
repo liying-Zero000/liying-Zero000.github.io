@@ -3,6 +3,7 @@ title: '[leetcode]206链表逆置'
 date: 2020-06-18 23:13:30
 tags:
 	- Java
+	- leetcode
 ---
 
 ## 思路1: 最笨的方法,链表节点全部入栈,然后出栈
