@@ -6,20 +6,32 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>tomcat到底是什么 | Territory</title>
+  <title>redo log和binlog | Territory</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="之前写课程设计就用tomcat，当时只是知道这个可以用来写网页项目，不知道为什么 刚才按照 IDEA的Tomcat配置Web的项目创建以及Servlet简单运行。 在Idea上配置了Spring，这次总得弄明白tomcat是什么了">
+  <meta name="description" content="MySql可以恢复到半个月内任意一秒的状态">
 <meta property="og:type" content="article">
-<meta property="og:title" content="tomcat到底是什么">
-<meta property="og:url" content="http://yoursite.com/2020/07/14/tomcat%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88/index.html">
+<meta property="og:title" content="redo log和binlog">
+<meta property="og:url" content="http://yoursite.com/2020/07/26/redo-log%E5%92%8Cbinlog/index.html">
 <meta property="og:site_name" content="Territory">
-<meta property="og:description" content="之前写课程设计就用tomcat，当时只是知道这个可以用来写网页项目，不知道为什么 刚才按照 IDEA的Tomcat配置Web的项目创建以及Servlet简单运行。 在Idea上配置了Spring，这次总得弄明白tomcat是什么了">
+<meta property="og:description" content="MySql可以恢复到半个月内任意一秒的状态">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-07-14T11:57:03.000Z">
-<meta property="article:modified_time" content="2020-07-14T12:36:07.988Z">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/1762736/1595641298348-b119c308-bdda-48d1-bed4-69dd7d0cec36.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/1762736/1595642539184-2fef52ca-a128-4572-abb9-42af91b5e890.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/1762736/1595645940148-05786141-11c7-4947-a388-ea6b24623794.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/1762736/1595659924346-9ec62427-ebb8-4058-9b38-dbb40a2218b7.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/1762736/1595660803750-4818acef-fc2e-4b06-9b6e-3dfe409760be.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/1762736/1595662416707-9a1f2e74-e861-4a8d-a301-7c5c7ef463ae.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/1762736/1595663300063-65417753-c9e4-41f1-a61f-62c1dbdfe1ce.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/jpeg/1762736/1595664361475-39801db7-d5bc-4d9e-ae1d-f30a1b375797.jpeg">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/1762736/1595647597227-11b21c4f-18fb-4f51-93b6-332eddb67ee2.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/1762736/1595648035540-f62ff990-5b52-41e1-bb25-e682707d3a6a.png">
+<meta property="article:published_time" content="2020-07-26T02:07:09.000Z">
+<meta property="article:modified_time" content="2020-07-26T03:13:36.122Z">
 <meta property="article:author" content="LiYing">
-<meta property="article:tag" content="Java">
+<meta property="article:tag" content="others">
+<meta property="article:tag" content="DB">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2020/png/1762736/1595641298348-b119c308-bdda-48d1-bed4-69dd7d0cec36.png">
   
   
   <link rel="stylesheet" type="text/css" href="/./main.4de6c3.css">
@@ -169,20 +181,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-tomcat到底是什么" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-redo-log和binlog" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      tomcat到底是什么
+      redo log和binlog
     </h1>
   
 
         
-        <a href="/2020/07/14/tomcat%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88/" class="archive-article-date">
-  	<time datetime="2020-07-14T11:57:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-14</time>
+        <a href="/2020/07/26/redo-log%E5%92%8Cbinlog/" class="archive-article-date">
+  	<time datetime="2020-07-26T02:07:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-26</time>
 </a>
 	<!-- 需要添加的位置 -->
         <!-- 开始添加字数统计-->
@@ -192,7 +204,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">70字</span>
+        <span class="post-count">2.7k字</span>
       </span>
     </span>
 
@@ -201,7 +213,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
+        <span class="post-count">9分</span>
       </span>
     </span>
 </div>
@@ -213,12 +225,177 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>之前写课程设计就用tomcat，当时只是知道这个可以用来写网页项目，不知道为什么</p>
-<p>刚才按照</p>
-<p><a href="https://www.cnblogs.com/liusong-funtime/p/9144275.html" target="_blank" rel="noopener">IDEA的Tomcat配置Web的项目创建以及Servlet简单运行。</a></p>
-<p>在Idea上配置了Spring，这次总得弄明白tomcat是什么了</p>
+        <p>MySql可以恢复到半个月内任意一秒的状态</p>
 <a id="more"></a>
 
+<h2 id="更新数据库字段"><a href="#更新数据库字段" class="headerlink" title="更新数据库字段"></a>更新数据库字段</h2><p>创建一个表：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> T(<span class="keyword">ID</span> <span class="built_in">int</span> primary <span class="keyword">key</span>, c <span class="built_in">int</span>)</span><br></pre></td></tr></table></figure></div>
+
+<p>如果要将ID=2这一行的值加1，SQL语句就会这么写：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SQL"><figure class="iseeu highlight /sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> T <span class="keyword">set</span> c= c+<span class="number">1</span> <span class="keyword">where</span> <span class="keyword">ID</span>=<span class="number">2</span></span><br></pre></td></tr></table></figure></div>
+
+<p>更新语句执行步骤：</p>
+<ul>
+<li>连接器连接数据库</li>
+<li>分析器分析到这是一条更新语句</li>
+<li>优化器决定使用ID</li>
+<li>执行器负责找到这一行，操作引擎进行更新</li>
+</ul>
+<h2 id="涉及日志"><a href="#涉及日志" class="headerlink" title="涉及日志"></a>涉及日志</h2><p>不同点：</p>
+<p>更新流程还设计到两个重要的日志模块：<strong>redo log（重做日志）和binlog（归档日志）</strong></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/1762736/1595641298348-b119c308-bdda-48d1-bed4-69dd7d0cec36.png" alt="image.png"></p>
+<p>ib_logfile$</p>
+<p>就是redo log</p>
+<h3 id="redo-log"><a href="#redo-log" class="headerlink" title="redo log"></a>redo log</h3><p>《孔乙己》酒店赊账：</p>
+<ul>
+<li>客人不多，写在黑板上</li>
+<li>赊账客人多，把黑板上的内容记录在账本上</li>
+</ul>
+<p>如果要赊账</p>
+<ol>
+<li>直接把账本翻出来，更新账本</li>
+<li>写在黑板上，打烊之后更新账本</li>
+</ol>
+<p>如果柜台很忙，老板一定会选择第二种，因为相对于黑板，账本肯定是内容多而查找时间长的。</p>
+<p>MySql更新也是同样的道理：</p>
+<p>如果每一次更新都要写进磁盘，那么磁盘也要找到对应的那条记录，然后再更新</p>
+<h4 id="WAL-WRITE-Ahead-Logging-技术"><a href="#WAL-WRITE-Ahead-Logging-技术" class="headerlink" title="WAL(WRITE-Ahead Logging)技术"></a>WAL(WRITE-Ahead Logging)技术</h4><p>先写日志，再写磁盘</p>
+<p>当有一条记录需要更新时，InnoDB引擎会先把记录写到 redo log里，更新内存</p>
+<blockquote>
+<p>P.s redo log 是不是这个日志需要再redo，重新执行的意思</p>
+</blockquote>
+<p>InnoDB会在系统比较空闲的时候更新磁盘。</p>
+<p>redo log更新过程：</p>
+<ul>
+<li>如果今天赊账不多，老板会在打烊之后更新账本</li>
+<li>如果今天赊账多，黑板(redo log)写满了，老板要放下手头的活，更新账本，擦掉黑板</li>
+</ul>
+<p>同样的，InnoDB的redo log是固定大小的，分配一组为m个文件，每个文件大小为nGB</p>
+<p>黑板的总大小：mn GB</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/1762736/1595642539184-2fef52ca-a128-4572-abb9-42af91b5e890.png" alt="image.png"></p>
+<p>这个记录过程是循环单链表式的。</p>
+<p>checkpoint跟write pos 是相同方向推进的。</p>
+<p>如果 write pos 追上了checkpoint，表示“黑板”满了，这时候不能执行新的更新，要停下来先把redo log的内容写到磁盘中，把check point 推进一下。</p>
+<h4 id="crash-safe"><a href="#crash-safe" class="headerlink" title="crash-safe"></a>crash-safe</h4><p>redo log 保证数据库发生异常重启，之前提交的记录也不会丢失，这个能力称为 crash-safe</p>
+<h3 id="binlog：日志模块"><a href="#binlog：日志模块" class="headerlink" title="binlog：日志模块"></a>binlog：日志模块</h3><p>MySql 整体来看分为两块：</p>
+<ul>
+<li>Server层</li>
+<li>引擎层</li>
+</ul>
+<p>redo log 是InnoDB引擎特有的日志，而Server层也有自己的日志，称为binlog(归档日志)</p>
+<p>为什么会有两份日志？</p>
+<p>原因1：一开始MySql里没有InnoDB引擎</p>
+<p>原因2：即使用MySql，用户也不一定用的是InnoDB引擎</p>
+<p>原因3：MySql自带引擎是MylSAM，没有crash-safe能力，binlog只用于归档，所以InnoDB设计了redo log</p>
+<p>两个日志的不同点(都不是同一个层面的东西为什么要放在一起比较啊(′д｀ )…彡…彡)</p>
+<ul>
+<li>redo log 是InnoDB引擎特有，binlog所有引擎都可以用</li>
+<li>redo log 是物理日志，记录的是“在某个数据页上做了什么修改”（记录了这个页做了什么改动）,binlog是逻辑日志，记录的是这个语句的原始逻辑，比如，“给ID=2这一行的c字段加1”。（binlog有两种模式，statement模式记sql语句，row格式记录行的内容，记两条，更新前和更新后都有。）</li>
+<li>redo log 循环写，binlog 是追加写，不会覆盖。</li>
+</ul>
+<p>again：执行器和InnoDB引擎在执行update语句时的内部流程</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/1762736/1595645940148-05786141-11c7-4947-a388-ea6b24623794.png" alt="image.png"></p>
+<p>解析：</p>
+<p>step1：执行器取到id =2 这一行（id是主键，引擎很快能查到这一行）</p>
+<p>如果在内存中，直接把这一行返回给执行器，如果不在内存中，从磁盘中取出来返回给执行器</p>
+<p>step2：执行器 对这行记录执行sql操作</p>
+<p>step3：执行完，引擎把新行写入内存</p>
+<p>step4：日志操作。事务的两段提交。</p>
+<blockquote>
+<p>P.s 这个流程图还没有涉及到redo log 何时执行 checkpoint 这个操作。</p>
+</blockquote>
+<h3 id="两阶段提交"><a href="#两阶段提交" class="headerlink" title="两阶段提交"></a>两阶段提交</h3><p>binlog记录所有的逻辑操作，如果半个月内的数据库都可以恢复，那么备份系统中一定保存最近半个月的所有binlog。</p>
+<p>如果系统定期做了整库备份：</p>
+<ul>
+<li>找到最近一次的全量备份，恢复到临时库</li>
+<li>从备份的时间点开始，把备份的binlog依次取出来，重放到误删表之前的时刻</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/1762736/1595659924346-9ec62427-ebb8-4058-9b38-dbb40a2218b7.png" alt="img"></p>
+<p>两阶段提交的过程：</p>
+<p>简易版本：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/1762736/1595660803750-4818acef-fc2e-4b06-9b6e-3dfe409760be.png" alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/1762736/1595662416707-9a1f2e74-e861-4a8d-a301-7c5c7ef463ae.png" alt="img"></p>
+<p>详细解释版本：</p>
+<p>prepare：redolog写入log buffer，并fsync持久化到磁盘，在redolog事务中记录2PC（两阶段提交）的XID，在redolog事务打上prepare标识</p>
+<p>commit：binlog写入log buffer，并fsync持久化到磁盘，在binlog事务中记录2PC的XID，同时在redolog事务打上commit标识</p>
+<p>其中，prepare和commit阶段所提到的“事务”，都是指内部XA事务，即2PC</p>
+<p>为什么日志需要“两阶段提交”？</p>
+<p>redo log和binlog是两个独立的逻辑，而事务提交必须确保两者<code>同时有效</code>。不然会出现不一致的情形。</p>
+<p>如果不用两阶段提交(也就是redo log 的prepare 跟commit 是一起的)，那么提交顺序有两种，如果在写完第一个日志后crash，第二个日志还没有写完，会出现的情况：</p>
+<p>（1）先redo log后binlog</p>
+<p>redo log 已经写完， 系统crash。</p>
+<p>引擎通过redo log恢复数据库，c=1</p>
+<p>如果通过binlog 恢复数据库，c=0</p>
+<p>（2）先binlog 后redo log</p>
+<p>binlog已经写完，系统crash</p>
+<p>引擎通过redo log恢复数据库，c=0</p>
+<p>如果通过bin log 恢复，c=1</p>
+<p>由于要保证2份日志的一致，所以可以把日志提交看作一个事务，不能让中间环节出现，也就是不能一个成功一个失败。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/1762736/1595663300063-65417753-c9e4-41f1-a61f-62c1dbdfe1ce.png" alt="image.png"></p>
+<p>第一种情况：</p>
+<p>A处宕机：</p>
+<p>redo log 处于prepare，binlog未提交</p>
+<p>引擎回滚事务跟binlog恢复的结果相同</p>
+<p>第二种情况：</p>
+<p>B处宕机：</p>
+<p>redolog处于prepare但是binlog完整，提交事务。</p>
+<p>跟binlog恢复出来的数据库一致。</p>
+<p>引出崩溃恢复时的逻辑：</p>
+<ol>
+<li>如果 redo log 里面的事务是完整的，也就是已经有了 commit 标识，则直接提交；</li>
+<li>如果 redo log 里面的事务只有完整的 prepare，则判断对应的事务 binlog 是否存在并完整：<br>a. 如果是，则提交事务；<br>b. 否则，回滚事务。</li>
+</ol>
+<p>丁奇：</p>
+<p><a href="https://www.infoq.cn/article/M6g1yjZqK6HiTIl_9bex" target="_blank" rel="noopener">MySQL 中 6 个常见的日志问题</a></p>
+<blockquote>
+<p>awsl</p>
+</blockquote>
+<h3 id="问题-1：MySQL-怎么知道-binlog-是完整的"><a href="#问题-1：MySQL-怎么知道-binlog-是完整的" class="headerlink" title="问题 1：MySQL 怎么知道 binlog 是完整的?"></a>问题 1：MySQL 怎么知道 binlog 是完整的?</h3><p>回答：一个事务的 binlog 是有完整格式的：</p>
+<ul>
+<li>statement 格式的 binlog，最后会有 COMMIT；</li>
+<li>row 格式的 binlog，最后会有一个 XID event。</li>
+</ul>
+<p>另外，在 MySQL 5.6.2 版本以后，还引入了 binlog-checksum 参数，用来验证 binlog 内容的正确性。对于 binlog 日志由于磁盘原因，可能会在日志中间出错的情况，MySQL 可以通过校验 checksum 的结果来发现。所以，MySQL 还是有办法验证事务 binlog 的完整性的。</p>
+<h3 id="问题-2：redo-log-和-binlog-是怎么关联起来的"><a href="#问题-2：redo-log-和-binlog-是怎么关联起来的" class="headerlink" title="问题 2：redo log 和 binlog 是怎么关联起来的?"></a>问题 2：redo log 和 binlog 是怎么关联起来的?</h3><p>回答：它们有一个共同的数据字段，叫 XID。崩溃恢复的时候，会按顺序扫描 redo log：</p>
+<ul>
+<li>如果碰到既有 prepare、又有 commit 的 redo log，就直接提交；</li>
+<li>如果碰到只有 parepare、而没有 commit 的 redo log，就拿着 XID 去 binlog 找对应的事务。</li>
+</ul>
+<h3 id="问题-3：处于-prepare-阶段的-redo-log-加上完整-binlog，重启就能恢复，MySQL-为什么要这么设计"><a href="#问题-3：处于-prepare-阶段的-redo-log-加上完整-binlog，重启就能恢复，MySQL-为什么要这么设计" class="headerlink" title="问题 3：处于 prepare 阶段的 redo log 加上完整 binlog，重启就能恢复，MySQL 为什么要这么设计?"></a>问题 3：处于 prepare 阶段的 redo log 加上完整 binlog，重启就能恢复，MySQL 为什么要这么设计?</h3><p>回答：其实，这个问题还是跟我们在反证法中说到的数据与备份的一致性有关。在时刻 B，也就是 binlog 写完以后 MySQL 发生崩溃，这时候 binlog 已经写入了，之后就会被从库（或者用这个 binlog 恢复出来的库）使用。</p>
+<p>所以，在主库上也要提交这个事务。采用这个策略，主库和备库的数据就保证了一致性。</p>
+<h3 id="问题-4：如果这样的话，为什么还要两阶段提交呢？干脆先-redo-log-写完，再写-binlog。崩溃恢复的时候，必须得两个日志都完整才可以。是不是一样的逻辑？"><a href="#问题-4：如果这样的话，为什么还要两阶段提交呢？干脆先-redo-log-写完，再写-binlog。崩溃恢复的时候，必须得两个日志都完整才可以。是不是一样的逻辑？" class="headerlink" title="问题 4：如果这样的话，为什么还要两阶段提交呢？干脆先 redo log 写完，再写 binlog。崩溃恢复的时候，必须得两个日志都完整才可以。是不是一样的逻辑？"></a>问题 4：如果这样的话，为什么还要两阶段提交呢？干脆先 redo log 写完，再写 binlog。崩溃恢复的时候，必须得两个日志都完整才可以。是不是一样的逻辑？</h3><p>回答：其实，两阶段提交是经典的分布式系统问题，并不是 MySQL 独有的。</p>
+<p>如果必须要举一个场景，来说明这么做的必要性的话，那就是事务的持久性问题。</p>
+<p>对于 InnoDB 引擎来说，如果 redo log 提交完成了，事务就不能回滚（如果这还允许回滚，就可能覆盖掉别的事务的更新）。而如果 <strong>redo log 直接提交，然后 binlog 写入的时候失败，InnoDB 又回滚不了，数据和 binlog 日志又不一致了。</strong></p>
+<p>两阶段提交就是为了给所有人一个机会，当每个人都说“我 ok”的时候，再一起提交。</p>
+<h3 id="问题5：只用redo-log可以吗？"><a href="#问题5：只用redo-log可以吗？" class="headerlink" title="问题5：只用redo log可以吗？"></a>问题5：只用redo log可以吗？</h3><p>只从崩溃恢复的角度来讲是可以的。你可以把 binlog 关掉，这样就没有两阶段提交了，但系统依然是 crash-safe 的。</p>
+<p>但是binlog有其他功能：</p>
+<ul>
+<li>归档</li>
+<li>MySQL 系统依赖于 binlog。binlog 作为 MySQL 一开始就有的功能，被用在了很多地方。其中，MySQL 系统高可用的基础，就是 binlog 复制。</li>
+<li>很多公司有异构系统（比如一些数据分析系统），这些系统就靠消费 MySQL 的 binlog 来更新自己的数据。关掉 binlog 的话，这些下游系统就没法输入了。</li>
+</ul>
+<h3 id="问题6：只用binlog可以吗？"><a href="#问题6：只用binlog可以吗？" class="headerlink" title="问题6：只用binlog可以吗？"></a>问题6：只用binlog可以吗？</h3><p>现阶段的binlog做不到崩溃恢复。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/jpeg/1762736/1595664361475-39801db7-d5bc-4d9e-ae1d-f30a1b375797.jpeg" alt="img"></p>
+<p>如果做成这样，在binlog2未commit之前crash，</p>
+<p>重启后，引擎内部事务 2 会回滚，然后应用 binlog2 可以补回来；但是对于事务 1 来说，系统已经认为提交完成了，不会再应用一次 binlog1。</p>
+<p>（因为MySql的Server层不支持WAL），所以不会再应用一次binlog1.</p>
+<h2 id="如何通过bin-log-恢复数据库"><a href="#如何通过bin-log-恢复数据库" class="headerlink" title="如何通过bin log 恢复数据库"></a>如何通过bin log 恢复数据库</h2><ol>
+<li>查看bin log是否开启</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/1762736/1595647597227-11b21c4f-18fb-4f51-93b6-332eddb67ee2.png" alt="image.png"></p>
+<ol start="2">
+<li>更多log内容</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/1762736/1595648035540-f62ff990-5b52-41e1-bb25-e682707d3a6a.png" alt="image.png"></p>
+<ol start="3">
+<li></li>
+</ol>
+<p>本节问题：</p>
+<ul>
+<li>🔲1. Mysql哪些内容存在内存中？哪些存在磁盘中?</li>
+<li>🔲2. 定期全量备份的周期“取决于系统重要性，有的是一周一备，有的是一天一备”</li>
+</ul>
+<p>答案：取决于系统对恢复时间的要求。如果要求系统尽快恢复，那么就要用一天一备，如果对系统恢复时间没有要求，那么可以用一周一备。因为一周一备就要用到一周前的全量备份+这一周的binlog。一天一备是用一天前的全量备份＋这一天的binlog，显然后者恢复起来更快。</p>
 
       
 
@@ -239,7 +416,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">others</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DB</a>
         		</li>
       		
 		</ul>
@@ -295,7 +476,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/14/tomcat%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/26/redo-log%E5%92%8Cbinlog/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -310,8 +491,8 @@
 <nav id="article-nav">
   
   
-    <a href="/2020/07/07/ifelse%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F-%E8%A1%A8%E9%A9%B1%E5%8A%A8/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ifelse解决方案:策略模式+表驱动</div>
+    <a href="/2020/07/21/session%E5%92%8Ccookie/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">session和cookie</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -467,6 +648,18 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">集合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">DB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CFI</a>
               </li>
             
             <div class="clearfix"></div>
