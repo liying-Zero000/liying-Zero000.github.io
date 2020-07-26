@@ -2,13 +2,15 @@
 title: redo log和binlog
 date: 2020-07-26 10:07:09
 tags:
-	-others
-	-DB
+	- others
+	- DB
 ---
 
 
 
 MySql可以恢复到半个月内任意一秒的状态
+
+<!--more-->
 
 ## 更新数据库字段
 
