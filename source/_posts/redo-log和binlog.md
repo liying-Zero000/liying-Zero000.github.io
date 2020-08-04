@@ -39,7 +39,7 @@ UPDATE T set c= c+1 where ID=2
 
 更新流程还设计到两个重要的日志模块：**redo log（重做日志）和binlog（归档日志）**
 
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/1762736/1595641298348-b119c308-bdda-48d1-bed4-69dd7d0cec36.png)
+![image.png](https://gitee.com/liying000/blogimg/raw/master/1595641298348-b119c308-bdda-48d1-bed4-69dd7d0cec36.png)
 
 ib_logfile$
 
@@ -94,7 +94,7 @@ redo log更新过程：
 
 黑板的总大小：mn GB
 
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/1762736/1595642539184-2fef52ca-a128-4572-abb9-42af91b5e890.png)
+![image.png](https://gitee.com/liying000/blogimg/raw/master/1595642539184-2fef52ca-a128-4572-abb9-42af91b5e890.png)
 
 这个记录过程是循环单链表式的。
 
@@ -143,7 +143,7 @@ again：执行器和InnoDB引擎在执行update语句时的内部流程
 
 
 
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/1762736/1595645940148-05786141-11c7-4947-a388-ea6b24623794.png)
+![image.png](https://gitee.com/liying000/blogimg/raw/master/1595659924346-9ec62427-ebb8-4058-9b38-dbb40a2218b7.png)
 
 解析：
 
@@ -180,7 +180,7 @@ binlog记录所有的逻辑操作，如果半个月内的数据库都可以恢�
 
 
 
-![img](https://cdn.nlark.com/yuque/0/2020/png/1762736/1595659924346-9ec62427-ebb8-4058-9b38-dbb40a2218b7.png)
+![img](https://gitee.com/liying000/blogimg/raw/master/1595645940148-05786141-11c7-4947-a388-ea6b24623794.png)
 
 两阶段提交的过程：
 
@@ -188,7 +188,7 @@ binlog记录所有的逻辑操作，如果半个月内的数据库都可以恢�
 
 
 
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/1762736/1595660803750-4818acef-fc2e-4b06-9b6e-3dfe409760be.png)
+![image.png](https://gitee.com/liying000/blogimg/raw/master/1595660803750-4818acef-fc2e-4b06-9b6e-3dfe409760be.png)
 
 ![img](https://cdn.nlark.com/yuque/0/2020/png/1762736/1595662416707-9a1f2e74-e861-4a8d-a301-7c5c7ef463ae.png)
 
@@ -230,7 +230,7 @@ binlog已经写完，系统crash
 
 由于要保证2份日志的一致，所以可以把日志提交看作一个事务，不能让中间环节出现，也就是不能一个成功一个失败。
 
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/1762736/1595663300063-65417753-c9e4-41f1-a61f-62c1dbdfe1ce.png)
+![image.png](https://gitee.com/liying000/blogimg/raw/master/1595664361475-39801db7-d5bc-4d9e-ae1d-f30a1b375797.jpeg)
 
 第一种情况：
 
@@ -319,7 +319,7 @@ redolog处于prepare但是binlog完整，提交事务。
 
 
 
-![img](https://cdn.nlark.com/yuque/0/2020/jpeg/1762736/1595664361475-39801db7-d5bc-4d9e-ae1d-f30a1b375797.jpeg)
+![img](https://gitee.com/liying000/blogimg/raw/master/1595648035540-f62ff990-5b52-41e1-bb25-e682707d3a6a.png)
 
 
 
@@ -341,13 +341,13 @@ redolog处于prepare但是binlog完整，提交事务。
 
 1. 查看bin log是否开启
 
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/1762736/1595647597227-11b21c4f-18fb-4f51-93b6-332eddb67ee2.png)
+![image.png](https://gitee.com/liying000/blogimg/raw/master/1595663300063-65417753-c9e4-41f1-a61f-62c1dbdfe1ce.png)
 
 
 
 2. 更多log内容
 
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/1762736/1595648035540-f62ff990-5b52-41e1-bb25-e682707d3a6a.png)
+![image.png](https://gitee.com/liying000/blogimg/raw/master/1595647597227-11b21c4f-18fb-4f51-93b6-332eddb67ee2.png)
 
 
 
