@@ -6,15 +6,37 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Territory</title>
+  <title>synchronized超详细理解 | Territory</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Territory">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+  <meta name="description" content="synchronized是一个重量级锁？ 同步就要用synchronized？ synchronized与Lock的区别？ synchronized跟Lock都是Java中对Mesa管程模型的一种支持，不同点在于，synchronized的条件变量是隐含的，而且只有一个，Lock对象可以new很多个condition出来。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="synchronized超详细理解">
+<meta property="og:url" content="http://yoursite.com/2020/08/09/synchronized%E8%B6%85%E8%AF%A6%E7%BB%86%E7%90%86%E8%A7%A3/index.html">
 <meta property="og:site_name" content="Territory">
+<meta property="og:description" content="synchronized是一个重量级锁？ 同步就要用synchronized？ synchronized与Lock的区别？ synchronized跟Lock都是Java中对Mesa管程模型的一种支持，不同点在于，synchronized的条件变量是隐含的，而且只有一个，Lock对象可以new很多个condition出来。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/1596685984418-8846cd80-536f-4f74-8b57-5da81d2b5017.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/1596628111797-cec635ac-1ce6-4314-8d78-d15dc5f169e1.jpeg">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/1596858063254-ffa5019d-3efc-4b9e-a3da-1db74504af9d.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/1596858458995-cf128107-132c-4fbb-a155-23f108cea852.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/1596858756781-1369dc53-d8a0-4d9b-a23c-4224b3e6d10d.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/1596858815467-a023cf69-74bc-448e-90b2-fe485549e55e.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/1596858875733-167385d5-5090-4e5c-aafd-7dce1dd1e2f3.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/1596877356860-640ff3de-077b-47c4-8b69-74321a8f1ae7.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/1596618978017-07123437-e09e-483d-9f62-f1f7bdfb2116.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/1762736/1596619680426-4d3fea01-3e10-418a-84f7-09da8816f700.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/1596619951656-c7d64abf-8357-4c51-a62a-60b24255fde2.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/1596889477651-b2a55d42-2c9b-425b-a473-93c64a99ccb0.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/1596890575755-fa6c5d24-9688-4c1b-8447-9ad8e3af0047.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/1596942884890-60b570c6-dde3-40f2-8ec9-fca056c931cb.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/1596942067624-becb6788-d656-4245-b593-a4486058e739.png">
+<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/1596854823873-f2a14c72-0e08-4b71-830e-ce5af6a7271f.png">
+<meta property="article:published_time" content="2020-08-09T11:13:27.000Z">
+<meta property="article:modified_time" content="2020-08-09T11:35:51.160Z">
 <meta property="article:author" content="LiYing">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/liying000/blogimg/raw/master/1596685984418-8846cd80-536f-4f74-8b57-5da81d2b5017.png">
   
   
   <link rel="stylesheet" type="text/css" href="/./main.4de6c3.css">
@@ -164,272 +186,257 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-synchronized超详细理解" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      synchronized超详细理解
+    </h1>
+  
+
+        
+        <a href="/2020/08/09/synchronized%E8%B6%85%E8%AF%A6%E7%BB%86%E7%90%86%E8%A7%A3/" class="archive-article-date">
+  	<time datetime="2020-08-09T11:13:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-09</time>
+</a>
+	<!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">4k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">14分</span>
+      </span>
+    </span>
+</div>
+
+	
+        <!-- 添加完成 -->
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>synchronized是一个重量级锁？</p>
+<p>同步就要用synchronized？</p>
+<p>synchronized与Lock的区别？</p>
+<p>synchronized跟Lock都是Java中对Mesa管程模型的一种支持，不同点在于，synchronized的条件变量是隐含的，而且只有一个，Lock对象可以new很多个condition出来。</p>
+<a id="more"></a>
+
+<h1 id="答题要点"><a href="#答题要点" class="headerlink" title="答题要点"></a>答题要点</h1><h2 id="锁的状态"><a href="#锁的状态" class="headerlink" title="锁的状态"></a>锁的状态</h2><p>锁的状态总共有四种：无锁状态、偏向锁、轻量级锁和重量级锁。随着锁的竞争，锁可以从偏向锁升级到轻量级锁，再升级的重量级锁（但是锁的升级是单向的，也就是说只能从低到高升级，不会出现锁的降级）。JDK 1.6 中默认是开启偏向锁和轻量级锁的，我们也可以通过 - XX:-UseBiasedLocking 来禁用偏向锁。</p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/1596685984418-8846cd80-536f-4f74-8b57-5da81d2b5017.png" alt="image.png"></p>
+<h2 id="状态转换"><a href="#状态转换" class="headerlink" title="状态转换"></a>状态转换</h2><p><img src="https://gitee.com/liying000/blogimg/raw/master/1596628111797-cec635ac-1ce6-4314-8d78-d15dc5f169e1.jpeg" alt="image"></p>
+<p><strong>JVM 一般是这样使用锁和 Mark Word 的：</strong></p>
+<p>1，当一个对象<strong>没有被当成锁</strong>时，这就是一个普通的对象，Mark Word 记录对象的 HashCode，锁标志位是 01，是否偏向锁那一位是 0。</p>
+<p>2，当对象被当做<strong>同步锁</strong>，并有一个线程 A 抢到了锁时，锁标志位还是 01，但是否偏向锁那一位改成 1，前 23bit 记录抢到锁的线程 id，表示进入偏向锁状态。</p>
+<p>3，当线程 A 再次试图来获得锁时，JVM 发现同步锁对象的标志位是 01，是否偏向锁是 1，也就是偏向状态，Mark Word 中记录的线程 id 就是线程 A 自己的 id，表示线程 A 已经获得了这个偏向锁，可以执行同步锁的代码。</p>
+<p>4，当线程 B 试图获得这个锁时，JVM 发现同步锁处于偏向状态，但是 Mark Word 中的线程 id 记录的不是 B，那么线程 B 会先用 CAS 操作试图获得锁，这里的获得锁操作是有可能成功的，因为线程 A 一般不会自动释放偏向锁。如果抢锁成功，就把 Mark Word 里的线程 id 改为线程 B 的 id，代表线程 B 获得了这个偏向锁，可以执行同步锁代码。如果抢锁失败，则继续执行步骤 5。</p>
+<p>5，偏向锁状态抢锁失败，代表当前锁有一定的竞争，偏向锁将升级为轻量级锁。JVM 会在当前线程的线程栈中开辟一块单独的空间，里面保存指向对象锁 Mark Word 的指针，同时在对象锁 Mark Word 中保存指向这片空间的指针。上述两个保存操作都是 CAS 操作，如果保存成功，代表线程抢到了同步锁，就把 Mark Word 中的锁标志位改成 00，可以执行同步锁代码。如果保存失败，表示抢锁失败，竞争太激烈，继续执行步骤 6。</p>
+<p>6，轻量级锁抢锁失败，JVM 会使用自旋锁，自旋锁不是一个锁状态，只是代表不断的重试，尝试抢锁。从 JDK1.7 开始，自旋锁默认启用，自旋次数是自适应的。如果抢锁成功则执行同步锁代码，如果失败则继续执行步骤 7。</p>
+<p>7，自旋锁重试之后如果抢锁依然失败，同步锁会升级至重量级锁，锁标志位改为 10。<strong>在这个状态下，未抢到锁的线程都会被阻塞。</strong></p>
+<h1 id="synchronized整个过程"><a href="#synchronized整个过程" class="headerlink" title="synchronized整个过程"></a>synchronized整个过程</h1><p>代码：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewBuffer</span></span>&#123;</span><br><span class="line">    Object lock = <span class="keyword">new</span> Object();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (lock)&#123;</span><br><span class="line">            System.out.println(<span class="string">"test"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+
+<p>javap -c NewBuffer(已编译为class文件)</p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/1596858063254-ffa5019d-3efc-4b9e-a3da-1db74504af9d.png" alt="image.png"></p>
+<p>代码</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSync</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">doSome</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"test synchronized"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>javap -c TestSync</p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/1596858458995-cf128107-132c-4fbb-a155-23f108cea852.png" alt="image.png"></p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/1596858756781-1369dc53-d8a0-4d9b-a23c-4224b3e6d10d.png" alt="image.png"></p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/1596858815467-a023cf69-74bc-448e-90b2-fe485549e55e.png" alt="image.png"></p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/1596858875733-167385d5-5090-4e5c-aafd-7dce1dd1e2f3.png" alt="image.png"></p>
+<h2 id="monitorenter指令"><a href="#monitorenter指令" class="headerlink" title="monitorenter指令"></a>monitorenter指令</h2><p>Each object is associated with a monitor. A monitor is locked if and only if has an owner. The thread that executes monitorenter attempts to gain ownership of the monitor associated with objectref, as follows:</p>
+<ul>
+<li>if the entry count of the monitor associated with the objectref is zero, the thread enters the monitor and sets its entry count count to one. The thread is then the owner od the monitor</li>
+<li>if the threead already owns the monitor associated with the objectref, it reenters the monitor, incementing its entry count.(也就是属于刚从wait set唤醒，进入到entry set的线程)</li>
+<li>if another thread is already owns the monitor associated with the objectref, the Thread blocks until the monitor’s entryset is zero, then tries again to gain ownership.</li>
+</ul>
+<p>object是如何跟monitor联系起来的?</p>
+<p>object的初始化是先注册本地方法</p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/1596877356860-640ff3de-077b-47c4-8b69-74321a8f1ae7.png" alt="image.png"></p>
+<p>我！！！知道了！！！！</p>
+<p>虽然每个类都是Object的子类，但是monitor绑定到对象上！！！不是Object干的！！！！！</p>
+<h2 id="Java对象的创建过程"><a href="#Java对象的创建过程" class="headerlink" title="Java对象的创建过程"></a>Java对象的创建过程</h2><h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p>在语言层面上，创建对象通常仅仅是一个 new 关键字而已。</p>
+<p>Java虚拟机遇到一个字节码 new 指令（class字节码）</p>
+<p>首先去检查这个指令的参数能否在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载、解析和初始化过。</p>
+<p>如果没有，先执行相应的类加载过程。</p>
+<p>在类加载检查通过后，虚拟机为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定（堆要分配多大的位置给这个对象？）</p>
+<p>分配内存后设置对象头。</p>
+<p>对象内存布局：</p>
+<p>对象头</p>
+<ul>
+<li><p>用于存储对象自身的运行时数据：MarkWord</p>
+</li>
+<li><ul>
+<li>哈希码</li>
+<li>GC分代年龄</li>
+<li>锁状态标志</li>
+<li>线程持有的锁</li>
+<li>偏向线程ID</li>
+<li>偏向时间戳</li>
+</ul>
+</li>
+<li><p>类型指针</p>
+</li>
+</ul>
+<p>Java虚拟机通过这个指针来确定该对象是哪个类的信息。</p>
+<p>实例数据</p>
+<p>在程序代码里所定义的各种类型的字段内容，无论是从父类继承下来的，还是在子类中定义的字段都必须记录下来。</p>
+<p>对齐填充</p>
+<p>然后是构造函数，也就是INIT函数</p>
+<p>在HotSpot中，oopDesc类定义在<a href="https://github.com/openjdk-mirror/jdk7u-hotspot/blob/50bdefc3afe944ca74c3093e7448d6b889cd20d1/src/share/vm/oops/oop.hpp" target="_blank" rel="noopener">oop.hpp</a>中，instanceOopDesc定义在<a href="https://github.com/openjdk-mirror/jdk7u-hotspot/blob/50bdefc3afe944ca74c3093e7448d6b889cd20d1/src/share/vm/oops/instanceOop.hpp" target="_blank" rel="noopener">instanceOop.hpp</a>中（普通对象），arrayOopDesc定义在<a href="https://github.com/openjdk-mirror/jdk7u-hotspot/blob/50bdefc3afe944ca74c3093e7448d6b889cd20d1/src/share/vm/oops/arrayOop.hpp" target="_blank" rel="noopener">arrayOop.hpp</a>中（数组对象）。(hpp是C++头文件格式)</p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/1596618978017-07123437-e09e-483d-9f62-f1f7bdfb2116.png" alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/1762736/1596619680426-4d3fea01-3e10-418a-84f7-09da8816f700.png" alt="image.png"></p>
+<p><strong>Mark Word</strong>：<code>instanceOopDesc</code> 中的 <code>_mark</code> 成员，允许压缩。它用于存储对象的运行时记录信息，如哈希值、GC 分代年龄(Age)、锁状态标志（偏向锁、轻量级锁、重量级锁）、线程持有的锁、偏向线程 ID、偏向时间戳等。</p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/1596619951656-c7d64abf-8357-4c51-a62a-60b24255fde2.png" alt="image.png"></p>
+<h2 id="继续monitorenter学习"><a href="#继续monitorenter学习" class="headerlink" title="继续monitorenter学习"></a>继续monitorenter学习</h2><blockquote>
+<p>讲解来自于《深入理解Java虚拟机》</p>
+</blockquote>
+<p>monitorenter和monitor这两个字节码指令都需要一个<strong>reference类型的参数</strong>来指明要<strong>锁定和解锁的对象。</strong></p>
+<p>如果synchronized指明了对象参数，那么就用这个对象的引用作为reference。</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line"></span><br><span class="line">Object lock = <span class="keyword">new</span> Object();</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span>(lock)&#123;</span><br><span class="line">        XXX;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//或者</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span>(<span class="keyword">this</span>)&#123;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>如果没有明确制定，那就根据synchronized修饰的方法类型（如实例方法或者类方法）。来决定是取代码所在的对象实例还是取类型对象的Class对象作为线程要持有的锁。</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        XXX;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//或者</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span></span>&#123;</span><br><span class="line">    XXX;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>synchronized其实有三种</p>
+<ul>
+<li>一个新建的对象，定义一个lock</li>
+<li>当前线程对象，用this或者 synchronized实例方法</li>
+<li>当前类对象，synchronized了static方法</li>
+</ul>
+<p>前两种都是锁住一个普通对象。</p>
+<p>enter命令之后，当前线程进入monitor对象的entryset，如果没有竞争，直接进入monitor，然后执行，如果被wait，那么进入waitset，被notify之后再次进入entryset。</p>
+<h2 id="自旋锁与自适应自旋"><a href="#自旋锁与自适应自旋" class="headerlink" title="自旋锁与自适应自旋"></a>自旋锁与自适应自旋</h2><p>互斥同步对性能的最大影响是阻塞的实现，挂起线程和恢复线程的操作都需要转入内核态中完成。</p>
+<p>现象：共享数据的锁定状态只会持续很短的一段时间。</p>
+<p>所以可以让后来的请求锁的线程“稍等一会”,但是不放弃处理器的执行时间。</p>
+<p>自旋的默认值是十次。</p>
+<p>无论是默认值还是用户指定自旋，对所有锁来说都是相同的。</p>
+<p>JDK6中加入了自旋锁的优化，引入了自适应的自旋。自适应意味着自旋的时间不再是固定的，而是由前一次在同一个锁上的自旋时间以及锁的拥有者的状态来决定的。</p>
+<p>在同一个锁对象上</p>
+<ul>
+<li>自旋等待刚成功获取过锁，并且持有锁的进程正在运行，虚拟机就会认为这次自旋也很有可能再次成功，进而允许自旋等待持续相对长的时间</li>
+<li>如果对于某个锁，自旋很少成功获得过锁，那在以后要获得这个锁将有可能直接忽略自旋过程</li>
+</ul>
+<h2 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h2><p>JDK6</p>
+<p>传统的使用操作系统互斥量来实现的锁：重量级</p>
+<p>轻量级锁并不是用来代替重量级锁的。</p>
+<p>设计初衷：在没有多线程竞争的前提下，减少传统的重量级锁使用操作系统互斥量产生的性能消耗。</p>
+<p>由于对象头是与对象本身定义的数据结构无关的额外存储成本，考虑从到Java虚拟机的空间使用效率，Mark Word被设计成一个非固定的动态数据结构。</p>
+<p>根据对象的状态复用自己的存储空间。</p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/1596889477651-b2a55d42-2c9b-425b-a473-93c64a99ccb0.png" alt="image.png"></p>
+<blockquote>
+<p>也就是说，不同的状态下，mark word 的长度是不同的 ?</p>
+</blockquote>
+<h3 id="轻量级锁工作过程："><a href="#轻量级锁工作过程：" class="headerlink" title="轻量级锁工作过程："></a>轻量级锁工作过程：</h3><p>在代码即将进入同步块的时候，如果此同步代码块没有被锁定(锁标志位为：”01”)，JVM首先将在当前线程的栈帧中建立一个名为锁记录（Lock Record）的空间，用于<strong>存储锁对象目前的Mark Word 的拷贝</strong>（官方命名为 Displaced Mark Word）</p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/1596890575755-fa6c5d24-9688-4c1b-8447-9ad8e3af0047.png" alt="image"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="comment">// Constants</span></span><br><span class="line">  <span class="keyword">enum</span> &#123; age_bits                 = <span class="number">4</span>,</span><br><span class="line">         lock_bits                = <span class="number">2</span>,</span><br><span class="line">         biased_lock_bits         = <span class="number">1</span>,</span><br><span class="line">         max_hash_bits            = BitsPerWord - age_bits - lock_bits - biased_lock_bits,</span><br><span class="line">         hash_bits                = max_hash_bits &gt; <span class="number">31</span> ? <span class="number">31</span> : max_hash_bits,</span><br><span class="line">         cms_bits                 = LP64_ONLY(<span class="number">1</span>) NOT_LP64(<span class="number">0</span>),</span><br><span class="line">         epoch_bits               = <span class="number">2</span></span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// The biased locking code currently requires that the age bits be</span></span><br><span class="line">  <span class="comment">// contiguous to the lock bits.</span></span><br><span class="line">  <span class="keyword">enum</span> &#123; lock_shift               = <span class="number">0</span>,</span><br><span class="line">         biased_lock_shift        = lock_bits,</span><br><span class="line">         age_shift                = lock_bits + biased_lock_bits,</span><br><span class="line">         cms_shift                = age_shift + age_bits,</span><br><span class="line">         hash_shift               = cms_shift + cms_bits,</span><br><span class="line">         epoch_shift              = hash_shift</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">enum</span> &#123; lock_mask                = right_n_bits(lock_bits),</span><br><span class="line">         lock_mask_in_place       = lock_mask &lt;&lt; lock_shift,</span><br><span class="line">         biased_lock_mask         = right_n_bits(lock_bits + biased_lock_bits),</span><br><span class="line">         biased_lock_mask_in_place= biased_lock_mask &lt;&lt; lock_shift,</span><br><span class="line">         biased_lock_bit_in_place = <span class="number">1</span> &lt;&lt; biased_lock_shift,</span><br><span class="line">         age_mask                 = right_n_bits(age_bits),</span><br><span class="line">         age_mask_in_place        = age_mask &lt;&lt; age_shift,</span><br><span class="line">         epoch_mask               = right_n_bits(epoch_bits),</span><br><span class="line">         epoch_mask_in_place      = epoch_mask &lt;&lt; epoch_shift,</span><br><span class="line">         cms_mask                 = right_n_bits(cms_bits),</span><br><span class="line">         cms_mask_in_place        = cms_mask &lt;&lt; cms_shift</span><br><span class="line">#ifndef _WIN64</span><br><span class="line">         ,hash_mask               = right_n_bits(hash_bits),</span><br><span class="line">         hash_mask_in_place       = (address_word)hash_mask &lt;&lt; hash_shift</span><br><span class="line">#endif</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>然后，JVM将使用<strong>CAS</strong>操作尝试把<strong>对象的 Mark Word 更新为指向Lock Record的指针</strong>。</p>
+<blockquote>
+<p>当前无法获取对象的hashcode吗？</p>
+</blockquote>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/1596942884890-60b570c6-dde3-40f2-8ec9-fca056c931cb.png" alt="image.png"></p>
+<p>抢锁的过程是不是抢这个指针的过程？</p>
+<p>如果更新成功，该线程拥有了这个对象的锁，并且把对象Mark Word的锁标志位，转变为”00”.</p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/1596942067624-becb6788-d656-4245-b593-a4486058e739.png" alt="image.png"></p>
+<p>如果更新失败了，那就存在一条线程与当前线程竞争。</p>
+<p>JVM首先检查对象的Mark Word是否指向当前线程的栈帧，如果是，说明当前线程已经拥有了对这个对象的锁，直接进入同步块执行。(也就是同一个线程，不同的方法，想要同一个锁？)</p>
+<p>如果不是当前线程，那么轻量级锁膨胀为重量级锁，此时Mark word中存储指向重量级锁（<strong>互斥量</strong>）（信号量吗？）的指针，后边等待的线程进入阻塞状态。</p>
+<h2 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h2><p>JDK6引入的优化。</p>
+<p>偏向锁的意思是这个锁会偏向于第一个获得它的线程。如果在接下来的过程中，该锁一直没有被其他线程获取，则持有偏向锁的线程永远不需要再进行同步（也就是不需要撤销锁？）</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><p>偏向锁获取：对象的处于无锁状态，那就CAS尝试获取锁，获取成功，markword中保存线程id，偏向位置1，锁状态为01。</p>
+<ol>
+<li>由来</li>
+</ol>
+<p>HotSpot的作者发现，大多数情况下，锁不仅不存在多线程竞争，而且总是由同一线程多次取得，为了让线程获得锁的代价更低而引入了偏向锁。</p>
+<ol>
+<li>偏向锁的撤销</li>
+</ol>
+<p>偏向锁使用了一种等到竞争出现才释放锁的机制，所以当其他线程尝试竞争偏向锁时，持有偏向锁的线程才会释放锁。</p>
+<h2 id="Hashcode的问题"><a href="#Hashcode的问题" class="headerlink" title="Hashcode的问题"></a>Hashcode的问题</h2><blockquote>
+<p>好的文章，一定会解答前面出现的疑问</p>
+</blockquote>
+<p>我也想知道hashcode怎么存的。</p>
+<p><img src="https://gitee.com/liying000/blogimg/raw/master/1596854823873-f2a14c72-0e08-4b71-830e-ce5af6a7271f.png" alt="image.png"></p>
+<blockquote>
+<p>在Java语言中，一个对象如果计算过hash码，就应该一直保持该值不变（强烈推荐但不强制，因为用户可以重载hashcode方法按自己的意愿返回哈希码），否则很多依赖对象哈希码的API都可能存在出错风险。而作为绝大多数对象哈希码来源的Object::hashcode()方法，返回的是对象的一致性哈希码（Identity Hash code），这个值是能强制保证不变的，它通过在对象头中存储计算结果来保证第一次计算之后，再次调用该方法取到的哈希码值永远不会再发生改变。</p>
+<p>因此，当一个对象已经计算过一致性哈希码之后，它就再也无法进入偏向锁的状态了，而当一个对象当前正处于偏向锁状态，又收到需要计算其一致性哈希码（Object::hashcode或者System::identityHashcode(Object)）时，它的偏向锁状态会被立即撤销，并且锁会膨胀为重量级锁，在重量级锁的实现中，对象头指向了重量级锁的位置，代表重量级锁的ObjectMonitor类里面有字段可以记录非加锁状态(标志位为“01”)下的mark word，其中自然可以存储原来的哈希码。</p>
+<p>——《深入理解Java虚拟机》</p>
+</blockquote>
+<h1 id="细节问题"><a href="#细节问题" class="headerlink" title="细节问题"></a>细节问题</h1><h2 id="CAS操作"><a href="#CAS操作" class="headerlink" title="CAS操作"></a>CAS操作</h2><p><a href="https://www.jianshu.com/p/bab16d7c83a2" target="_blank" rel="noopener">Java基础：CAS操作</a></p>
+<p>在Java并发应用中通常指CompareAndSwap，即比较并交换。</p>
+<p>在Java中，所有的CAS操作都是Unsafe类实现的。</p>
+<p>CAS可以理解为一个无阻塞多线程争抢资源的模型</p>
+<ol>
+<li>CAS是一个原子操作，它比较一个内存位置的值并且只有相等时修改这个内存位置的值为新的值，保证了新的值总是基于最新的信息计算的，如果有其他线程在这期间修改了这个值则CAS失败。CAS返回是否成功或者内存位置原来的值用于判断CAS是否成功</li>
+<li>JVM中的CAS操作是利用了处理器提供的CMPXCHG指令实现的。</li>
+</ol>
+<p>优点：</p>
+<ul>
+<li>竞争不大的时候系统开销小</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>循环时间长开销大</li>
+<li>ABA问题（无法交替进入？）</li>
+<li>只能保证一个共享变量的原子操作</li>
+</ul>
+<p>底层原理比较复杂，新开一篇。</p>
+<h2 id="wait使用的标准范式。"><a href="#wait使用的标准范式。" class="headerlink" title="wait使用的标准范式。"></a>wait使用的标准范式。</h2><p>if和while的区别</p>
+<p>notify 唤醒的那一刻，线程<strong>【曾经/曾经/曾经】</strong>要求的条件得到了满足，从这一刻开始，到去条件等队列中唤醒线程，再到再次尝试获取锁是<code>有时间差</code>的，当再次获取到锁时，线程曾经要求的条件是<strong>不一定</strong>满足，所以需要<strong>重新</strong>进行条件判断，所以需要将 <code>if</code> 判断改成 <code>while</code> 判断</p>
+<blockquote>
+<p>我：没说到点子上，线程被notify，然后取锁池队列，再获取锁。时间差在这里。</p>
+</blockquote>
+<blockquote>
+<p>一个线程可以从挂起状态变为可运行状态（也就是被唤醒），即使线程没有被其他线程调用notify/notify()方法进行通知，或被中断，或者等待超时，这就是所谓的虚假唤醒。虽然虚假唤醒很少发生，但要防患于未然，做法就是不停地去测试该线程的唤醒条件是否满足。</p>
+<p>-《Java并发编程之美》</p>
+</blockquote>
+<p>为什么while可以不断测试？</p>
+<p>因为wait在while循环内部，被notify之后会再次进入循环条件进行判断。</p>
+<h2 id="notify和notifAll"><a href="#notify和notifAll" class="headerlink" title="notify和notifAll"></a>notify和notifAll</h2><p><code>notify</code>函数</p>
+<p>随机唤醒一个在WaitSet中的线程</p>
+<p><code>notifyAll</code>函数</p>
+<p>唤醒所有的WaitSet中的线程，全部放入锁池</p>
+<h2 id="什么时候使用notify"><a href="#什么时候使用notify" class="headerlink" title="什么时候使用notify"></a>什么时候使用notify</h2><ol>
+<li>所有等待线程拥有相同的等待条件</li>
+<li>所有等待线程被唤醒后，执行相同的操作。</li>
+<li>只需要唤醒一个线程。</li>
+</ol>
+<p>为什么？</p>
+<p>线程池使用了<code>notify</code>。。。（存在必合理）</p>
+
+      
+
+      
+    </div>
+   <!-- 添加本文结束标记-->
+
+<div style="text-align:center;color: #00BFFF;font-size:14px;">
+     -------------本文结束,<i class="fa fa-paw"></i>感谢阅读-------------
+</div>
+
+<!-- 添加完成 -->
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/21/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" class="archive-article-date">
-  	<time datetime="2020-06-20T18:36:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/21/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">科学上网</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/18/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%AD%90%E5%BC%B9%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2020-06-18T15:30:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/18/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%AD%90%E5%BC%B9%E7%AC%94%E8%AE%B0/">[读书笔记]子弹笔记</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/18/leetcode-160%E4%B8%A4%E4%B8%AA%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E4%BA%A4%E7%82%B9/" class="archive-article-date">
-  	<time datetime="2020-06-18T15:19:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/18/leetcode-160%E4%B8%A4%E4%B8%AA%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E4%BA%A4%E7%82%B9/">[leetcode]160两个单链表的交点</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/18/leetcode-206%E9%93%BE%E8%A1%A8%E9%80%86%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2020-06-18T15:13:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/18/leetcode-206%E9%93%BE%E8%A1%A8%E9%80%86%E7%BD%AE/">[leetcode]206链表逆置</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/14/yilia-%E5%8D%9A%E5%AE%A2%E6%A0%B7%E5%BC%8F%E4%BF%AE%E6%94%B9%E7%82%B9/" class="archive-article-date">
-  	<time datetime="2020-06-14T14:31:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/14/yilia-%E5%8D%9A%E5%AE%A2%E6%A0%B7%E5%BC%8F%E4%BF%AE%E6%94%B9%E7%82%B9/">yilia 博客样式修改点</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/14/2020-6-14/" class="archive-article-date">
-  	<time datetime="2020-06-14T07:13:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/14/2020-6-14/">2020年广东第一个台风天</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/13/jdk%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%9A%84%E5%85%B3%E9%94%AE%E7%82%B9%E6%80%9D%E8%80%83/" class="archive-article-date">
-  	<time datetime="2020-06-13T15:33:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/13/jdk%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%9A%84%E5%85%B3%E9%94%AE%E7%82%B9%E6%80%9D%E8%80%83/">jdk动态代理的关键点思考</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -441,140 +448,114 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/08/09/synchronized%E8%B6%85%E8%AF%A6%E7%BB%86%E7%90%86%E8%A7%A3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/12/%E5%BE%AE%E8%BD%AF%E7%9A%84CFI%E5%AE%9E%E7%8E%B0-CFG-RFG/" class="archive-article-date">
-  	<time datetime="2020-06-11T16:55:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-12</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020/08/09/CAS%E7%90%86%E8%A7%A3%E4%B8%8E%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          CAS理解与初步使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/08/04/%E7%A7%8B%E6%8B%9B%E5%A4%87%E6%88%98%E5%90%84%E7%A7%8D%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">秋招备战各种笔记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/12/%E5%BE%AE%E8%BD%AF%E7%9A%84CFI%E5%AE%9E%E7%8E%B0-CFG-RFG/">微软的CFI实现:CFG&amp;RFG</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">others</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CFI</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/09/2020-6-9/" class="archive-article-date">
-  	<time datetime="2020-06-09T15:11:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/09/2020-6-9/">2020-6-9</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/08/%E9%9B%86%E5%90%88-1/" class="archive-article-date">
-  	<time datetime="2020-06-07T17:46:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/08/%E9%9B%86%E5%90%88-1/">集合</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&amp;laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/3/">Next &amp;raquo;</a>
-    </nav>
   
 
 
@@ -598,8 +579,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
