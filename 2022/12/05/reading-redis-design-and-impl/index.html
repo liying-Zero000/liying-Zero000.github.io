@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>科学上网 | Territory</title>
+  <title>[读书笔记]-redis设计与实现 | Territory</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我在手机上用的Shadowrocket，在ssrbee上买的节点。但是这在windows电脑上不好用啊！！！！">
+  <meta name="description" content="知其然，知其所以然之：redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="科学上网">
-<meta property="og:url" content="http://yoursite.com/2020/06/21/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/index.html">
+<meta property="og:title" content="[读书笔记]-redis设计与实现">
+<meta property="og:url" content="http://yoursite.com/2022/12/05/reading-redis-design-and-impl/index.html">
 <meta property="og:site_name" content="Territory">
-<meta property="og:description" content="我在手机上用的Shadowrocket，在ssrbee上买的节点。但是这在windows电脑上不好用啊！！！！">
+<meta property="og:description" content="知其然，知其所以然之：redis">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/liying000/blogimg/raw/master/image-20200621023829653.png">
-<meta property="article:published_time" content="2020-06-20T18:36:04.000Z">
-<meta property="article:modified_time" content="2022-11-25T15:36:36.372Z">
+<meta property="article:published_time" content="2022-12-05T11:27:34.000Z">
+<meta property="article:modified_time" content="2022-12-14T09:16:54.369Z">
 <meta property="article:author" content="LiYing">
-<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="reading - redis">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/liying000/blogimg/raw/master/image-20200621023829653.png">
   
   
   <link rel="stylesheet" type="text/css" href="/./main.4de6c3.css">
@@ -173,20 +171,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-科学上网" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-reading-redis-design-and-impl" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      科学上网
+      [读书笔记]-redis设计与实现
     </h1>
   
 
         
-        <a href="/2020/06/21/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" class="archive-article-date">
-  	<time datetime="2020-06-20T18:36:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-21</time>
+        <a href="/2022/12/05/reading-redis-design-and-impl/" class="archive-article-date">
+  	<time datetime="2022-12-05T11:27:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-05</time>
 </a>
 	<!-- 需要添加的位置 -->
         <!-- 开始添加字数统计-->
@@ -196,7 +194,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">201字</span>
+        <span class="post-count">833字</span>
       </span>
     </span>
 
@@ -205,7 +203,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
+        <span class="post-count">3分</span>
       </span>
     </span>
 </div>
@@ -217,25 +215,84 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>我在手机上用的Shadowrocket，在ssrbee上买的节点。但是这在windows电脑上不好用啊！！！！</p>
+        <p>知其然，知其所以然之：redis</p>
 <a id="more"></a>
 
-<p><img src="https://gitee.com/liying000/blogimg/raw/master/image-20200621023829653.png" alt="image-20200621023829653"></p>
-<p>进行了这些尝试之后，都不行！！！</p>
-<p>是ssr节点不行了吗？可是我手机上还能用呢。</p>
-<p>总之就是添加订阅失败</p>
-<p>想起来上周看到一个关于科学上网的推荐 ：<a href="https://kejibear.ml/" target="_blank" rel="noopener">科技熊</a></p>
-<p>测评：</p>
-<p>1.注册登录界面良好</p>
-<p>对比：ssrbee.top连账号注册都不做</p>
-<p>2.使用简单</p>
-<p>教程非常详细，安装什么软件，大多数是一键配置</p>
-<p>3.价格不贵</p>
-<p>大约是ssrbee的三分之一！</p>
-<p>气死我了！！大半夜不睡觉搞这个。</p>
-<p>试用了一下，网速很快，打开网页几乎不用等。</p>
-<p>下个月就用这个了</p>
-<p>满篇写满了我对晚睡的怨念。</p>
+<h1 id="第一部分-数据结构与对象"><a href="#第一部分-数据结构与对象" class="headerlink" title="第一部分 数据结构与对象"></a>第一部分 数据结构与对象</h1><h2 id="第二章-简单动态字符串"><a href="#第二章-简单动态字符串" class="headerlink" title="第二章 简单动态字符串"></a>第二章 简单动态字符串</h2><ul>
+<li>简单动态字符串（SDS）：可以被修改的字符串</li>
+</ul>
+<p>结构如下：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="C"><figure class="iseeu highlight /c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sdshdr</span> &#123;</span> </span><br><span class="line">    <span class="keyword">int</span> len;    <span class="comment">// 记录buf数组中已使用字节的数量    // 等于SDS所保存字符串的长度  </span></span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">free</span>; <span class="comment">// 记录buf数组中未使用字节的数量</span></span><br><span class="line">    <span class="keyword">char</span> buf[]; <span class="comment">// 字节数组，用于保存字符串</span></span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>个人理解：封装过的C字符串数组</li>
+</ul>
+<p>用途：</p>
+<ol>
+<li>空间预分配</li>
+</ol>
+<ul>
+<li>修改后 buf.size(need) &lt; 1m，分配给free以buf.size(need)大小的内存。buf.size = 2* buf.size(need)</li>
+<li>修改后 buf.size(need) &gt;= 1m，分配给free以buf.size(need)大小的内存。buf.size = buf.size(need)+ 1m</li>
+</ul>
+<ol start="2">
+<li>惰性空间释放</li>
+</ol>
+<ul>
+<li>sds的字符删减之后，不会释放空间。而是继续留着，等待下次添加时使用</li>
+</ul>
+<h2 id="第三章-链表"><a href="#第三章-链表" class="headerlink" title="第三章 链表"></a>第三章 链表</h2><p>C语言没有内置链表，所以redis自己实现了。</p>
+<p>链表节点：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="C"><figure class="iseeu highlight /c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">listNode</span> &#123;</span> </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">listNode</span> * <span class="title">prev</span>;</span> <span class="comment">// 前置节点</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">listNode</span> * <span class="title">next</span>;</span> <span class="comment">// 后置节点</span></span><br><span class="line">    <span class="keyword">void</span> * value; <span class="comment">// 节点的值</span></span><br><span class="line">&#125; listNode;</span><br></pre></td></tr></table></figure></div>
+
+<p>list:链表</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="C"><figure class="iseeu highlight /c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">list</span> &#123;</span> </span><br><span class="line">    listNode * head; <span class="comment">// 表头节点</span></span><br><span class="line">    listNode * tail; <span class="comment">// 表尾节点</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> len; <span class="comment">// 链表包含节点数量</span></span><br><span class="line">    <span class="keyword">void</span> *(*dup)(<span class="keyword">void</span> *ptr); <span class="comment">// 节点值复制函数</span></span><br><span class="line">    <span class="keyword">void</span> (*<span class="built_in">free</span>)(<span class="keyword">void</span> *ptr); <span class="comment">// 节点值释放函数</span></span><br><span class="line">    <span class="keyword">int</span> (*match)(<span class="keyword">void</span> *ptr,<span class="keyword">void</span> *key); <span class="comment">// 节点值对比函数</span></span><br><span class="line">&#125; <span class="built_in">list</span>;</span><br></pre></td></tr></table></figure></div>
+<p>list是双向不循环链表</p>
+<h2 id="第四章-字典"><a href="#第四章-字典" class="headerlink" title="第四章 字典"></a>第四章 字典</h2><p>C语言没有内置map，所以redis自己实现了。<br>redis实现的map底层使用哈希表 (HashMap?)</p>
+<h3 id="4-1-结构"><a href="#4-1-结构" class="headerlink" title="4.1 结构"></a>4.1 结构</h3><ol>
+<li>哈希表</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="C"><figure class="iseeu highlight /c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">dictht</span> &#123;</span></span><br><span class="line">    dictEntry **table; <span class="comment">// 哈希表数组</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="built_in">size</span>; <span class="comment">// 哈希表大小(上面这个数组的大小)</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> sizemask; <span class="comment">//哈希表大小掩码，用于计算索引值    //总是等于size-1</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> used; <span class="comment">// 已有节点的数量</span></span><br><span class="line">&#125; dictht;</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li><p>哈希表节点：一个键值对</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="C"><figure class="iseeu highlight /c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">dictEntry</span> &#123;</span> </span><br><span class="line">    <span class="keyword">void</span> *key; <span class="comment">// 键</span></span><br><span class="line">    <span class="keyword">union</span>&#123;</span><br><span class="line">        <span class="keyword">void</span> *val;        </span><br><span class="line">        uint64_tu64;        </span><br><span class="line">        int64_ts64;    </span><br><span class="line">        &#125; v;   <span class="comment">// 值.可以是其中一种   </span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">dictEntry</span> *<span class="title">next</span>;</span> <span class="comment">// 指向下个哈希表节点，形成链表</span></span><br><span class="line">&#125; dictEntry;</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p>字典</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="C"><figure class="iseeu highlight /c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">dict</span> &#123;</span></span><br><span class="line">    dictType *type; <span class="comment">// 类型特定函数</span></span><br><span class="line">    <span class="keyword">void</span> *privdata; <span class="comment">// 私有数据</span></span><br><span class="line">    dictht ht[<span class="number">2</span>]; <span class="comment">// 哈希表</span></span><br><span class="line">    in trehashidx; <span class="comment">// rehash索引    //当rehash不在进行时，值为-1</span></span><br><span class="line">&#125; dict;</span><br></pre></td></tr></table></figure></div>
+
+</li>
+</ol>
+<p>type 和 privdata 是针对不同类型的键值对，为创建多态字典设置</p>
+<ul>
+<li>dictType 结构保存了一些用于操作指定类型的的函数，根据dictType不同，dict可以使用不同的函数</li>
+<li>privdata，保存需要传给类型特定函数的数据</li>
+</ul>
+<h3 id="4-2-哈希算法"><a href="#4-2-哈希算法" class="headerlink" title="4.2 哈希算法"></a>4.2 哈希算法</h3><p>ht[0]主要使用，ht[1]用作rehash</p>
+<p>放入一个键值对 k0v0</p>
+<ul>
+<li>计算哈希值为8</li>
+<li>8和dictht.sizeMark计算：放入 ht[0].dictEntry[0]</li>
+</ul>
+<h3 id="4-3-解决键冲突"><a href="#4-3-解决键冲突" class="headerlink" title="4.3 解决键冲突"></a>4.3 解决键冲突</h3><p>盲猜，使用k0v0的next指针</p>
+<p>bingo。链地址法解决冲突</p>
+<h3 id="4-4-rehash"><a href="#4-4-rehash" class="headerlink" title="4.4 rehash"></a>4.4 rehash</h3><p>问题：</p>
+<ul>
+<li>什么时候需要rehash？</li>
+<li>rehash是由谁执行的？<blockquote>
+<p>1)服务器目前没有在执行BGSAVE命令或者BGREWRITEAOF命令，并且哈希表的负载因子大于等于1。</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>2）服务器目前正在执行BGSAVE命令或者BGREWRITEAOF命令，并且哈希表的负载因子大于等于5。</p>
+</blockquote>
+<p>这个要一直探测？</p>
+<h3 id="4-5-渐进式哈希"><a href="#4-5-渐进式哈希" class="headerlink" title="4.5 渐进式哈希"></a>4.5 渐进式哈希</h3><h2 id="第五章-跳跃表"><a href="#第五章-跳跃表" class="headerlink" title="第五章 跳跃表"></a>第五章 跳跃表</h2><p>“Redis使用跳跃表作为有序集合键的底层实现之一”</p>
+<ul>
+<li>有序表包含元素数量比较多</li>
+<li>有序集合的member是较长字符串</li>
+</ul>
 
       
 
@@ -256,7 +313,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">reading - redis</a>
         		</li>
       		
 		</ul>
@@ -275,18 +332,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/06/26/%E8%8F%9C%E8%B0%B1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          菜谱
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/06/18/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%AD%90%E5%BC%B9%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">[读书笔记]子弹笔记</div>
+    <a href="/2022/12/05/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">[读书笔记]-浪潮之巅</div>
       <i class="icon-circle-right"></i>
     </a>
   
