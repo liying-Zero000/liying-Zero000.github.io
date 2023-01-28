@@ -16,7 +16,7 @@
 <meta property="og:description" content="知其然，知其所以然之：redis">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-05T11:27:34.000Z">
-<meta property="article:modified_time" content="2022-12-14T09:16:54.369Z">
+<meta property="article:modified_time" content="2023-01-28T09:39:10.991Z">
 <meta property="article:author" content="LiYing">
 <meta property="article:tag" content="reading - redis">
 <meta name="twitter:card" content="summary">
@@ -194,7 +194,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">833字</span>
+        <span class="post-count">1.5k字</span>
       </span>
     </span>
 
@@ -203,7 +203,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">3分</span>
+        <span class="post-count">5分</span>
       </span>
     </span>
 </div>
@@ -293,6 +293,62 @@
 <li>有序表包含元素数量比较多</li>
 <li>有序集合的member是较长字符串</li>
 </ul>
+<p>跳跃表</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="C"><figure class="iseeu highlight /c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">zskiplist</span> &#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 头节点，尾节点</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">zskiplistNode</span> *<span class="title">header</span>, *<span class="title">tail</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 节点数量</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> length;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 目前表内节点的最大层数</span></span><br><span class="line">    <span class="keyword">int</span> level;</span><br><span class="line"></span><br><span class="line">&#125; zskiplist;</span><br></pre></td></tr></table></figure></div>
+
+<p>跳跃表的节点</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="C"><figure class="iseeu highlight /c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">zskiplistNode</span> &#123;</span></span><br><span class="line">    <span class="comment">// member 对象</span></span><br><span class="line">    robj *obj;</span><br><span class="line">    <span class="comment">// 分值</span></span><br><span class="line">    <span class="keyword">double</span> score;</span><br><span class="line">    <span class="comment">// 后退指针</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">zskiplistNode</span> *<span class="title">backward</span>;</span></span><br><span class="line">    <span class="comment">// 层</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">zskiplistLevel</span> &#123;</span></span><br><span class="line">        <span class="comment">// 前进指针</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">zskiplistNode</span> *<span class="title">forward</span>;</span></span><br><span class="line">        <span class="comment">// 这个层跨越的节点数量</span></span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">int</span> span;</span><br><span class="line">    &#125; level[]; <span class="comment">// level数组</span></span><br><span class="line">&#125; zskiplistNode;</span><br></pre></td></tr></table></figure></div>
+
+<p>level数组的每个元素为一层，程序都根据幂次定律（power law，越大的数出现的概率越小）随机生成一个介于1和32之间的值作为level数组的大小，这个大小是层的高度</p>
+<p>问题：</p>
+<ul>
+<li>如何遍历跳跃表？</li>
+<li>如何查找跳跃表中的结点？</li>
+</ul>
+<h1 id="第六章-整数集合"><a href="#第六章-整数集合" class="headerlink" title="第六章 整数集合"></a>第六章 整数集合</h1><ul>
+<li>集合键的底层实现之一<ul>
+<li>集合只包含整数</li>
+<li>数量不多</li>
+</ul>
+</li>
+</ul>
+<h2 id="结构："><a href="#结构：" class="headerlink" title="结构："></a>结构：</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="C"><figure class="iseeu highlight /c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">intset</span> &#123;</span></span><br><span class="line">    <span class="keyword">uint32_t</span> encoding;</span><br><span class="line">    <span class="keyword">uint32_t</span> length;</span><br><span class="line">    <span class="keyword">int8_t</span> contents[];</span><br><span class="line">&#125; intset;</span><br></pre></td></tr></table></figure></div>
+
+<p>contents 数组保存整数集合的元素</p>
+<ul>
+<li>不重复</li>
+<li>从小到大排列</li>
+</ul>
+<p>length: 整数集合大小，contents数组大小</p>
+<p>contents的类型取决于 encoding</p>
+<h2 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h2><ul>
+<li>添加新元素</li>
+<li>新元素比其他元素长（位数）</li>
+</ul>
+<p>如果新元素比所有元素都大：从尾部开始挪元素</p>
+<p>如果新元素比所有元素都小，从头部开始挪元素</p>
+<h2 id="升级后不降级"><a href="#升级后不降级" class="headerlink" title="升级后不降级"></a>升级后不降级</h2><h1 id="第七章-压缩列表"><a href="#第七章-压缩列表" class="headerlink" title="第七章 压缩列表"></a>第七章 压缩列表</h1><p>列表键和哈希键的底层实现之一<br>目的：节约内存</p>
+<ul>
+<li><p>列表键只包含少量列表项 &amp; 每项是小整数或短字符串：使用压缩列表</p>
+</li>
+<li><p>哈希键：只包含少数键值对 &amp; 键和值是小整数或短字符串：使用压缩列表</p>
+</li>
+</ul>
+<p>…… 没看下去，待续</p>
+<h1 id="第八章-对象"><a href="#第八章-对象" class="headerlink" title="第八章 对象"></a>第八章 对象</h1><p>“Redis并没有直接使用这些数据结构来实现键值对数据库，而是基于这些数据结构创建了一个对象系统”</p>
+<ul>
+<li>字符串对象</li>
+<li>列表对象</li>
+<li>哈希对象</li>
+<li>集合对象</li>
+<li>有序集合对象</li>
+</ul>
+<p>每个对象至少包含前面的一种结构</p>
+<p>“对象系统还实现了基于引用计数技术的内存回收机制，当程序不再使用某个对象的时候，这个对象所占用的内存就会被自动释放”</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="C"><figure class="iseeu highlight /c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Redis 对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">redisObject</span> &#123;</span></span><br><span class="line">    <span class="comment">// 类型</span></span><br><span class="line">    <span class="keyword">unsigned</span> type:<span class="number">4</span>; <span class="comment">// 五种</span></span><br><span class="line">    <span class="comment">// 对齐位</span></span><br><span class="line">    <span class="keyword">unsigned</span> notused:<span class="number">2</span>;</span><br><span class="line">    <span class="comment">// 编码方式</span></span><br><span class="line">    <span class="keyword">unsigned</span> encoding:<span class="number">4</span>;</span><br><span class="line">    <span class="comment">// LRU 时间（相对于 server.lruclock）</span></span><br><span class="line">    <span class="keyword">unsigned</span> lru:<span class="number">22</span>;</span><br><span class="line">    <span class="comment">// 引用计数</span></span><br><span class="line">    <span class="keyword">int</span> refcount;</span><br><span class="line">    <span class="comment">// 指向对象的值</span></span><br><span class="line">    <span class="keyword">void</span> *ptr;</span><br><span class="line">&#125; robj;</span><br></pre></td></tr></table></figure></div>
+
+<p>redis的键总是一个字符串，因此redis对象的类型是值的类型</p>
+<p>…… 待续</p>
 
       
 
@@ -377,7 +433,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2022 LiYing
+    		&copy; 2023 LiYing
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
