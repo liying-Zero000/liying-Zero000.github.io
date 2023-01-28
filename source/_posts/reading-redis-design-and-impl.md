@@ -132,3 +132,128 @@ bingo。链地址法解决冲突
 - 有序表包含元素数量比较多
 - 有序集合的member是较长字符串
 
+跳跃表
+```C
+typedef struct zskiplist {
+
+    // 头节点，尾节点
+    struct zskiplistNode *header, *tail;
+
+    // 节点数量
+    unsigned long length;
+
+    // 目前表内节点的最大层数
+    int level;
+
+} zskiplist;
+```
+
+跳跃表的节点
+
+```C
+typedef struct zskiplistNode {
+    // member 对象
+    robj *obj;
+    // 分值
+    double score;
+    // 后退指针
+    struct zskiplistNode *backward;
+    // 层
+    struct zskiplistLevel {
+        // 前进指针
+        struct zskiplistNode *forward;
+        // 这个层跨越的节点数量
+        unsigned int span;
+    } level[]; // level数组
+} zskiplistNode;
+```
+
+level数组的每个元素为一层，程序都根据幂次定律（power law，越大的数出现的概率越小）随机生成一个介于1和32之间的值作为level数组的大小，这个大小是层的高度
+
+
+问题：
+- 如何遍历跳跃表？
+- 如何查找跳跃表中的结点？
+
+# 第六章 整数集合
+
+- 集合键的底层实现之一
+    - 集合只包含整数
+    - 数量不多
+
+## 结构：
+```C
+typedef struct intset {
+    uint32_t encoding;
+    uint32_t length;
+    int8_t contents[];
+} intset;
+```
+
+contents 数组保存整数集合的元素
+- 不重复
+- 从小到大排列
+
+length: 整数集合大小，contents数组大小
+
+contents的类型取决于 encoding
+
+## 升级
+
+- 添加新元素
+- 新元素比其他元素长（位数）
+
+
+如果新元素比所有元素都大：从尾部开始挪元素
+
+如果新元素比所有元素都小，从头部开始挪元素
+
+## 升级后不降级
+
+# 第七章 压缩列表
+
+列表键和哈希键的底层实现之一
+目的：节约内存
+
+- 列表键只包含少量列表项 & 每项是小整数或短字符串：使用压缩列表
+
+- 哈希键：只包含少数键值对 & 键和值是小整数或短字符串：使用压缩列表
+
+…… 没看下去，待续
+
+# 第八章 对象
+
+“Redis并没有直接使用这些数据结构来实现键值对数据库，而是基于这些数据结构创建了一个对象系统”
+- 字符串对象
+- 列表对象
+- 哈希对象
+- 集合对象
+- 有序集合对象
+
+每个对象至少包含前面的一种结构
+
+“对象系统还实现了基于引用计数技术的内存回收机制，当程序不再使用某个对象的时候，这个对象所占用的内存就会被自动释放”
+
+```C
+/*
+ * Redis 对象
+ */
+typedef struct redisObject {
+    // 类型
+    unsigned type:4; // 五种
+    // 对齐位
+    unsigned notused:2;
+    // 编码方式
+    unsigned encoding:4;
+    // LRU 时间（相对于 server.lruclock）
+    unsigned lru:22;
+    // 引用计数
+    int refcount;
+    // 指向对象的值
+    void *ptr;
+} robj;
+```
+
+redis的键总是一个字符串，因此redis对象的类型是值的类型
+
+…… 待续
