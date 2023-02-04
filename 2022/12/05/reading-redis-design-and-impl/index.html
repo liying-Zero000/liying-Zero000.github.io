@@ -16,7 +16,7 @@
 <meta property="og:description" content="知其然，知其所以然之：redis">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-05T11:27:34.000Z">
-<meta property="article:modified_time" content="2023-01-28T09:39:10.991Z">
+<meta property="article:modified_time" content="2023-01-29T09:36:43.556Z">
 <meta property="article:author" content="LiYing">
 <meta property="article:tag" content="reading - redis">
 <meta name="twitter:card" content="summary">
@@ -194,7 +194,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.5k字</span>
+        <span class="post-count">1.7k字</span>
       </span>
     </span>
 
@@ -203,7 +203,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">5分</span>
+        <span class="post-count">6分</span>
       </span>
     </span>
 </div>
@@ -348,6 +348,21 @@
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="C"><figure class="iseeu highlight /c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Redis 对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">redisObject</span> &#123;</span></span><br><span class="line">    <span class="comment">// 类型</span></span><br><span class="line">    <span class="keyword">unsigned</span> type:<span class="number">4</span>; <span class="comment">// 五种</span></span><br><span class="line">    <span class="comment">// 对齐位</span></span><br><span class="line">    <span class="keyword">unsigned</span> notused:<span class="number">2</span>;</span><br><span class="line">    <span class="comment">// 编码方式</span></span><br><span class="line">    <span class="keyword">unsigned</span> encoding:<span class="number">4</span>;</span><br><span class="line">    <span class="comment">// LRU 时间（相对于 server.lruclock）</span></span><br><span class="line">    <span class="keyword">unsigned</span> lru:<span class="number">22</span>;</span><br><span class="line">    <span class="comment">// 引用计数</span></span><br><span class="line">    <span class="keyword">int</span> refcount;</span><br><span class="line">    <span class="comment">// 指向对象的值</span></span><br><span class="line">    <span class="keyword">void</span> *ptr;</span><br><span class="line">&#125; robj;</span><br></pre></td></tr></table></figure></div>
 
 <p>redis的键总是一个字符串，因此redis对象的类型是值的类型</p>
+<h2 id="字符串对象"><a href="#字符串对象" class="headerlink" title="字符串对象"></a>字符串对象</h2><h3 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h3><p>编码：int、raw、embstr</p>
+<ul>
+<li>对象是整数，int编码</li>
+<li>对象是32位以上字符，ptr对象是简单动态字符串，编码raw</li>
+<li>对象是32位以下字符或浮点数，ptr对象是简单动态字符串，编码embstr。区别：编码方式，创建对象时少调用一次内存</li>
+</ul>
+<h3 id="编码转换"><a href="#编码转换" class="headerlink" title="编码转换"></a>编码转换</h3><p>append命令，需要在字符串后追加时，可能产生编码转换</p>
+<h2 id="列表对象"><a href="#列表对象" class="headerlink" title="列表对象"></a>列表对象</h2><p>列表对象的编码可以是压缩列表或者链表</p>
+<h3 id="编码转换-1"><a href="#编码转换-1" class="headerlink" title="编码转换"></a>编码转换</h3><p>使用 zipList的两个条件</p>
+<ul>
+<li>列表对象保存的所有字符串元素的长度都小于64字节</li>
+<li>列表对象保存的元素数量小于512个</li>
+</ul>
+<p>任何一个条件不满足，都会转换为linkList</p>
+<h2 id="哈希对象"><a href="#哈希对象" class="headerlink" title="哈希对象"></a>哈希对象</h2><p>“哈希对象的编码可以是ziplist或者hashtable”</p>
 <p>…… 待续</p>
 
       
@@ -387,6 +402,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2023/01/30/%E4%B8%A4%E6%80%A7%E5%AF%B9%E7%AB%8B%E6%80%9D%E8%80%83/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          两性对立思考
+        
+      </div>
+    </a>
   
   
     <a href="/2022/12/05/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/" id="article-nav-older" class="article-nav-link-wrap">
